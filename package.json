@@ -1,0 +1,18 @@
+{
+  "name": "create-ios-app",
+  "version": "0.1.0",
+  "description": "A command line interface to create an iOS Boilerplate Xcode project",
+  "preferGlobal": true,
+  "bin": {
+    "create-ios-app": "./index.js",
+    "xcodegen": "xcodegen"
+  },
+  "dependencies": {
+    "commander": "^2.16.0",
+    "prompts": "^0.1.10",
+    "shelljs": "^0.8.2",
+    "simple-plist": "^0.3.0",
+    "write-yaml": "^1.0.0",
+    "xcodegen": "dehlen/xcodegen"
+  }
+}
