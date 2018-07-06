@@ -181,8 +181,8 @@ const createProjectConfiguration = (name, configuration, projectLocation) => {
         targets: {},
         configFiles: {
             Debug: 'Configurations/Debug.xcconfig',
-            Release: 'Configurations/Release.xcconfig'
-        }
+            Release: 'Configurations/Release.xcconfig',
+        },
     };
 
     const targetConfiguration = {
@@ -191,10 +191,33 @@ const createProjectConfiguration = (name, configuration, projectLocation) => {
         deploymentTarget: configuration.deploymentTarget,
         configFiles: {
             Debug: 'Configurations/Application.xcconfig',
-            Release: 'Configurations/Application.xcconfig'
-        }
+            Release: 'Configurations/Application.xcconfig',
+        },
+        sources: [name],
     }
+
+    const testName = name + 'Tests'
+    const testTargetConfiguration = {
+        platform: 'iOS',
+        type: 'bundle.unit-test',
+        configFiles: {
+            Debug: 'Configurations/Tests.xcconfig',
+            Release: 'Configurations/Tests.xcconfig',
+        },
+        sources: testName,
+        dependencies: [
+            { 
+                target: name
+            },
+        ],
+        scheme: {
+            testTargets: testName,
+            gatherCoverageData: true,
+        },
+    }
+
     yamlConfiguration.targets[name] = targetConfiguration
+    yamlConfiguration.targets[testName] = testTargetConfiguration
     
     const specLocation = path.join(projectLocation, '/project.yml')
     try {
