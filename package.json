@@ -7,8 +7,7 @@
     "test": "echo 'Implement!'"
   },
   "bin": {
-    "create-ios-app": "./index.js",
-    "xcodegen": "xcodegen"
+    "create-ios-app": "./index.js"
   },
   "dependencies": {
     "commander": "^2.16.0",
@@ -18,7 +17,6 @@
     "shelljs": "^0.8.2",
     "simple-plist": "^0.3.0",
     "through2": "^2.0.3",
-    "write-yaml": "^1.0.0",
-    "xcodegen": "dehlen/xcodegen"
+    "write-yaml": "^1.0.0"
   }
 }
