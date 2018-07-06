@@ -3,7 +3,7 @@ const path = require('path')
 const through = require('through2')
 
 const escapeRegExp = (string) => {
-    return string.replace(/[.*+?^${}()|[\]\\]/g, "\\\$&");
+    return string.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }
 
 const replaceVariables = (string, replacementMap) => {
