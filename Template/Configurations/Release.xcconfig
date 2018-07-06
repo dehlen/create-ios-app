@@ -1,0 +1,4 @@
+// Release.xcconfig
+
+#include "Base.xcconfig"
+#include "../Carthage/Checkouts/xcconfigs/Base/Configurations/Release.xcconfig"

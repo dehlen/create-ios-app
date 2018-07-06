@@ -1,0 +1,4 @@
+// Tests.xcconfig
+
+#include "../Carthage/Checkouts/xcconfigs/iOS/Platforms/iOS/iOS-Application.xcconfig"
+#include "../Carthage/Checkouts/xcconfigs/Base/Configurations/Test.xcconfig"

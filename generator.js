@@ -28,11 +28,6 @@ const questions = [
         initial: '',
     },
     {
-        type: 'list',
-        name: 'configurations',
-        message: 'Enter configurations - Comma separated',
-    },
-    {
         type: 'text',
         name: 'bundleIdPrefix',
         message: 'Set a bundleIdPrefix',
@@ -183,13 +178,21 @@ const createProjectConfiguration = (name, configuration, projectLocation) => {
         options: {
             bundleIdPrefix: configuration.bundleIdPrefix
         },
-        targets: {}
+        targets: {},
+        configFiles: {
+            Debug: 'Configurations/Debug.xcconfig',
+            Release: 'Configurations/Release.xcconfig'
+        }
     };
 
     const targetConfiguration = {
         type: 'application',
         platform: 'iOS',
-        deploymentTarget: configuration.deploymentTarget
+        deploymentTarget: configuration.deploymentTarget,
+        configFiles: {
+            Debug: 'Configurations/Application.xcconfig',
+            Release: 'Configurations/Application.xcconfig'
+        }
     }
     yamlConfiguration.targets[name] = targetConfiguration
     
