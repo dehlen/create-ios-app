@@ -1,0 +1,3 @@
+[submodule "Carthage/Checkouts/xcconfigs"]
+	path = Template/Carthage/Checkouts/xcconfigs
+	url = https://github.com/jspahrsummers/xcconfigs.git
