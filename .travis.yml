@@ -1,7 +1,10 @@
-sudo: false
+os: osx
 language: node_js
 node_js:
 - "10"
 
 cache:
   yarn: true
+install: 
+  - ./scripts/installDependencies.sh
+  - yarn
