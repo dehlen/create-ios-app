@@ -4,13 +4,22 @@ const yaml = require('write-yaml')
 const path = require('path')
 const fs = require('fs');
 const plist = require('simple-plist');
+const moment = require('moment')
+
+const rename = require('./rename')
 
 const questions = [
-		{
+	{
         type: 'text',
         name: 'name',
         message: '👶 What\'s your name?',
         initial: 'John Doe',
+    },
+    {
+        type: 'text',
+        name: 'organization',
+        message: '🏢 What\'s your organizations name?',
+        initial: '',
     },
     {
         type: 'text',
@@ -149,7 +158,7 @@ const questions = [
     }
 ]
 
-const confirmation = [
+const confirmationQuestion = [
 		{
         type: 'toggle',
         name: 'shouldProceed',
@@ -202,7 +211,18 @@ const createXcodeProject = (projectLocation) => {
 
 const exit = () => {
 	console.error('❌ Aborting...')
-  process.exit()
+    process.exit()
+}
+
+const copyTemplateProject = async (projectLocation, name, configuration) => {
+    const replacementMap = {
+        '{PROJECT_NAME}': name,
+        '{AUTHOR}': configuration.name,
+        '{TODAY}': moment().format('LL'),
+        '{YEAR}': moment().format('YYYY'),
+        '{ORGANIZATION}': configuration.organization,
+    }
+    await rename.recusivelyCopy(path.join(__dirname, 'Template'), projectLocation, replacementMap)
 }
 
 module.exports = {
@@ -216,16 +236,17 @@ module.exports = {
         console.log("Destination: ", projectLocation)
         console.log("Configuration: ", configuration)
 
-        const confirmation = await prompts(confirmation, {onCancel: () => {
+        const confirmation = await prompts(confirmationQuestion, {onCancel: () => {
           	exit()
         }})
 
         if (!confirmation.shouldProceed) {
-        		exit()
+        	exit()
         }
 
         console.log("🚀 Please hold tight while create-ios-app generates the project for you")
-        createProjectConfiguration(name, configuration, projectLocation)
-        createXcodeProject(projectLocation)
+        await createProjectConfiguration(name, configuration, projectLocation)
+        await copyTemplateProject(projectLocation, name, configuration)
+        await createXcodeProject(projectLocation)
     },
 };

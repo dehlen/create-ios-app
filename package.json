@@ -9,9 +9,12 @@
   },
   "dependencies": {
     "commander": "^2.16.0",
+    "moment": "^2.22.2",
     "prompts": "^0.1.10",
+    "recursive-copy": "^2.0.9",
     "shelljs": "^0.8.2",
     "simple-plist": "^0.3.0",
+    "through2": "^2.0.3",
     "write-yaml": "^1.0.0",
     "xcodegen": "dehlen/xcodegen"
   }
