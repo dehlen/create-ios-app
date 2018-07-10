@@ -1,0 +1,25 @@
+disabled_rules:
+  - vertical_whitespace
+  - line_length
+  - statement_position
+  - switch_case_alignment
+identifier_name:
+  max_length:
+    warning: 60
+    error: 80
+  min_length:
+    warning: 3
+    error: 2
+  excluded:
+    - x
+    - y
+    - l
+    - r
+    - vm
+file_length:
+  warning: 500
+  error: 1000
+excluded:
+  - {PROJECT_NAME}Tests
+  - Carthage
+  
