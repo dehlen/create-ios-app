@@ -1,12 +1,11 @@
 const prompts = require('prompts')
 const shell = require("shelljs")
-const yaml = require('write-yaml')
 const path = require('path')
-const fs = require('fs');
 const plist = require('simple-plist');
-const moment = require('moment')
 
-const rename = require('./rename')
+const xcodegen = require('./xcodegen')
+const templater = require('./templater')
+const exit = require('./exit')
 
 const questions = [
 	{
@@ -71,7 +70,7 @@ const questions = [
     {
         type: 'toggle',
         name: 'swiftgen',
-        message: 'Should we add swiftgen to generate localizable string, images, etc?',
+        message: 'Should we add swiftgen to generate localizable strings, images, etc?',
         active: 'yes',
         inactive: 'no',
         initial: 'yes',
@@ -172,90 +171,10 @@ const availableDeploymentTargets = () => {
     })
 }
 
-const createProjectConfiguration = (name, configuration, projectLocation) => {
-    const yamlConfiguration = {
-        name: name,
-        options: {
-            bundleIdPrefix: configuration.bundleIdPrefix
-        },
-        targets: {},
-        configFiles: {
-            Debug: 'Configurations/Debug.xcconfig',
-            Release: 'Configurations/Release.xcconfig',
-        },
-    };
-
-    const targetConfiguration = {
-        type: 'application',
-        platform: 'iOS',
-        deploymentTarget: configuration.deploymentTarget,
-        configFiles: {
-            Debug: 'Configurations/Application.xcconfig',
-            Release: 'Configurations/Application.xcconfig',
-        },
-        sources: [name],
-    }
-
-    const testName = name + 'Tests'
-    const testTargetConfiguration = {
-        platform: 'iOS',
-        type: 'bundle.unit-test',
-        configFiles: {
-            Debug: 'Configurations/Tests.xcconfig',
-            Release: 'Configurations/Tests.xcconfig',
-        },
-        sources: testName,
-        dependencies: [
-            { 
-                target: name
-            },
-        ],
-        scheme: {
-            testTargets: testName,
-            gatherCoverageData: true,
-        },
-    }
-
-    yamlConfiguration.targets[name] = targetConfiguration
-    yamlConfiguration.targets[testName] = testTargetConfiguration
-    
-    const specLocation = path.join(projectLocation, '/project.yml')
-    try {
-        yaml.sync(specLocation, yamlConfiguration)
-        console.log('✅ Created project spec at ' + specLocation)
-    } catch(err) {
-        console.log('Could not create project spec.')
-        console.error(err)
-        exit()
-    }
-}
-
-const createXcodeProject = (projectLocation) => {
-    console.log('🛠 Generating Xcode project...')
-    shell.exec('xcodegen --spec ' + path.join(projectLocation, 'project.yml') + ' --project ' + projectLocation)
-}
-
-const exit = () => {
-	console.error('❌ Aborting...')
-    process.exit()
-}
-
-const copyTemplateProject = async (projectLocation, name, configuration) => {
-    const replacementMap = {
-        '{PROJECT_NAME}': name,
-        '{AUTHOR}': configuration.name,
-        '{TODAY}': moment().format('LL'),
-        '{YEAR}': moment().format('YYYY'),
-        '{ORGANIZATION}': configuration.organization,
-    }
-    await rename.recusivelyCopy(path.join(__dirname, 'Template'), projectLocation, replacementMap)
-}
-
 module.exports = {
     setup: async (name, projectLocation) => {
         const configuration = await prompts(questions, {onCancel: () => {
-            console.error('Aborting...')
-            process.exit()
+        	exit.exit()
         }})
         console.log("create-ios-app will now generate a project with the following parameters: ")
         console.log("Name: ", name)
@@ -263,16 +182,17 @@ module.exports = {
         console.log("Configuration: ", configuration)
 
         const confirmation = await prompts(confirmationQuestion, {onCancel: () => {
-          	exit()
+          exit.exit()
+
         }})
 
         if (!confirmation.shouldProceed) {
-        	exit()
+        	exit.exit()
         }
 
         console.log("🚀 Please hold tight while create-ios-app generates the project for you")
-        await createProjectConfiguration(name, configuration, projectLocation)
-        await copyTemplateProject(projectLocation, name, configuration)
-        await createXcodeProject(projectLocation)
+        await xcodegen.createProjectConfiguration(name, configuration, projectLocation)
+        await templater.copyTemplateProject(projectLocation, name, configuration)
+        await xcodegen.createXcodeProject(projectLocation, configuration)
     },
 };
