@@ -404,10 +404,6 @@ write@^0.3.3:
     fs-exists-sync "^0.1.0"
     mkdirp "^0.5.1"
 
-xcodegen@dehlen/xcodegen:
-  version "1.9.2"
-  resolved "https://codeload.github.com/dehlen/xcodegen/tar.gz/0f0373cd3c433479cb8ef60bccd89cd3f65aafa6"
-
 xmlbuilder@8.2.2:
   version "8.2.2"
   resolved "https://registry.yarnpkg.com/xmlbuilder/-/xmlbuilder-8.2.2.tgz#69248673410b4ba42e1a6136551d2922335aa773"
