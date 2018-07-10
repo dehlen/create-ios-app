@@ -16,34 +16,36 @@ const replaceVariables = (string, replacementMap) => {
     return output
 }
 
-var options = {
-    overwrite: true,
-    expand: true,
-    dot: true,
-    junk: true,
-    rename: function(filePath) {
-        return replaceVariables(filePath)
-    },
-    transform: function(src, dest, stats) {
-        if (path.extname(src) !== '.swift') { return null; }
-        return through(function(chunk, enc, done)  {
-            done(null, replaceVariables(chunk.toString()));
-        });
+
+const filteredFiles = (configuration) => {
+    var filteredFiles = ['**/*']
+    if (!configuration.swiftlint) {
+        filteredFiles.push('!.swiftlint.yml')
     }
-};
+
+    if (!configuration.swiftgen) {
+        filteredFiles.push('!swiftgen.yml')
+        filteredFiles.push('!**/Resources')
+    }
+
+    return filteredFiles
+}
+
+const supportedExtensions = ['.swift', '.yml', '.yaml']
 
 var renamer = {
-    recusivelyCopy: async (from, to, replacementMap) => {
+    recusivelyCopy: async (from, to, replacementMap, configuration) => {
         await copy(from, to, {
             overwrite: true,
             expand: true,
             dot: true,
             junk: true,
+            filter: filteredFiles(configuration),
             rename: function(filePath) {
                 return replaceVariables(filePath, replacementMap)
             },
             transform: function(src, dest, stats) {
-                if (path.extname(src) !== '.swift') { return null; }
+                if (!supportedExtensions.includes(path.extname(src))) { return null; }
                 return through(function(chunk, enc, done)  {
                     done(null, replaceVariables(chunk.toString(), replacementMap));
                 });
