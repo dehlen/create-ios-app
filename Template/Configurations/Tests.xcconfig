@@ -2,3 +2,6 @@
 
 #include "../Carthage/Checkouts/xcconfigs/iOS/iOS-Application.xcconfig"
 #include "../Carthage/Checkouts/xcconfigs/Base/Configurations/Test.xcconfig"
+
+PRODUCT_BUNDLE_IDENTIFIER = {BUNDLE_IDENTIFIER_PREFIX}.{PROJECT_NAME}.tests
+INFOPLIST_FILE = $(PROJECT_DIR)/{PROJECT_NAME}Tests/Info.plist

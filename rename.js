@@ -2,6 +2,8 @@ const copy = require('recursive-copy')
 const path = require('path')
 const through = require('through2')
 
+const supportedExtensions = ['.swift', '.yml', '.yaml', '.xcconfig']
+
 const escapeRegExp = (string) => {
     return string.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }
@@ -30,8 +32,6 @@ const filteredFiles = (configuration) => {
 
     return filteredFiles
 }
-
-const supportedExtensions = ['.swift', '.yml', '.yaml']
 
 var renamer = {
     recusivelyCopy: async (from, to, replacementMap, configuration) => {
