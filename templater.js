@@ -14,7 +14,8 @@ exports.copyTemplateProject = async (projectLocation, name, configuration) => {
         '{TODAY}': moment().format('LL'),
         '{YEAR}': moment().format('YYYY'),
         '{ORGANIZATION}': configuration.organization,
-        '{BUNDLE_IDENTIFIER_PREFIX}': removeTrailingDot(configuration.bundleIdPrefix)
+        '{BUNDLE_IDENTIFIER_PREFIX}': removeTrailingDot(configuration.bundleIdPrefix),
+        '{DEPLOYMENT_TARGET}': configuration.deploymentTarget,
     }
     await rename.recusivelyCopy(path.join(__dirname, 'Template'), projectLocation, replacementMap, configuration)
 }
