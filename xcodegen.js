@@ -76,6 +76,8 @@ const createApplicationConfiguration = (name, configuration) => {
 }
 
 exports.createProjectConfiguration = (name, configuration, projectLocation) => {
+    const testTargetName = name + 'Tests'
+
     const yamlConfiguration = {
         name: name,
         options: {
@@ -88,7 +90,6 @@ exports.createProjectConfiguration = (name, configuration, projectLocation) => {
         },
     };
 
-    const testTargetName = name + 'Tests'
     yamlConfiguration.targets[name] = createApplicationConfiguration(name, configuration)
     yamlConfiguration.targets[testTargetName] = createUnitTestConfiguration(testTargetName, name)
     
@@ -107,6 +108,10 @@ exports.createXcodeProject = (projectLocation, configuration) => {
     if(configuration.swiftgen) {
         console.log("Generating SwiftGen content before creating the project...")
         shell.exec("cd " + projectLocation + " && swiftgen")
+    }
+    if(configuration.fastlane) {
+        console.log("Installing ruby gems needed for fastlane configuration")
+        shell.exec("cd " + projectLocation + " && bundle install --path vendor/bundle")
     }
     console.log('🛠 Generating Xcode project...')
     shell.exec('xcodegen --spec ' + path.join(projectLocation, 'project.yml') + ' --project ' + projectLocation)

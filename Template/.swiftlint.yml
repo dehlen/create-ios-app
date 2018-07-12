@@ -22,4 +22,5 @@ file_length:
 excluded:
   - {PROJECT_NAME}Tests
   - Carthage
+  - vendor/bundle
   

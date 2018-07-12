@@ -1,0 +1,46 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+
+default_platform(:ios)
+
+platform :ios do
+	desc "Bump version. Options: patch, minor, major"
+	lane :version_bump do |options|
+		ensure_git_status_clean
+
+  	increment_version_number(
+    	bump_type: options[:type], # patch, minor, major
+    	xcodeproj: '{PROJECT_NAME}.xcodeproj'
+  	)
+
+  	commit_version_bump(xcodeproj: '{PROJECT_NAME}.xcodeproj')
+  	add_git_tag
+  	push_to_git_remote
+	end
+
+	#### Tests ####
+	desc "Run tests"
+	lane :tests do
+  	run_tests(scheme: "{PROJECT_NAME}Tests")
+	end
+
+	{SWIFTLINT_LANE}
+
+	#### Build ####
+	lane :beta do
+  	ensure_git_status_clean
+  	increment_build_number(xcodeproj: "{PROJECT_NAME}.xcodeproj")
+  	build_app(scheme: "{PROJECT_NAME}")
+  	commit_version_bump(xcodeproj: "{PROJECT_NAME}.xcodeproj")
+  	add_git_tag
+  	push_to_git_remote
+	end
+end

@@ -2,7 +2,7 @@ const copy = require('recursive-copy')
 const path = require('path')
 const through = require('through2')
 
-const supportedExtensions = ['.swift', '.yml', '.yaml', '.xcconfig']
+const supportedExtensions = ['.swift', '.yml', '.yaml', '.xcconfig', '.strings', '']
 
 const escapeRegExp = (string) => {
     return string.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
@@ -28,6 +28,12 @@ const filteredFiles = (configuration) => {
     if (!configuration.swiftgen) {
         filteredFiles.push('!swiftgen.yml')
         filteredFiles.push('!**/Resources')
+    }
+
+    if (!configuration.fastlane) {
+        filteredFiles.push('!**/fastlane')
+        filteredFiles.push('!Gemfile')
+        filteredFiles.push('!Gemfile.lock')
     }
 
     return filteredFiles

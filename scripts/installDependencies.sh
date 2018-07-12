@@ -25,4 +25,6 @@ blender/homebrew-tap/rome
 
 brew tap yonaskolb/XcodeGen https://github.com/yonaskolb/XcodeGen.git
 brew install XcodeGen
+
+gem install bundler
 echo "✅ Installation completed"
