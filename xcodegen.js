@@ -17,7 +17,7 @@ const createUnitTestConfiguration = (testTargetName, name) => {
             },
         ],
         scheme: {
-            testTargets: testTargetName,
+            testTargets: [testTargetName],
             gatherCoverageData: true,
         },
     }
@@ -55,7 +55,7 @@ const createRunScriptPhases = (configuration) => {
     return runScriptPhases
 }
 
-const createApplicationConfiguration = (name, configuration) => {
+const createApplicationConfiguration = (name, configuration, testTargetName) => {
     const targetConfiguration = {
         type: 'application',
         platform: 'iOS',
@@ -65,6 +65,10 @@ const createApplicationConfiguration = (name, configuration) => {
             Release: 'Configurations/Application.xcconfig',
         },
         sources: [name],
+        scheme: {
+            testTargets: [testTargetName],
+            gatherCoverageData: true,
+        },
     }
 
     const runScriptPhases = createRunScriptPhases(configuration)
@@ -90,7 +94,7 @@ exports.createProjectConfiguration = (name, configuration, projectLocation) => {
         },
     };
 
-    yamlConfiguration.targets[name] = createApplicationConfiguration(name, configuration)
+    yamlConfiguration.targets[name] = createApplicationConfiguration(name, configuration, testTargetName)
     yamlConfiguration.targets[testTargetName] = createUnitTestConfiguration(testTargetName, name)
     
     const specLocation = path.join(projectLocation, '/project.yml')
