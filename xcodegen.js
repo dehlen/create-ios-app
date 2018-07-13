@@ -2,6 +2,9 @@ const yaml = require('write-yaml')
 const path = require('path')
 const shell = require("shelljs")
 
+const carthage = require('./carthage')
+const git = require('./git')
+
 const createUnitTestConfiguration = (testTargetName, name) => {
     const testTargetConfiguration = {
         platform: 'iOS',
@@ -117,6 +120,13 @@ exports.createXcodeProject = (projectLocation, configuration) => {
         console.log("Installing ruby gems needed for fastlane configuration")
         shell.exec("cd " + projectLocation + " && bundle install --path vendor/bundle")
     }
+
+    console.log("⚡️ Installing carthage dependencies")
+    carthage.fetchDependencies(projectLocation)
+
     console.log('🛠 Generating Xcode project...')
     shell.exec('xcodegen --spec ' + path.join(projectLocation, 'project.yml') + ' --project ' + projectLocation)
+
+    console.log("🌍 Initializing git repository")
+    git.initRepository(projectLocation, configuration.githubURL)
 }
