@@ -17,14 +17,14 @@ platform :ios do
 		ensure_git_status_clean
 
   	version_number = increment_version_number_in_plist(
-      xcodeproj: './test.xcodeproj',
-      scheme: 'test',
+      xcodeproj: './{PROJECT_NAME}.xcodeproj',
+      scheme: '{PROJECT_NAME}',
       bump_type: options[:type],
     )
 
-  	commit_version_bump(xcodeproj: '{PROJECT_NAME}.xcodeproj')
-  	add_git_tag
-  	push_to_git_remote
+	git_commit(path: "./{PROJECT_NAME}/Info.plist", message: "Version bump to: #{version_number}")
+  	add_git_tag(tag: "#{version_number}")
+  	{GIT_PUSH_CONFIGURATION}
 	end
 
 	#### Tests ####
