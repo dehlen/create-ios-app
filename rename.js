@@ -20,7 +20,7 @@ const replaceVariables = (string, replacementMap) => {
 
 
 const filteredFiles = (configuration) => {
-    var filteredFiles = ['**/*']
+    var filteredFiles = ['**/*', '!**/.gitkeep']
     if (!configuration.swiftlint) {
         filteredFiles.push('!.swiftlint.yml')
     }
