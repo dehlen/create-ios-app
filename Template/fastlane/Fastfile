@@ -16,10 +16,11 @@ platform :ios do
 	lane :version_bump do |options|
 		ensure_git_status_clean
 
-  	increment_version_number(
-    	bump_type: options[:type], # patch, minor, major
-    	xcodeproj: '{PROJECT_NAME}.xcodeproj'
-  	)
+  	version_number = increment_version_number_in_plist(
+      xcodeproj: './test.xcodeproj',
+      scheme: 'test',
+      bump_type: options[:type],
+    )
 
   	commit_version_bump(xcodeproj: '{PROJECT_NAME}.xcodeproj')
   	add_git_tag
