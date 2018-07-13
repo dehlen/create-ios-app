@@ -33,24 +33,14 @@ const createRunScriptPhases = (configuration) => {
 
     if(configuration.swiftlint) {
         runScriptPhases.push({
-            script: `
-            if which swiftlint >/dev/null; then
-                swiftlint
-            else
-                echo "warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint"
-            fi`,
+            script: 'sh "$PROJECT_DIR/scripts/swiftlint.sh"',
             name: "Lint with Swiftlint",
         })
     }
 
     if(configuration.swiftgen) {
         runScriptPhases.push({
-            script: `
-            if which swiftgen >/dev/null; then
-                swiftgen
-            else
-                echo "warning: SwiftGen not installed, download it from https://github.com/SwiftGen/SwiftGen"
-            fi`,
+            script: 'sh "$PROJECT_DIR/scripts/swiftgen.sh"',
             name: "Generate with SwiftGen",
         })
     }

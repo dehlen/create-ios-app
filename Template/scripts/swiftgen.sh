@@ -1,0 +1,9 @@
+#!/bin/bash
+PROJECT_ROOT=$(dirname $(dirname "$0"))
+echo "Generating assets with SwiftGen"
+if which swiftgen >/dev/null; then
+	swiftgen
+else
+	echo "warning: SwiftGen not installed, download it from https://github.com/SwiftGen/SwiftGen"
+fi
+echo "Finished generating assets"
