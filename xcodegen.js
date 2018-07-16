@@ -2,6 +2,9 @@ const yaml = require('write-yaml')
 const path = require('path')
 const shell = require("shelljs")
 
+const carthage = require('./carthage')
+const git = require('./git')
+
 const createUnitTestConfiguration = (testTargetName, name) => {
     const testTargetConfiguration = {
         platform: 'iOS',
@@ -17,7 +20,7 @@ const createUnitTestConfiguration = (testTargetName, name) => {
             },
         ],
         scheme: {
-            testTargets: testTargetName,
+            testTargets: [testTargetName],
             gatherCoverageData: true,
         },
     }
@@ -30,24 +33,14 @@ const createRunScriptPhases = (configuration) => {
 
     if(configuration.swiftlint) {
         runScriptPhases.push({
-            script: `
-            if which swiftlint >/dev/null; then
-                swiftlint
-            else
-                echo "warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint"
-            fi`,
+            script: 'sh "$PROJECT_DIR/scripts/swiftlint.sh"',
             name: "Lint with Swiftlint",
         })
     }
 
     if(configuration.swiftgen) {
         runScriptPhases.push({
-            script: `
-            if which swiftgen >/dev/null; then
-                swiftgen
-            else
-                echo "warning: SwiftGen not installed, download it from https://github.com/SwiftGen/SwiftGen"
-            fi`,
+            script: 'sh "$PROJECT_DIR/scripts/swiftgen.sh"',
             name: "Generate with SwiftGen",
         })
     }
@@ -55,7 +48,7 @@ const createRunScriptPhases = (configuration) => {
     return runScriptPhases
 }
 
-const createApplicationConfiguration = (name, configuration) => {
+const createApplicationConfiguration = (name, configuration, testTargetName) => {
     const targetConfiguration = {
         type: 'application',
         platform: 'iOS',
@@ -65,6 +58,10 @@ const createApplicationConfiguration = (name, configuration) => {
             Release: 'Configurations/Application.xcconfig',
         },
         sources: [name],
+        scheme: {
+            testTargets: [testTargetName],
+            gatherCoverageData: true,
+        },
     }
 
     const runScriptPhases = createRunScriptPhases(configuration)
@@ -90,7 +87,7 @@ exports.createProjectConfiguration = (name, configuration, projectLocation) => {
         },
     };
 
-    yamlConfiguration.targets[name] = createApplicationConfiguration(name, configuration)
+    yamlConfiguration.targets[name] = createApplicationConfiguration(name, configuration, testTargetName)
     yamlConfiguration.targets[testTargetName] = createUnitTestConfiguration(testTargetName, name)
     
     const specLocation = path.join(projectLocation, '/project.yml')
@@ -113,6 +110,13 @@ exports.createXcodeProject = (projectLocation, configuration) => {
         console.log("Installing ruby gems needed for fastlane configuration")
         shell.exec("cd " + projectLocation + " && bundle install --path vendor/bundle")
     }
+
+    console.log("⚡️ Installing carthage dependencies")
+    carthage.fetchDependencies(projectLocation)
+
     console.log('🛠 Generating Xcode project...')
     shell.exec('xcodegen --spec ' + path.join(projectLocation, 'project.yml') + ' --project ' + projectLocation)
+
+    console.log("🌍 Initializing git repository")
+    git.initRepository(projectLocation, configuration.githubURL)
 }
