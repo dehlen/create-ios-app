@@ -116,40 +116,43 @@ const questions = [
         initial: 'yes',
     },
     {
-        type: 'select',
-        name: 'uiengine',
-        message: 'Pick UI engine',
-        choices: [
-            { title: 'UIKit', value:'uikit' },
-            { title: 'Layoutless', value: 'layoutless', selected: true },
-            { title: 'TextureKit', value: 'textureKit'}
-        ],
-        initial: 1,
-    },
-    {
         type: 'multiselect',
-        name: 'animations',
-        message: 'Do you need any of these animation frameworks?',
+        name: 'testDependencies',
+        message: 'Do you want to add one or more of this curated testing dependencies?',
         choices: [
-            { title: 'Hero', value:'hero' },
-            { title: 'Spruce', value: 'spruce'},
-            { title: 'ViewAnimator', value: 'viewAnimator', selected: true },
-            { title: 'EasyTransitions', value: 'easyTransitions'}
+            { title: 'Quick', value:'quick', selected: true  },
+            { title: 'Nimble', value: 'nimble', selected: true },
         ],
         hint: '- Space to select. Return to submit'
     },
     {
         type: 'multiselect',
         name: 'dependencies',
-        message: 'Any other dependencies you would like to add for convenience?',
+        message: 'Do you want to add one or more of this curated other dependencies?',
         choices: [
             { title: 'Nuke (Image Caching)', value:'nuke', selected: true  },
             { title: 'Shallows (Persistence)', value: 'shallows', selected: true },
             { title: 'SwiftEntryKit (Context menus)', value: 'swiftentrykit', selected: true },
-            { title: 'PromiseKit (Promises)', value: 'promisekit', selected: true }
+            { title: 'PromiseKit (Promises)', value: 'promisekit', selected: true },
+            { title: 'ViewAnimator (Animations)', value: 'viewAnimator', selected: true },
+            { title: 'Layoutless (Layouting)', value: 'layoutless', selected: true },
+            { title: 'TextureKit (Async Rendering)', value: 'textureKit'},
+            { title: 'Spruce (Transitions)', value: 'spruce'},
+            { title: 'Hero', value:'hero' },
+            { title: 'EasyTransitions (Transitions)', value: 'easyTransitions'},
         ],
         hint: '- Space to select. Return to submit'
-    }
+    },
+    {
+        type: 'multiselect',
+        name: 'editor',
+        message: '✏️ Do you want to edit your Cartfiles even further?',
+        choices: [
+            { title: 'Cartfile', value: 'Cartfile' },
+            { title: 'Cartfile.private', value: 'Cartfile.private' },
+        ],
+        hint: '- Space to select. Return to submit'
+    },
 ]
 
 const confirmationQuestion = [
@@ -176,6 +179,15 @@ module.exports = {
         const configuration = await prompts(questions, {onCancel: () => {
         	exit.exit()
         }})
+
+        if(configuration.editor.length > 0) {
+            const files = configuration.editor.map(fileName => '"' + path.join(__dirname, 'Template', fileName) + '"').join(" ")
+
+            console.log("You selected to edit " + configuration.editor.join(" and ") + ".")
+            console.log("The editor will open the files for you to edit. When you finished editing, close the editor application in order to continue with the setup.")
+            shell.exec("open -W -g -e " + files)
+        }
+        
         console.log("create-ios-app will now generate a project with the following parameters: ")
         console.log("Name: ", name)
         console.log("Destination: ", projectLocation)
