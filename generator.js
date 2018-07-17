@@ -1,7 +1,8 @@
 const prompts = require('prompts')
 const shell = require("shelljs")
 const path = require('path')
-const plist = require('simple-plist');
+const plist = require('simple-plist')
+const child_process = require('child_process')
 
 const xcodegen = require('./xcodegen')
 const templater = require('./templater')
@@ -181,11 +182,16 @@ module.exports = {
         }})
 
         if(configuration.editor.length > 0) {
-            const files = configuration.editor.map(fileName => '"' + path.join(__dirname, 'Template', fileName) + '"').join(" ")
+            const files = configuration.editor.map(fileName => path.join(__dirname, 'Template', fileName))
 
             console.log("You selected to edit " + configuration.editor.join(" and ") + ".")
-            console.log("The editor will open the files for you to edit. When you finished editing, close the editor application in order to continue with the setup.")
-            shell.exec("open -W -g -e " + files)
+            console.log("The editor will open the files for you to edit.")
+            console.log("Use :tabn (next), :tabp (previous) and :tabc (close) to control the tabs.")
+            console.log("\n");
+            var editor = 'vim'
+            var child = child_process.spawnSync(editor, ['-p', ...files], {
+                stdio: 'inherit'
+            });
         }
         
         console.log("create-ios-app will now generate a project with the following parameters: ")
@@ -195,7 +201,6 @@ module.exports = {
 
         const confirmation = await prompts(confirmationQuestion, {onCancel: () => {
           exit.exit()
-
         }})
 
         if (!confirmation.shouldProceed) {
