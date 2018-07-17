@@ -4,7 +4,9 @@ const path = require('path')
 const plist = require('simple-plist')
 const child_process = require('child_process')
 const copy = require('recursive-copy')
+const fs = require('fs')
 
+const carthage = require('./carthage')
 const xcodegen = require('./xcodegen')
 const templater = require('./templater')
 const exit = require('./exit')
@@ -178,16 +180,27 @@ const availableDeploymentTargets = () => {
 
 module.exports = {
     setup: async (name, projectLocation) => {
+        const templatePath = path.join(__dirname, 'Template')
+
         const configuration = await prompts(questions, {onCancel: () => {
+            carthage.handleCartfileBackups(templatePath)
         	exit.exit()
         }})
-        if(configuration.editor.length > 0) {
-            const files = configuration.editor.map(fileName => path.join(__dirname, 'Template', fileName))
-            for (file of files) {
-                await copy(file, file + '.bak', { overwrite: true })
-            }
 
-            //TODO: add dependecies into cartfile, needs to happen here but should also happen if no editor was requested
+        const files = [path.join(templatePath, 'Cartfile'), path.join(templatePath, 'Cartfile.private')]
+        for (file of files) {
+            await copy(file, file + '.bak', { overwrite: true })
+        }
+
+        for (dependency of configuration.dependencies) {
+            fs.appendFileSync(path.join(templatePath, 'Cartfile'), 'github "' + dependency + '"\n');
+        }
+
+        for (testDependency of configuration.testDependencies) {
+            fs.appendFileSync(path.join(templatePath, 'Cartfile.private'), 'github "' + testDependency + '"\n');
+        }
+
+        if(configuration.editor.length > 0) {
             console.log("You selected to edit " + configuration.editor.join(" and ") + ".")
             console.log("The editor will open the files for you to edit.")
             console.log("Use :tabn (next), :tabp (previous) and :tabc (close) to control the tabs.")
@@ -204,10 +217,12 @@ module.exports = {
         console.log("Configuration: ", configuration)
 
         const confirmation = await prompts(confirmationQuestion, {onCancel: () => {
-          exit.exit()
+            carthage.handleCartfileBackups(templatePath)
+            exit.exit()
         }})
 
         if (!confirmation.shouldProceed) {
+            carthage.handleCartfileBackups(templatePath)
         	exit.exit()
         }
 
