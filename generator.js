@@ -181,12 +181,13 @@ module.exports = {
         const configuration = await prompts(questions, {onCancel: () => {
         	exit.exit()
         }})
-
         if(configuration.editor.length > 0) {
             const files = configuration.editor.map(fileName => path.join(__dirname, 'Template', fileName))
             for (file of files) {
                 await copy(file, file + '.bak', { overwrite: true })
             }
+
+            //TODO: add dependecies into cartfile, needs to happen here but should also happen if no editor was requested
             console.log("You selected to edit " + configuration.editor.join(" and ") + ".")
             console.log("The editor will open the files for you to edit.")
             console.log("Use :tabn (next), :tabp (previous) and :tabc (close) to control the tabs.")
@@ -196,7 +197,7 @@ module.exports = {
                 stdio: 'inherit'
             });
         }
-        
+
         console.log("create-ios-app will now generate a project with the following parameters: ")
         console.log("Name: ", name)
         console.log("Destination: ", projectLocation)
