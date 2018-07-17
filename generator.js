@@ -3,6 +3,7 @@ const shell = require("shelljs")
 const path = require('path')
 const plist = require('simple-plist')
 const child_process = require('child_process')
+const copy = require('recursive-copy')
 
 const xcodegen = require('./xcodegen')
 const templater = require('./templater')
@@ -183,7 +184,9 @@ module.exports = {
 
         if(configuration.editor.length > 0) {
             const files = configuration.editor.map(fileName => path.join(__dirname, 'Template', fileName))
-
+            for (file of files) {
+                await copy(file, file + '.bak', { overwrite: true })
+            }
             console.log("You selected to edit " + configuration.editor.join(" and ") + ".")
             console.log("The editor will open the files for you to edit.")
             console.log("Use :tabn (next), :tabp (previous) and :tabc (close) to control the tabs.")
