@@ -3,21 +3,46 @@
   "version": "0.1.0",
   "description": "A command line interface to create an iOS Boilerplate Xcode project",
   "preferGlobal": true,
+  "main": ".bin/index.js",
   "scripts": {
-    "test": "echo 'Implement!'"
+    "clean": "rimraf bin",
+    "tsc": "tsc --outDir bin",
+    "build": "yarn clean && yarn tsc",
+    "tsc:watch": "yarn build && yarn tsc -- -w",
+    "lint": "tslint -p tsconfig.json -c tslint.json",
+    "lint-fix": "yarn lint --fix",
+    "test": "echo 'Implement!'",
+    "precommit": "yarn run lint"
   },
   "bin": {
-    "create-ios-app": "./index.js"
+    "create-ios-app": "./bin/index.js"
   },
   "dependencies": {
     "commander": "^2.16.0",
+    "fs-extra": "^7.0.0",
+    "is-empty": "^1.2.0",
     "moment": "^2.22.2",
     "prompts": "^0.1.10",
     "recursive-copy": "^2.0.9",
+    "regex-replace": "^2.1.0",
     "shelljs": "^0.8.2",
     "simple-git": "^1.96.0",
     "simple-plist": "^0.3.0",
-    "through2": "^2.0.3",
     "write-yaml": "^1.0.0"
+  },
+  "devDependencies": {
+    "@types/commander": "^2.12.2",
+    "@types/es6-promise": "^3.3.0",
+    "@types/fs-extra": "^5.0.4",
+    "@types/is-empty": "^1.2.0",
+    "@types/moment": "^2.13.0",
+    "@types/node": "^10.5.2",
+    "@types/shelljs": "^0.8.0",
+    "husky": "^0.14.3",
+    "prettier": "1.13.7",
+    "pretty-quick": "^1.6.0",
+    "rimraf": "^2.6.2",
+    "tslint": "^5.11.0",
+    "typescript": "^2.9.2"
   }
 }
