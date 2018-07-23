@@ -36,10 +36,12 @@ export default class SwiftLintPlugin extends Plugin {
   }
 
   async postExecute(configuration: any, destination: string) {
-    const swiftlintLane = `desc "Check style and conventions"
+    const swiftlintLane = configuration.swiftlint
+      ? `desc "Check style and conventions"
     lane :lint do
       swiftlint(strict: true)
     end`
+      : ''
 
     const stringUtil = new StringUtility()
     await replace(
