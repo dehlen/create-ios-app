@@ -1,4 +1,7 @@
 import Plugin from '../plugin'
+import * as copy from 'recursive-copy'
+import { join } from 'path'
+import { exec } from 'shelljs'
 
 export default class FastlanePlugin extends Plugin {
   constructor() {
@@ -19,10 +22,36 @@ export default class FastlanePlugin extends Plugin {
   }
   async execute(configuration: any, destination: string) {
     if (configuration.fastlane) {
-      // TODO copy fastlane folder and Gemfile, Gemfile.lock
+      const fastlanePath = join(this.pluginDirectory, 'fastlane')
+      const gemfilePath = join(this.pluginDirectory, 'Gemfile')
+      const gemfileLockPath = join(this.pluginDirectory, 'Gemfile.lock')
+
+      await copy(fastlanePath, join(destination, 'fastlane'), {
+        overwrite: true,
+        expand: true,
+        dot: true,
+        junk: true
+      })
+
+      await copy(gemfilePath, join(destination, 'Gemfile'), {
+        overwrite: true,
+        expand: true,
+        dot: true,
+        junk: true
+      })
+
+      await copy(gemfileLockPath, join(destination, 'Gemfile.lock'), {
+        overwrite: true,
+        expand: true,
+        dot: true,
+        junk: true
+      })
     }
   }
   async postExecute(configuration: any, destination: string) {
-    // TODO: bundle install
+    if (configuration.fastlane) {
+      console.log('Installing ruby gems needed for fastlane configuration')
+      exec('cd ' + destination + ' && bundle install --path vendor/bundle')
+    }
   }
 }
