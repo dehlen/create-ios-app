@@ -16,7 +16,7 @@
 
 "@types/events@*":
   version "1.2.0"
-  resolved "https://artifactory.dm-drogeriemarkt.com:443/api/npm/repo-npm/@types/events/-/events-1.2.0.tgz#81a6731ce4df43619e5c8c945383b3e62a89ea86"
+  resolved "https://registry.yarnpkg.com/@types/events/-/events-1.2.0.tgz#81a6731ce4df43619e5c8c945383b3e62a89ea86"
 
 "@types/fs-extra@^5.0.4":
   version "5.0.4"
@@ -26,7 +26,7 @@
 
 "@types/glob@*":
   version "5.0.35"
-  resolved "https://artifactory.dm-drogeriemarkt.com:443/api/npm/repo-npm/@types/glob/-/glob-5.0.35.tgz#1ae151c802cece940443b5ac246925c85189f32a"
+  resolved "https://registry.yarnpkg.com/@types/glob/-/glob-5.0.35.tgz#1ae151c802cece940443b5ac246925c85189f32a"
   dependencies:
     "@types/events" "*"
     "@types/minimatch" "*"
@@ -34,15 +34,15 @@
 
 "@types/is-empty@^1.2.0":
   version "1.2.0"
-  resolved "https://artifactory.dm-drogeriemarkt.com:443/api/npm/repo-npm/@types/is-empty/-/is-empty-1.2.0.tgz#16bc578060c9b0b6953339eea906c255a375bf86"
+  resolved "https://registry.yarnpkg.com/@types/is-empty/-/is-empty-1.2.0.tgz#16bc578060c9b0b6953339eea906c255a375bf86"
 
 "@types/minimatch@*":
   version "3.0.3"
-  resolved "https://artifactory.dm-drogeriemarkt.com:443/api/npm/repo-npm/@types/minimatch/-/minimatch-3.0.3.tgz#3dca0e3f33b200fc7d1139c0cd96c1268cadfd9d"
+  resolved "https://registry.yarnpkg.com/@types/minimatch/-/minimatch-3.0.3.tgz#3dca0e3f33b200fc7d1139c0cd96c1268cadfd9d"
 
 "@types/moment@^2.13.0":
   version "2.13.0"
-  resolved "https://artifactory.dm-drogeriemarkt.com:443/api/npm/repo-npm/@types/moment/-/moment-2.13.0.tgz#604ebd189bc3bc34a1548689404e61a2a4aac896"
+  resolved "https://registry.yarnpkg.com/@types/moment/-/moment-2.13.0.tgz#604ebd189bc3bc34a1548689404e61a2a4aac896"
   dependencies:
     moment "*"
 
@@ -52,7 +52,7 @@
 
 "@types/shelljs@^0.8.0":
   version "0.8.0"
-  resolved "https://artifactory.dm-drogeriemarkt.com:443/api/npm/repo-npm/@types/shelljs/-/shelljs-0.8.0.tgz#0caa56b68baae4f68f44e0dd666ab30b098e3632"
+  resolved "https://registry.yarnpkg.com/@types/shelljs/-/shelljs-0.8.0.tgz#0caa56b68baae4f68f44e0dd666ab30b098e3632"
   dependencies:
     "@types/glob" "*"
     "@types/node" "*"
@@ -79,25 +79,25 @@ argparse@^1.0.7:
 
 array-differ@^1.0.0:
   version "1.0.0"
-  resolved "https://artifactory.dm-drogeriemarkt.com:443/api/npm/repo-npm/array-differ/-/array-differ-1.0.0.tgz#eff52e3758249d33be402b8bb8e564bb2b5d4031"
+  resolved "https://registry.yarnpkg.com/array-differ/-/array-differ-1.0.0.tgz#eff52e3758249d33be402b8bb8e564bb2b5d4031"
 
 array-union@^1.0.1:
   version "1.0.2"
-  resolved "https://artifactory.dm-drogeriemarkt.com:443/api/npm/repo-npm/array-union/-/array-union-1.0.2.tgz#9a34410e4f4e3da23dea375be5be70f24778ec39"
+  resolved "https://registry.yarnpkg.com/array-union/-/array-union-1.0.2.tgz#9a34410e4f4e3da23dea375be5be70f24778ec39"
   dependencies:
     array-uniq "^1.0.1"
 
 array-uniq@^1.0.1:
   version "1.0.3"
-  resolved "https://artifactory.dm-drogeriemarkt.com:443/api/npm/repo-npm/array-uniq/-/array-uniq-1.0.3.tgz#af6ac877a25cc7f74e058894753858dfdb24fdb6"
+  resolved "https://registry.yarnpkg.com/array-uniq/-/array-uniq-1.0.3.tgz#af6ac877a25cc7f74e058894753858dfdb24fdb6"
 
 arrify@^1.0.0:
   version "1.0.1"
-  resolved "https://artifactory.dm-drogeriemarkt.com:443/api/npm/repo-npm/arrify/-/arrify-1.0.1.tgz#898508da2226f380df904728456849c1501a4b0d"
+  resolved "https://registry.yarnpkg.com/arrify/-/arrify-1.0.1.tgz#898508da2226f380df904728456849c1501a4b0d"
 
 asap@~2.0.3:
   version "2.0.6"
-  resolved "https://artifactory.dm-drogeriemarkt.com:443/api/npm/repo-npm/asap/-/asap-2.0.6.tgz#e50347611d7e690943208bbdafebcbc2fb866d46"
+  resolved "https://registry.yarnpkg.com/asap/-/asap-2.0.6.tgz#e50347611d7e690943208bbdafebcbc2fb866d46"
 
 babel-code-frame@^6.22.0:
   version "6.26.0"
@@ -162,11 +162,7 @@ chalk@^2.3.0:
 
 ci-info@^1.0.0:
   version "1.1.3"
-  resolved "https://artifactory.dm-drogeriemarkt.com:443/api/npm/repo-npm/ci-info/-/ci-info-1.1.3.tgz#710193264bb05c77b8c90d02f5aaf22216a667b2"
-
-clorox@^1.0.3:
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/clorox/-/clorox-1.0.3.tgz#6fa63653f280c33d69f548fb14d239ddcfa1590d"
+  resolved "https://registry.yarnpkg.com/ci-info/-/ci-info-1.1.3.tgz#710193264bb05c77b8c90d02f5aaf22216a667b2"
 
 color-convert@^1.9.0:
   version "1.9.2"
@@ -180,7 +176,7 @@ color-name@1.1.1:
 
 colors@0.5.x:
   version "0.5.1"
-  resolved "https://artifactory.dm-drogeriemarkt.com:443/api/npm/repo-npm/colors/-/colors-0.5.1.tgz#7d0023eaeb154e8ee9fce75dcb923d0ed1667774"
+  resolved "https://registry.yarnpkg.com/colors/-/colors-0.5.1.tgz#7d0023eaeb154e8ee9fce75dcb923d0ed1667774"
 
 commander@*, commander@^2.12.1, commander@^2.16.0:
   version "2.16.0"
@@ -192,7 +188,7 @@ concat-map@0.0.1:
 
 cross-spawn@^5.0.1:
   version "5.1.0"
-  resolved "https://artifactory.dm-drogeriemarkt.com:443/api/npm/repo-npm/cross-spawn/-/cross-spawn-5.1.0.tgz#e8bd0efee58fcff6f8f94510a0a554bbfa235449"
+  resolved "https://registry.yarnpkg.com/cross-spawn/-/cross-spawn-5.1.0.tgz#e8bd0efee58fcff6f8f94510a0a554bbfa235449"
   dependencies:
     lru-cache "^4.0.1"
     shebang-command "^1.2.0"
@@ -206,7 +202,7 @@ debug@^3.1.0:
 
 del@^2.2.0:
   version "2.2.2"
-  resolved "https://artifactory.dm-drogeriemarkt.com:443/api/npm/repo-npm/del/-/del-2.2.2.tgz#c12c981d067846c84bcaf862cff930d907ffd1a8"
+  resolved "https://registry.yarnpkg.com/del/-/del-2.2.2.tgz#c12c981d067846c84bcaf862cff930d907ffd1a8"
   dependencies:
     globby "^5.0.0"
     is-path-cwd "^1.0.0"
@@ -222,11 +218,11 @@ diff@^3.2.0:
 
 emitter-mixin@0.0.3:
   version "0.0.3"
-  resolved "https://artifactory.dm-drogeriemarkt.com:443/api/npm/repo-npm/emitter-mixin/-/emitter-mixin-0.0.3.tgz#5948cb286f2e48edc3b251a7cfc1f7883396d65c"
+  resolved "https://registry.yarnpkg.com/emitter-mixin/-/emitter-mixin-0.0.3.tgz#5948cb286f2e48edc3b251a7cfc1f7883396d65c"
 
 errno@^0.1.2:
   version "0.1.7"
-  resolved "https://artifactory.dm-drogeriemarkt.com:443/api/npm/repo-npm/errno/-/errno-0.1.7.tgz#4684d71779ad39af177e3f007996f7c67c852618"
+  resolved "https://registry.yarnpkg.com/errno/-/errno-0.1.7.tgz#4684d71779ad39af177e3f007996f7c67c852618"
   dependencies:
     prr "~1.0.1"
 
@@ -239,8 +235,8 @@ escape-string-regexp@^1.0.2, escape-string-regexp@^1.0.5:
   resolved "https://registry.yarnpkg.com/escape-string-regexp/-/escape-string-regexp-1.0.5.tgz#1b61c0562190a8dff6ae3bb2cf0200ca130b86d4"
 
 esprima@^4.0.0:
-  version "4.0.0"
-  resolved "https://registry.yarnpkg.com/esprima/-/esprima-4.0.0.tgz#4499eddcd1110e0b218bacf2fa7f7f59f55ca804"
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/esprima/-/esprima-4.0.1.tgz#13b04cdb3e6c5d19df91ab6987a8695619b0aa71"
 
 esutils@^2.0.2:
   version "2.0.2"
@@ -248,7 +244,7 @@ esutils@^2.0.2:
 
 execa@^0.8.0:
   version "0.8.0"
-  resolved "https://artifactory.dm-drogeriemarkt.com:443/api/npm/repo-npm/execa/-/execa-0.8.0.tgz#d8d76bbc1b55217ed190fd6dd49d3c774ecfc8da"
+  resolved "https://registry.yarnpkg.com/execa/-/execa-0.8.0.tgz#d8d76bbc1b55217ed190fd6dd49d3c774ecfc8da"
   dependencies:
     cross-spawn "^5.0.1"
     get-stream "^3.0.0"
@@ -266,7 +262,7 @@ extend-shallow@^2.0.1:
 
 find-up@^2.1.0:
   version "2.1.0"
-  resolved "https://artifactory.dm-drogeriemarkt.com:443/api/npm/repo-npm/find-up/-/find-up-2.1.0.tgz#45d1b7e506c717ddd482775a2b77920a3c0c57a7"
+  resolved "https://registry.yarnpkg.com/find-up/-/find-up-2.1.0.tgz#45d1b7e506c717ddd482775a2b77920a3c0c57a7"
   dependencies:
     locate-path "^2.0.0"
 
@@ -276,7 +272,7 @@ fs-exists-sync@^0.1.0:
 
 fs-extra@^4.0.2:
   version "4.0.3"
-  resolved "https://artifactory.dm-drogeriemarkt.com:443/api/npm/repo-npm/fs-extra/-/fs-extra-4.0.3.tgz#0d852122e5bc5beb453fb028e9c0c9bf36340c94"
+  resolved "https://registry.yarnpkg.com/fs-extra/-/fs-extra-4.0.3.tgz#0d852122e5bc5beb453fb028e9c0c9bf36340c94"
   dependencies:
     graceful-fs "^4.1.2"
     jsonfile "^4.0.0"
@@ -296,7 +292,7 @@ fs.realpath@^1.0.0:
 
 get-stream@^3.0.0:
   version "3.0.0"
-  resolved "https://artifactory.dm-drogeriemarkt.com:443/api/npm/repo-npm/get-stream/-/get-stream-3.0.0.tgz#8e943d1358dc37555054ecbe2edb05aa174ede14"
+  resolved "https://registry.yarnpkg.com/get-stream/-/get-stream-3.0.0.tgz#8e943d1358dc37555054ecbe2edb05aa174ede14"
 
 glob@^7.0.0, glob@^7.0.3, glob@^7.0.5, glob@^7.1.1:
   version "7.1.2"
@@ -311,7 +307,7 @@ glob@^7.0.0, glob@^7.0.3, glob@^7.0.5, glob@^7.1.1:
 
 globby@^5.0.0:
   version "5.0.0"
-  resolved "https://artifactory.dm-drogeriemarkt.com:443/api/npm/repo-npm/globby/-/globby-5.0.0.tgz#ebd84667ca0dbb330b99bcfc68eac2bc54370e0d"
+  resolved "https://registry.yarnpkg.com/globby/-/globby-5.0.0.tgz#ebd84667ca0dbb330b99bcfc68eac2bc54370e0d"
   dependencies:
     array-union "^1.0.1"
     arrify "^1.0.0"
@@ -336,7 +332,7 @@ has-flag@^3.0.0:
 
 husky@^0.14.3:
   version "0.14.3"
-  resolved "https://artifactory.dm-drogeriemarkt.com:443/api/npm/repo-npm/husky/-/husky-0.14.3.tgz#c69ed74e2d2779769a17ba8399b54ce0b63c12c3"
+  resolved "https://registry.yarnpkg.com/husky/-/husky-0.14.3.tgz#c69ed74e2d2779769a17ba8399b54ce0b63c12c3"
   dependencies:
     is-ci "^1.0.10"
     normalize-path "^1.0.0"
@@ -344,7 +340,7 @@ husky@^0.14.3:
 
 ignore@^3.3.7:
   version "3.3.10"
-  resolved "https://artifactory.dm-drogeriemarkt.com:443/api/npm/repo-npm/ignore/-/ignore-3.3.10.tgz#0a97fb876986e8081c631160f8f9f389157f0043"
+  resolved "https://registry.yarnpkg.com/ignore/-/ignore-3.3.10.tgz#0a97fb876986e8081c631160f8f9f389157f0043"
 
 inflight@^1.0.4:
   version "1.0.6"
@@ -363,13 +359,13 @@ interpret@^1.0.0:
 
 is-ci@^1.0.10:
   version "1.1.0"
-  resolved "https://artifactory.dm-drogeriemarkt.com:443/api/npm/repo-npm/is-ci/-/is-ci-1.1.0.tgz#247e4162e7860cebbdaf30b774d6b0ac7dcfe7a5"
+  resolved "https://registry.yarnpkg.com/is-ci/-/is-ci-1.1.0.tgz#247e4162e7860cebbdaf30b774d6b0ac7dcfe7a5"
   dependencies:
     ci-info "^1.0.0"
 
 is-empty@^1.2.0:
   version "1.2.0"
-  resolved "https://artifactory.dm-drogeriemarkt.com:443/api/npm/repo-npm/is-empty/-/is-empty-1.2.0.tgz#de9bb5b278738a05a0b09a57e1fb4d4a341a9f6b"
+  resolved "https://registry.yarnpkg.com/is-empty/-/is-empty-1.2.0.tgz#de9bb5b278738a05a0b09a57e1fb4d4a341a9f6b"
 
 is-extendable@^0.1.0:
   version "0.1.1"
@@ -377,27 +373,27 @@ is-extendable@^0.1.0:
 
 is-path-cwd@^1.0.0:
   version "1.0.0"
-  resolved "https://artifactory.dm-drogeriemarkt.com:443/api/npm/repo-npm/is-path-cwd/-/is-path-cwd-1.0.0.tgz#d225ec23132e89edd38fda767472e62e65f1106d"
+  resolved "https://registry.yarnpkg.com/is-path-cwd/-/is-path-cwd-1.0.0.tgz#d225ec23132e89edd38fda767472e62e65f1106d"
 
 is-path-in-cwd@^1.0.0:
   version "1.0.1"
-  resolved "https://artifactory.dm-drogeriemarkt.com:443/api/npm/repo-npm/is-path-in-cwd/-/is-path-in-cwd-1.0.1.tgz#5ac48b345ef675339bd6c7a48a912110b241cf52"
+  resolved "https://registry.yarnpkg.com/is-path-in-cwd/-/is-path-in-cwd-1.0.1.tgz#5ac48b345ef675339bd6c7a48a912110b241cf52"
   dependencies:
     is-path-inside "^1.0.0"
 
 is-path-inside@^1.0.0:
   version "1.0.1"
-  resolved "https://artifactory.dm-drogeriemarkt.com:443/api/npm/repo-npm/is-path-inside/-/is-path-inside-1.0.1.tgz#8ef5b7de50437a3fdca6b4e865ef7aa55cb48036"
+  resolved "https://registry.yarnpkg.com/is-path-inside/-/is-path-inside-1.0.1.tgz#8ef5b7de50437a3fdca6b4e865ef7aa55cb48036"
   dependencies:
     path-is-inside "^1.0.1"
 
 is-stream@^1.1.0:
   version "1.1.0"
-  resolved "https://artifactory.dm-drogeriemarkt.com:443/api/npm/repo-npm/is-stream/-/is-stream-1.1.0.tgz#12d4a3dd4e68e0b79ceb8dbc84173ae80d91ca44"
+  resolved "https://registry.yarnpkg.com/is-stream/-/is-stream-1.1.0.tgz#12d4a3dd4e68e0b79ceb8dbc84173ae80d91ca44"
 
 isexe@^2.0.0:
   version "2.0.0"
-  resolved "https://artifactory.dm-drogeriemarkt.com:443/api/npm/repo-npm/isexe/-/isexe-2.0.0.tgz#e8fbf374dc556ff8947a10dcb0572d633f2cfa10"
+  resolved "https://registry.yarnpkg.com/isexe/-/isexe-2.0.0.tgz#e8fbf374dc556ff8947a10dcb0572d633f2cfa10"
 
 js-tokens@^3.0.2:
   version "3.0.2"
@@ -418,29 +414,33 @@ jsonfile@^4.0.0:
 
 junk@^1.0.1:
   version "1.0.3"
-  resolved "https://artifactory.dm-drogeriemarkt.com:443/api/npm/repo-npm/junk/-/junk-1.0.3.tgz#87be63488649cbdca6f53ab39bec9ccd2347f592"
+  resolved "https://registry.yarnpkg.com/junk/-/junk-1.0.3.tgz#87be63488649cbdca6f53ab39bec9ccd2347f592"
+
+kleur@^1.0.0:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/kleur/-/kleur-1.0.2.tgz#637f126d3cda40a423b1297da88cf753bd04ebdd"
 
 locate-path@^2.0.0:
   version "2.0.0"
-  resolved "https://artifactory.dm-drogeriemarkt.com:443/api/npm/repo-npm/locate-path/-/locate-path-2.0.0.tgz#2b568b265eec944c6d9c0de9c3dbbbca0354cd8e"
+  resolved "https://registry.yarnpkg.com/locate-path/-/locate-path-2.0.0.tgz#2b568b265eec944c6d9c0de9c3dbbbca0354cd8e"
   dependencies:
     p-locate "^2.0.0"
     path-exists "^3.0.0"
 
 lru-cache@2:
   version "2.7.3"
-  resolved "https://artifactory.dm-drogeriemarkt.com:443/api/npm/repo-npm/lru-cache/-/lru-cache-2.7.3.tgz#6d4524e8b955f95d4f5b58851ce21dd72fb4e952"
+  resolved "https://registry.yarnpkg.com/lru-cache/-/lru-cache-2.7.3.tgz#6d4524e8b955f95d4f5b58851ce21dd72fb4e952"
 
 lru-cache@^4.0.1:
   version "4.1.3"
-  resolved "https://artifactory.dm-drogeriemarkt.com:443/api/npm/repo-npm/lru-cache/-/lru-cache-4.1.3.tgz#a1175cf3496dfc8436c156c334b4955992bce69c"
+  resolved "https://registry.yarnpkg.com/lru-cache/-/lru-cache-4.1.3.tgz#a1175cf3496dfc8436c156c334b4955992bce69c"
   dependencies:
     pseudomap "^1.0.2"
     yallist "^2.1.2"
 
 maximatch@^0.1.0:
   version "0.1.0"
-  resolved "https://artifactory.dm-drogeriemarkt.com:443/api/npm/repo-npm/maximatch/-/maximatch-0.1.0.tgz#86cd8d6b04c9f307c05a6b9419906d0360fb13a2"
+  resolved "https://registry.yarnpkg.com/maximatch/-/maximatch-0.1.0.tgz#86cd8d6b04c9f307c05a6b9419906d0360fb13a2"
   dependencies:
     array-differ "^1.0.0"
     array-union "^1.0.1"
@@ -455,7 +455,7 @@ minimatch@^3.0.0, minimatch@^3.0.4:
 
 minimatch@~0.2.9:
   version "0.2.14"
-  resolved "https://artifactory.dm-drogeriemarkt.com:443/api/npm/repo-npm/minimatch/-/minimatch-0.2.14.tgz#c74e780574f63c6f9a090e90efbe6ef53a6a756a"
+  resolved "https://registry.yarnpkg.com/minimatch/-/minimatch-0.2.14.tgz#c74e780574f63c6f9a090e90efbe6ef53a6a756a"
   dependencies:
     lru-cache "2"
     sigmund "~1.0.0"
@@ -476,7 +476,7 @@ moment@*, moment@^2.22.2:
 
 mri@^1.1.0:
   version "1.1.1"
-  resolved "https://artifactory.dm-drogeriemarkt.com:443/api/npm/repo-npm/mri/-/mri-1.1.1.tgz#85aa26d3daeeeedf80dc5984af95cc5ca5cad9f1"
+  resolved "https://registry.yarnpkg.com/mri/-/mri-1.1.1.tgz#85aa26d3daeeeedf80dc5984af95cc5ca5cad9f1"
 
 ms@2.0.0:
   version "2.0.0"
@@ -484,24 +484,24 @@ ms@2.0.0:
 
 nomnom@1.6.x:
   version "1.6.2"
-  resolved "https://artifactory.dm-drogeriemarkt.com:443/api/npm/repo-npm/nomnom/-/nomnom-1.6.2.tgz#84a66a260174408fc5b77a18f888eccc44fb6971"
+  resolved "https://registry.yarnpkg.com/nomnom/-/nomnom-1.6.2.tgz#84a66a260174408fc5b77a18f888eccc44fb6971"
   dependencies:
     colors "0.5.x"
     underscore "~1.4.4"
 
 normalize-path@^1.0.0:
   version "1.0.0"
-  resolved "https://artifactory.dm-drogeriemarkt.com:443/api/npm/repo-npm/normalize-path/-/normalize-path-1.0.0.tgz#32d0e472f91ff345701c15a8311018d3b0a90379"
+  resolved "https://registry.yarnpkg.com/normalize-path/-/normalize-path-1.0.0.tgz#32d0e472f91ff345701c15a8311018d3b0a90379"
 
 npm-run-path@^2.0.0:
   version "2.0.2"
-  resolved "https://artifactory.dm-drogeriemarkt.com:443/api/npm/repo-npm/npm-run-path/-/npm-run-path-2.0.2.tgz#35a9232dfa35d7067b4cb2ddf2357b1871536c5f"
+  resolved "https://registry.yarnpkg.com/npm-run-path/-/npm-run-path-2.0.2.tgz#35a9232dfa35d7067b4cb2ddf2357b1871536c5f"
   dependencies:
     path-key "^2.0.0"
 
 object-assign@^4.0.1:
   version "4.1.1"
-  resolved "https://artifactory.dm-drogeriemarkt.com:443/api/npm/repo-npm/object-assign/-/object-assign-4.1.1.tgz#2109adc7965887cfc05cbbd442cac8bfbb360863"
+  resolved "https://registry.yarnpkg.com/object-assign/-/object-assign-4.1.1.tgz#2109adc7965887cfc05cbbd442cac8bfbb360863"
 
 once@^1.3.0:
   version "1.4.0"
@@ -511,27 +511,27 @@ once@^1.3.0:
 
 p-finally@^1.0.0:
   version "1.0.0"
-  resolved "https://artifactory.dm-drogeriemarkt.com:443/api/npm/repo-npm/p-finally/-/p-finally-1.0.0.tgz#3fbcfb15b899a44123b34b6dcc18b724336a2cae"
+  resolved "https://registry.yarnpkg.com/p-finally/-/p-finally-1.0.0.tgz#3fbcfb15b899a44123b34b6dcc18b724336a2cae"
 
 p-limit@^1.1.0:
   version "1.3.0"
-  resolved "https://artifactory.dm-drogeriemarkt.com:443/api/npm/repo-npm/p-limit/-/p-limit-1.3.0.tgz#b86bd5f0c25690911c7590fcbfc2010d54b3ccb8"
+  resolved "https://registry.yarnpkg.com/p-limit/-/p-limit-1.3.0.tgz#b86bd5f0c25690911c7590fcbfc2010d54b3ccb8"
   dependencies:
     p-try "^1.0.0"
 
 p-locate@^2.0.0:
   version "2.0.0"
-  resolved "https://artifactory.dm-drogeriemarkt.com:443/api/npm/repo-npm/p-locate/-/p-locate-2.0.0.tgz#20a0103b222a70c8fd39cc2e580680f3dde5ec43"
+  resolved "https://registry.yarnpkg.com/p-locate/-/p-locate-2.0.0.tgz#20a0103b222a70c8fd39cc2e580680f3dde5ec43"
   dependencies:
     p-limit "^1.1.0"
 
 p-try@^1.0.0:
   version "1.0.0"
-  resolved "https://artifactory.dm-drogeriemarkt.com:443/api/npm/repo-npm/p-try/-/p-try-1.0.0.tgz#cbc79cdbaf8fd4228e13f621f2b1a237c1b207b3"
+  resolved "https://registry.yarnpkg.com/p-try/-/p-try-1.0.0.tgz#cbc79cdbaf8fd4228e13f621f2b1a237c1b207b3"
 
 path-exists@^3.0.0:
   version "3.0.0"
-  resolved "https://artifactory.dm-drogeriemarkt.com:443/api/npm/repo-npm/path-exists/-/path-exists-3.0.0.tgz#ce0ebeaa5f78cb18925ea7d810d7b59b010fd515"
+  resolved "https://registry.yarnpkg.com/path-exists/-/path-exists-3.0.0.tgz#ce0ebeaa5f78cb18925ea7d810d7b59b010fd515"
 
 path-is-absolute@^1.0.0:
   version "1.0.1"
@@ -539,11 +539,11 @@ path-is-absolute@^1.0.0:
 
 path-is-inside@^1.0.1:
   version "1.0.2"
-  resolved "https://artifactory.dm-drogeriemarkt.com:443/api/npm/repo-npm/path-is-inside/-/path-is-inside-1.0.2.tgz#365417dede44430d1c11af61027facf074bdfc53"
+  resolved "https://registry.yarnpkg.com/path-is-inside/-/path-is-inside-1.0.2.tgz#365417dede44430d1c11af61027facf074bdfc53"
 
 path-key@^2.0.0:
   version "2.0.1"
-  resolved "https://artifactory.dm-drogeriemarkt.com:443/api/npm/repo-npm/path-key/-/path-key-2.0.1.tgz#411cadb574c5a140d3a4b1910d40d80cc9f40b40"
+  resolved "https://registry.yarnpkg.com/path-key/-/path-key-2.0.1.tgz#411cadb574c5a140d3a4b1910d40d80cc9f40b40"
 
 path-parse@^1.0.5:
   version "1.0.5"
@@ -551,17 +551,17 @@ path-parse@^1.0.5:
 
 pify@^2.0.0, pify@^2.3.0:
   version "2.3.0"
-  resolved "https://artifactory.dm-drogeriemarkt.com:443/api/npm/repo-npm/pify/-/pify-2.3.0.tgz#ed141a6ac043a849ea588498e7dca8b15330e90c"
+  resolved "https://registry.yarnpkg.com/pify/-/pify-2.3.0.tgz#ed141a6ac043a849ea588498e7dca8b15330e90c"
 
 pinkie-promise@^2.0.0:
   version "2.0.1"
-  resolved "https://artifactory.dm-drogeriemarkt.com:443/api/npm/repo-npm/pinkie-promise/-/pinkie-promise-2.0.1.tgz#2135d6dfa7a358c069ac9b178776288228450ffa"
+  resolved "https://registry.yarnpkg.com/pinkie-promise/-/pinkie-promise-2.0.1.tgz#2135d6dfa7a358c069ac9b178776288228450ffa"
   dependencies:
     pinkie "^2.0.0"
 
 pinkie@^2.0.0:
   version "2.0.4"
-  resolved "https://artifactory.dm-drogeriemarkt.com:443/api/npm/repo-npm/pinkie/-/pinkie-2.0.4.tgz#72556b80cfa0d48a974e80e77248e80ed4f7f870"
+  resolved "https://registry.yarnpkg.com/pinkie/-/pinkie-2.0.4.tgz#72556b80cfa0d48a974e80e77248e80ed4f7f870"
 
 plist@2.1.0:
   version "2.1.0"
@@ -573,11 +573,11 @@ plist@2.1.0:
 
 prettier@1.13.7:
   version "1.13.7"
-  resolved "https://artifactory.dm-drogeriemarkt.com:443/api/npm/repo-npm/prettier/-/prettier-1.13.7.tgz#850f3b8af784a49a6ea2d2eaa7ed1428a34b7281"
+  resolved "https://registry.yarnpkg.com/prettier/-/prettier-1.13.7.tgz#850f3b8af784a49a6ea2d2eaa7ed1428a34b7281"
 
 pretty-quick@^1.6.0:
   version "1.6.0"
-  resolved "https://artifactory.dm-drogeriemarkt.com:443/api/npm/repo-npm/pretty-quick/-/pretty-quick-1.6.0.tgz#afc3591eb5c4cf37614a305d489a8a40e57c9258"
+  resolved "https://registry.yarnpkg.com/pretty-quick/-/pretty-quick-1.6.0.tgz#afc3591eb5c4cf37614a305d489a8a40e57c9258"
   dependencies:
     chalk "^2.3.0"
     execa "^0.8.0"
@@ -587,24 +587,24 @@ pretty-quick@^1.6.0:
 
 promise@^7.0.1:
   version "7.3.1"
-  resolved "https://artifactory.dm-drogeriemarkt.com:443/api/npm/repo-npm/promise/-/promise-7.3.1.tgz#064b72602b18f90f29192b8b1bc418ffd1ebd3bf"
+  resolved "https://registry.yarnpkg.com/promise/-/promise-7.3.1.tgz#064b72602b18f90f29192b8b1bc418ffd1ebd3bf"
   dependencies:
     asap "~2.0.3"
 
 prompts@^0.1.10:
-  version "0.1.10"
-  resolved "https://registry.yarnpkg.com/prompts/-/prompts-0.1.10.tgz#832cbf6116ecb121d6884e84643bb2cf92b3ed2c"
+  version "0.1.12"
+  resolved "https://registry.yarnpkg.com/prompts/-/prompts-0.1.12.tgz#39dc42de7d2f0ec3e2af76bf40713fcb8726090d"
   dependencies:
-    clorox "^1.0.3"
+    kleur "^1.0.0"
     sisteransi "^0.1.1"
 
 prr@~1.0.1:
   version "1.0.1"
-  resolved "https://artifactory.dm-drogeriemarkt.com:443/api/npm/repo-npm/prr/-/prr-1.0.1.tgz#d3fc114ba06995a45ec6893f484ceb1d78f5f476"
+  resolved "https://registry.yarnpkg.com/prr/-/prr-1.0.1.tgz#d3fc114ba06995a45ec6893f484ceb1d78f5f476"
 
 pseudomap@^1.0.2:
   version "1.0.2"
-  resolved "https://artifactory.dm-drogeriemarkt.com:443/api/npm/repo-npm/pseudomap/-/pseudomap-1.0.2.tgz#f052a28da70e618917ef0a8ac34c1ae5a68286b3"
+  resolved "https://registry.yarnpkg.com/pseudomap/-/pseudomap-1.0.2.tgz#f052a28da70e618917ef0a8ac34c1ae5a68286b3"
 
 rechoir@^0.6.2:
   version "0.6.2"
@@ -614,7 +614,7 @@ rechoir@^0.6.2:
 
 recursive-copy@^2.0.9:
   version "2.0.9"
-  resolved "https://artifactory.dm-drogeriemarkt.com:443/api/npm/repo-npm/recursive-copy/-/recursive-copy-2.0.9.tgz#d9524dedb36409274cbbb3276cd8a022abca8920"
+  resolved "https://registry.yarnpkg.com/recursive-copy/-/recursive-copy-2.0.9.tgz#d9524dedb36409274cbbb3276cd8a022abca8920"
   dependencies:
     del "^2.2.0"
     emitter-mixin "0.0.3"
@@ -629,14 +629,14 @@ recursive-copy@^2.0.9:
 
 regex-replace@^2.1.0:
   version "2.1.0"
-  resolved "https://artifactory.dm-drogeriemarkt.com:443/api/npm/repo-npm/regex-replace/-/regex-replace-2.1.0.tgz#c3885a88dadba4f05335c41d9f18c24ae62276ea"
+  resolved "https://registry.yarnpkg.com/regex-replace/-/regex-replace-2.1.0.tgz#c3885a88dadba4f05335c41d9f18c24ae62276ea"
   dependencies:
     fs-extra "^4.0.2"
     replace "^0.3.0"
 
 replace@^0.3.0:
   version "0.3.0"
-  resolved "https://artifactory.dm-drogeriemarkt.com:443/api/npm/repo-npm/replace/-/replace-0.3.0.tgz#60081721188658595ab6a794eb7fedcb4c8d39c7"
+  resolved "https://registry.yarnpkg.com/replace/-/replace-0.3.0.tgz#60081721188658595ab6a794eb7fedcb4c8d39c7"
   dependencies:
     colors "0.5.x"
     minimatch "~0.2.9"
@@ -660,13 +660,13 @@ semver@^5.3.0:
 
 shebang-command@^1.2.0:
   version "1.2.0"
-  resolved "https://artifactory.dm-drogeriemarkt.com:443/api/npm/repo-npm/shebang-command/-/shebang-command-1.2.0.tgz#44aac65b695b03398968c39f363fee5deafdf1ea"
+  resolved "https://registry.yarnpkg.com/shebang-command/-/shebang-command-1.2.0.tgz#44aac65b695b03398968c39f363fee5deafdf1ea"
   dependencies:
     shebang-regex "^1.0.0"
 
 shebang-regex@^1.0.0:
   version "1.0.0"
-  resolved "https://artifactory.dm-drogeriemarkt.com:443/api/npm/repo-npm/shebang-regex/-/shebang-regex-1.0.0.tgz#da42f49740c0b42db2ca9728571cb190c98efea3"
+  resolved "https://registry.yarnpkg.com/shebang-regex/-/shebang-regex-1.0.0.tgz#da42f49740c0b42db2ca9728571cb190c98efea3"
 
 shelljs@^0.8.2:
   version "0.8.2"
@@ -678,11 +678,11 @@ shelljs@^0.8.2:
 
 sigmund@~1.0.0:
   version "1.0.1"
-  resolved "https://artifactory.dm-drogeriemarkt.com:443/api/npm/repo-npm/sigmund/-/sigmund-1.0.1.tgz#3ff21f198cad2175f9f3b781853fd94d0d19b590"
+  resolved "https://registry.yarnpkg.com/sigmund/-/sigmund-1.0.1.tgz#3ff21f198cad2175f9f3b781853fd94d0d19b590"
 
 signal-exit@^3.0.0:
   version "3.0.2"
-  resolved "https://artifactory.dm-drogeriemarkt.com:443/api/npm/repo-npm/signal-exit/-/signal-exit-3.0.2.tgz#b5fdc08f1287ea1178628e415e25132b73646c6d"
+  resolved "https://registry.yarnpkg.com/signal-exit/-/signal-exit-3.0.2.tgz#b5fdc08f1287ea1178628e415e25132b73646c6d"
 
 simple-git@^1.96.0:
   version "1.96.0"
@@ -704,7 +704,7 @@ sisteransi@^0.1.1:
 
 slash@^1.0.0:
   version "1.0.0"
-  resolved "https://artifactory.dm-drogeriemarkt.com:443/api/npm/repo-npm/slash/-/slash-1.0.0.tgz#c41f2f6c39fc16d1cd17ad4b5d896114ae470d55"
+  resolved "https://registry.yarnpkg.com/slash/-/slash-1.0.0.tgz#c41f2f6c39fc16d1cd17ad4b5d896114ae470d55"
 
 sprintf-js@~1.0.2:
   version "1.0.3"
@@ -722,11 +722,11 @@ strip-ansi@^3.0.0:
 
 strip-eof@^1.0.0:
   version "1.0.0"
-  resolved "https://artifactory.dm-drogeriemarkt.com:443/api/npm/repo-npm/strip-eof/-/strip-eof-1.0.0.tgz#bb43ff5598a6eb05d89b59fcd129c983313606bf"
+  resolved "https://registry.yarnpkg.com/strip-eof/-/strip-eof-1.0.0.tgz#bb43ff5598a6eb05d89b59fcd129c983313606bf"
 
 strip-indent@^2.0.0:
   version "2.0.0"
-  resolved "https://artifactory.dm-drogeriemarkt.com:443/api/npm/repo-npm/strip-indent/-/strip-indent-2.0.0.tgz#5ef8db295d01e6ed6cbf7aab96998d7822527b68"
+  resolved "https://registry.yarnpkg.com/strip-indent/-/strip-indent-2.0.0.tgz#5ef8db295d01e6ed6cbf7aab96998d7822527b68"
 
 supports-color@^2.0.0:
   version "2.0.0"
@@ -771,7 +771,7 @@ typescript@^2.9.2:
 
 underscore@~1.4.4:
   version "1.4.4"
-  resolved "https://artifactory.dm-drogeriemarkt.com:443/api/npm/repo-npm/underscore/-/underscore-1.4.4.tgz#61a6a32010622afa07963bf325203cf12239d604"
+  resolved "https://registry.yarnpkg.com/underscore/-/underscore-1.4.4.tgz#61a6a32010622afa07963bf325203cf12239d604"
 
 universalify@^0.1.0:
   version "0.1.2"
@@ -779,7 +779,7 @@ universalify@^0.1.0:
 
 which@^1.2.9:
   version "1.3.1"
-  resolved "https://artifactory.dm-drogeriemarkt.com:443/api/npm/repo-npm/which/-/which-1.3.1.tgz#a45043d54f5805316da8d62f9f50918d3da70b0a"
+  resolved "https://registry.yarnpkg.com/which/-/which-1.3.1.tgz#a45043d54f5805316da8d62f9f50918d3da70b0a"
   dependencies:
     isexe "^2.0.0"
 
@@ -812,4 +812,4 @@ xmldom@0.1.x:
 
 yallist@^2.1.2:
   version "2.1.2"
-  resolved "https://artifactory.dm-drogeriemarkt.com:443/api/npm/repo-npm/yallist/-/yallist-2.1.2.tgz#1c11f9218f076089a47dd512f93c6699a6a81d52"
+  resolved "https://registry.yarnpkg.com/yallist/-/yallist-2.1.2.tgz#1c11f9218f076089a47dd512f93c6699a6a81d52"
