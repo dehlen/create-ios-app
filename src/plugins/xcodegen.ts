@@ -127,6 +127,5 @@ export default class XcodeGenPlugin extends Plugin {
     exec('xcodegen --spec ' + join(destination, 'project.yml') + ' --project ' + destination)
     // TODO: generate carthage run script phase if needed
     // TODO: generate cocoapods workspace if needed
-    // TODO: install dependencies or only fetch them base on --skipInstall parameter
   }
 }

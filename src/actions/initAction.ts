@@ -23,6 +23,8 @@ import XcodeGenPlugin from '../plugins/xcodegen'
 import AuthorPlugin from '../plugins/author'
 import YearPlugin from '../plugins/year'
 import TodayPlugin from '../plugins/today'
+import CarthagePlugin from '../plugins/carthage'
+import CocoapodsPlugin from '../plugins/cocoapods'
 
 export default async (name: string, destination: string) => {
   const generator = new Generator(name, destination)
@@ -48,6 +50,8 @@ export default async (name: string, destination: string) => {
     new ThemingDependencyPlugin(),
     new CuratedDependencyPlugin(),
     new DependencyEditorPlugin(),
+    new CarthagePlugin(),
+    new CocoapodsPlugin(),
     new XcodeGenPlugin(name),
     new GithubPlugin()
   ])
