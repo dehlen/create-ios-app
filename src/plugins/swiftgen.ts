@@ -34,7 +34,9 @@ export default class SwiftGenPlugin extends Plugin {
   }
 
   async postExecute(configuration: any, destination: string) {
-    console.log('Generating SwiftGen content before creating the project...')
-    exec('cd ' + destination + ' && swiftgen')
+    if (configuration.swiftgen) {
+      console.log('Generating SwiftGen content before creating the project...')
+      exec('cd ' + destination + ' && swiftgen')
+    }
   }
 }
