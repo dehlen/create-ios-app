@@ -34,7 +34,6 @@ export default async (name: string, destination: string) => {
     new TodayPlugin(),
     new AuthorPlugin(),
     new OrganizationPlugin(),
-    new GithubPlugin(),
     new BundleIdPrefixPlugin(),
     new DeploymentTargetPlugin(),
     new TabBasedAppPlugin(),
@@ -49,7 +48,8 @@ export default async (name: string, destination: string) => {
     new ThemingDependencyPlugin(),
     new CuratedDependencyPlugin(),
     new DependencyEditorPlugin(),
-    new XcodeGenPlugin()
+    new XcodeGenPlugin(name),
+    new GithubPlugin()
   ])
   const configuration = await generator.ask()
   await templateHandler.copyTo(destination, configuration)
