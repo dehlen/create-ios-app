@@ -20,9 +20,7 @@ export default class DependencyChooserPlugin extends Plugin {
     ]
   }
 
-  async execute(configuration: any, destination: string) {
-    // copy files based on selection
-  }
+  async execute(configuration: any, destination: string) {}
 
   async postExecute(configuration: any, destination: string) {}
 }

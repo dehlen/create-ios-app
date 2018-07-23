@@ -43,6 +43,8 @@ export default async (name: string, destination: string) => {
     new FastlanePlugin(),
     new SwiftGenPlugin(),
     new DependencyChooserPlugin(),
+    new CarthagePlugin(),
+    new CocoapodsPlugin(),
     new SettingsBundlePlugin(),
     new NetworkStackPlugin(),
     new LoggingDependencyPlugin(),
@@ -50,8 +52,6 @@ export default async (name: string, destination: string) => {
     new ThemingDependencyPlugin(),
     new CuratedDependencyPlugin(),
     new DependencyEditorPlugin(),
-    new CarthagePlugin(),
-    new CocoapodsPlugin(),
     new XcodeGenPlugin(name),
     new GithubPlugin()
   ])

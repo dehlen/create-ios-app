@@ -1,4 +1,6 @@
 import Plugin from '../plugin'
+import { appendFileSync } from 'fs'
+import { join } from 'path'
 
 export default class CuratedDependencyPlugin extends Plugin {
   constructor() {
@@ -46,8 +48,21 @@ export default class CuratedDependencyPlugin extends Plugin {
     ]
   }
 
+  private writeCarthageDependencies(configuration: any, destination: string) {
+    for (const testDependency of configuration.testDependencies) {
+      appendFileSync(join(destination, 'Cartfile.private'), 'github "' + testDependency + '"\n')
+    }
+    for (const dependency of configuration.dependencies) {
+      appendFileSync(join(destination, 'Cartfile'), 'github "' + dependency + '"\n')
+    }
+  }
+
   async execute(configuration: any, destination: string) {
-    // TODO: add dependency to cartfile or podfile based on configuration.dependencyManager
+    if (configuration.dependencyManager === 'Carthage') {
+      this.writeCarthageDependencies(configuration, destination)
+    } else if (configuration.dependencyManager === 'Cocoapods') {
+      // TODO: add dependencies to podfile
+    }
   }
 
   async postExecute(configuration: any, destination: string) {}

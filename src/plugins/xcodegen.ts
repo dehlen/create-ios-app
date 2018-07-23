@@ -60,6 +60,7 @@ export default class XcodeGenPlugin extends Plugin {
   }
 
   private createApplicationConfiguration(configuration: any, testTargetName: string) {
+    // TODO: generate carthage run script phase if needed in dependencies: [{carthage: Framework Name}]
     const targetConfiguration: any = {
       type: 'application',
       platform: 'iOS',
@@ -125,7 +126,6 @@ export default class XcodeGenPlugin extends Plugin {
     this.writeProjectConfiguration(configuration, destination)
     console.log('🛠 Generating Xcode project...')
     exec('xcodegen --spec ' + join(destination, 'project.yml') + ' --project ' + destination)
-    // TODO: generate carthage run script phase if needed
     // TODO: generate cocoapods workspace if needed
   }
 }
