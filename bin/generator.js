@@ -112,19 +112,62 @@ var Generator = /** @class */ (function () {
             });
         });
     };
+    Generator.prototype.processPlugins = function (plugins, configuration) {
+        return __awaiter(this, void 0, void 0, function () {
+            var _i, plugins_1, plugin;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _i = 0, plugins_1 = plugins;
+                        _a.label = 1;
+                    case 1:
+                        if (!(_i < plugins_1.length)) return [3 /*break*/, 4];
+                        plugin = plugins_1[_i];
+                        return [4 /*yield*/, plugin.execute(configuration, this.destination)];
+                    case 2:
+                        _a.sent();
+                        _a.label = 3;
+                    case 3:
+                        _i++;
+                        return [3 /*break*/, 1];
+                    case 4: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    Generator.prototype.postProcessPlugins = function (plugins, configuration) {
+        return __awaiter(this, void 0, void 0, function () {
+            var _i, plugins_2, plugin;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _i = 0, plugins_2 = plugins;
+                        _a.label = 1;
+                    case 1:
+                        if (!(_i < plugins_2.length)) return [3 /*break*/, 4];
+                        plugin = plugins_2[_i];
+                        return [4 /*yield*/, plugin.postExecute(configuration, this.destination)];
+                    case 2:
+                        _a.sent();
+                        _a.label = 3;
+                    case 3:
+                        _i++;
+                        return [3 /*break*/, 1];
+                    case 4: return [2 /*return*/];
+                }
+            });
+        });
+    };
     Generator.prototype.run = function (configuration) {
         return __awaiter(this, void 0, void 0, function () {
-            var _this = this;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         console.log('🚀 Please hold tight while create-ios-app generates the project for you');
-                        return [4 /*yield*/, this.plugins.forEach(function (plugin) { return plugin.execute(configuration, _this.destination); })];
+                        return [4 /*yield*/, this.processPlugins(this.plugins, configuration)];
                     case 1:
                         _a.sent();
-                        return [4 /*yield*/, this.plugins.forEach(function (plugin) {
-                                return plugin.postExecute(configuration, _this.destination);
-                            })];
+                        return [4 /*yield*/, this.postProcessPlugins(this.plugins, configuration)];
                     case 2:
                         _a.sent();
                         return [2 /*return*/];
