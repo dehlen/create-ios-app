@@ -62,13 +62,16 @@ var year_1 = require("../plugins/year");
 var today_1 = require("../plugins/today");
 var carthage_1 = require("../plugins/carthage");
 var cocoapods_1 = require("../plugins/cocoapods");
+var directoryHandler_1 = require("../directoryHandler");
 exports.default = (function (name, destination) { return __awaiter(_this, void 0, void 0, function () {
-    var generator, templateHandler, configuration;
+    var pathToProject, generator, templateHandler, directoryHandler, configuration;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
-                generator = new generator_1.default(name, destination);
+                pathToProject = path_1.join(destination, name);
+                generator = new generator_1.default(name, pathToProject);
                 templateHandler = new templateHandler_1.default(path_1.join(__dirname, '../../Template'));
+                directoryHandler = new directoryHandler_1.default();
                 generator.register([
                     new name_1.default(name),
                     new year_1.default(),
@@ -94,14 +97,17 @@ exports.default = (function (name, destination) { return __awaiter(_this, void 0
                     new xcodegen_1.default(name),
                     new github_1.default()
                 ]);
-                return [4 /*yield*/, generator.ask()];
+                return [4 /*yield*/, directoryHandler.handleProjectFolderGeneration(pathToProject)];
             case 1:
-                configuration = _a.sent();
-                return [4 /*yield*/, templateHandler.copyTo(destination, configuration)];
+                _a.sent();
+                return [4 /*yield*/, generator.ask()];
             case 2:
+                configuration = _a.sent();
+                return [4 /*yield*/, templateHandler.copyTo(pathToProject, configuration)];
+            case 3:
                 _a.sent();
                 return [4 /*yield*/, generator.run(configuration)];
-            case 3:
+            case 4:
                 _a.sent();
                 return [2 /*return*/];
         }

@@ -1,4 +1,5 @@
 import { join } from 'path'
+import { ensureDir, pathExists } from 'fs-extra'
 
 import Generator from '../generator'
 import NamePlugin from '../plugins/name'
@@ -25,10 +26,14 @@ import YearPlugin from '../plugins/year'
 import TodayPlugin from '../plugins/today'
 import CarthagePlugin from '../plugins/carthage'
 import CocoapodsPlugin from '../plugins/cocoapods'
+import DirectoryHandler from '../directoryHandler'
 
 export default async (name: string, destination: string) => {
-  const generator = new Generator(name, destination)
+  const pathToProject = join(destination, name)
+
+  const generator = new Generator(name, pathToProject)
   const templateHandler = new TemplateHandler(join(__dirname, '../../Template'))
+  const directoryHandler = new DirectoryHandler()
 
   generator.register([
     new NamePlugin(name),
@@ -55,7 +60,9 @@ export default async (name: string, destination: string) => {
     new XcodeGenPlugin(name),
     new GithubPlugin()
   ])
+
+  await directoryHandler.handleProjectFolderGeneration(pathToProject)
   const configuration = await generator.ask()
-  await templateHandler.copyTo(destination, configuration)
+  await templateHandler.copyTo(pathToProject, configuration)
   await generator.run(configuration)
 }
