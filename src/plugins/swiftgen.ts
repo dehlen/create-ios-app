@@ -23,8 +23,17 @@ export default class SwiftGenPlugin extends Plugin {
 
   async execute(configuration: any, destination: string) {
     const swiftgenConfigurationPath = join(this.pluginDirectory, 'swiftgen.yml')
+    const swiftgenScriptPath = join(this.pluginDirectory, 'scripts', 'swiftgen.sh')
+
     if (configuration.swiftgen) {
       await copy(swiftgenConfigurationPath, join(destination, 'swiftgen.yml'), {
+        overwrite: true,
+        expand: true,
+        dot: true,
+        junk: true
+      })
+
+      await copy(swiftgenScriptPath, join(destination, 'scripts', 'swiftgen.sh'), {
         overwrite: true,
         expand: true,
         dot: true,
