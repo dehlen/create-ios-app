@@ -65,11 +65,21 @@ export default class Generator {
     return confirmation.shouldProceed
   }
 
+  async processPlugins(plugins: Array<Plugin>, configuration: any) {
+    for (const plugin of plugins) {
+      await plugin.execute(configuration, this.destination)
+    }
+  }
+
+  async postProcessPlugins(plugins: Array<Plugin>, configuration: any) {
+    for (const plugin of plugins) {
+      await plugin.postExecute(configuration, this.destination)
+    }
+  }
+
   async run(configuration: object) {
     console.log('🚀 Please hold tight while create-ios-app generates the project for you')
-    await this.plugins.forEach((plugin: Plugin) => plugin.execute(configuration, this.destination))
-    await this.plugins.forEach((plugin: Plugin) =>
-      plugin.postExecute(configuration, this.destination)
-    )
+    await this.processPlugins(this.plugins, configuration)
+    await this.postProcessPlugins(this.plugins, configuration)
   }
 }
