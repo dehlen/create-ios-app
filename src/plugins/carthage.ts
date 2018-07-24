@@ -21,6 +21,16 @@ export default class CarthagePlugin extends Plugin {
     if (configuration.dependencyManager === 'Carthage') {
       const cartfilePath = join(this.pluginDirectory, 'Cartfile')
       const cartfilePrivatePath = join(this.pluginDirectory, 'Cartfile.private')
+      const buildDependenciesScriptPath = join(
+        this.pluginDirectory,
+        'scripts',
+        'build-dependencies.sh'
+      )
+      const fetchDependenciesScriptPath = join(
+        this.pluginDirectory,
+        'scripts',
+        'fetch-dependencies.sh'
+      )
 
       await copy(cartfilePath, join(destination, 'Cartfile'), {
         overwrite: true,
@@ -35,6 +45,28 @@ export default class CarthagePlugin extends Plugin {
         dot: true,
         junk: true
       })
+
+      await copy(
+        buildDependenciesScriptPath,
+        join(destination, 'scripts', 'build-dependencies.sh'),
+        {
+          overwrite: true,
+          expand: true,
+          dot: true,
+          junk: true
+        }
+      )
+
+      await copy(
+        fetchDependenciesScriptPath,
+        join(destination, 'scripts', 'fetch-dependencies.sh'),
+        {
+          overwrite: true,
+          expand: true,
+          dot: true,
+          junk: true
+        }
+      )
     }
   }
 
