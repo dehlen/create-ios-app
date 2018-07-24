@@ -46,35 +46,28 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var plugin_1 = require("../plugin");
-var NetworkStackPlugin = /** @class */ (function (_super) {
-    __extends(NetworkStackPlugin, _super);
-    function NetworkStackPlugin() {
+var CocoapodsPlugin = /** @class */ (function (_super) {
+    __extends(CocoapodsPlugin, _super);
+    function CocoapodsPlugin() {
         return _super.call(this) || this;
     }
-    NetworkStackPlugin.prototype.questions = function () {
-        return [
-            {
-                type: 'toggle',
-                name: 'network',
-                message: '🌏 Do you need a network stack?',
-                active: 'yes',
-                inactive: 'no',
-                initial: 'yes'
-            }
-        ];
+    CocoapodsPlugin.prototype.questions = function () {
+        return [];
     };
-    NetworkStackPlugin.prototype.execute = function (configuration, destination) {
+    CocoapodsPlugin.prototype.execute = function (configuration, destination) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 return [2 /*return*/];
             });
         });
     };
-    NetworkStackPlugin.prototype.postExecute = function (configuration, destination) {
-        return __awaiter(this, void 0, void 0, function () { return __generator(this, function (_a) {
-            return [2 /*return*/];
-        }); });
+    CocoapodsPlugin.prototype.postExecute = function (configuration, destination) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                return [2 /*return*/];
+            });
+        });
     };
-    return NetworkStackPlugin;
+    return CocoapodsPlugin;
 }(plugin_1.default));
-exports.default = NetworkStackPlugin;
+exports.default = CocoapodsPlugin;

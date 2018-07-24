@@ -47,35 +47,32 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var plugin_1 = require("../plugin");
 var shelljs_1 = require("shelljs");
-var copy = require("recursive-copy");
 var path_1 = require("path");
-var SwiftGenPlugin = /** @class */ (function (_super) {
-    __extends(SwiftGenPlugin, _super);
-    function SwiftGenPlugin() {
+var copy = require("recursive-copy");
+var CarthagePlugin = /** @class */ (function (_super) {
+    __extends(CarthagePlugin, _super);
+    function CarthagePlugin() {
         return _super.call(this) || this;
     }
-    SwiftGenPlugin.prototype.questions = function () {
-        return [
-            {
-                type: 'toggle',
-                name: 'swiftgen',
-                message: 'Should we add swiftgen to generate localizable strings, images, etc?',
-                active: 'yes',
-                inactive: 'no',
-                initial: 'yes'
-            }
-        ];
+    CarthagePlugin.prototype.questions = function () {
+        return [];
     };
-    SwiftGenPlugin.prototype.execute = function (configuration, destination) {
+    CarthagePlugin.prototype.fetchDependencies = function (destination) {
+        console.log('⚡️ Installing carthage dependencies');
+        shelljs_1.exec('cd ' + destination + ' && ./scripts/fetch-dependencies.sh');
+    };
+    CarthagePlugin.prototype.execute = function (configuration, destination) {
         return __awaiter(this, void 0, void 0, function () {
-            var swiftgenConfigurationPath, swiftgenScriptPath;
+            var cartfilePath, cartfilePrivatePath, buildDependenciesScriptPath, fetchDependenciesScriptPath;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        swiftgenConfigurationPath = path_1.join(this.pluginDirectory, 'swiftgen.yml');
-                        swiftgenScriptPath = path_1.join(this.pluginDirectory, 'scripts', 'swiftgen.sh');
-                        if (!configuration.swiftgen) return [3 /*break*/, 3];
-                        return [4 /*yield*/, copy(swiftgenConfigurationPath, path_1.join(destination, 'swiftgen.yml'), {
+                        if (!(configuration.dependencyManager === 'Carthage')) return [3 /*break*/, 5];
+                        cartfilePath = path_1.join(this.pluginDirectory, 'Cartfile');
+                        cartfilePrivatePath = path_1.join(this.pluginDirectory, 'Cartfile.private');
+                        buildDependenciesScriptPath = path_1.join(this.pluginDirectory, 'scripts', 'build-dependencies.sh');
+                        fetchDependenciesScriptPath = path_1.join(this.pluginDirectory, 'scripts', 'fetch-dependencies.sh');
+                        return [4 /*yield*/, copy(cartfilePath, path_1.join(destination, 'Cartfile'), {
                                 overwrite: true,
                                 expand: true,
                                 dot: true,
@@ -83,7 +80,7 @@ var SwiftGenPlugin = /** @class */ (function (_super) {
                             })];
                     case 1:
                         _a.sent();
-                        return [4 /*yield*/, copy(swiftgenScriptPath, path_1.join(destination, 'scripts', 'swiftgen.sh'), {
+                        return [4 /*yield*/, copy(cartfilePrivatePath, path_1.join(destination, 'Cartfile.private'), {
                                 overwrite: true,
                                 expand: true,
                                 dot: true,
@@ -91,23 +88,39 @@ var SwiftGenPlugin = /** @class */ (function (_super) {
                             })];
                     case 2:
                         _a.sent();
-                        _a.label = 3;
-                    case 3: return [2 /*return*/];
+                        return [4 /*yield*/, copy(buildDependenciesScriptPath, path_1.join(destination, 'scripts', 'build-dependencies.sh'), {
+                                overwrite: true,
+                                expand: true,
+                                dot: true,
+                                junk: true
+                            })];
+                    case 3:
+                        _a.sent();
+                        return [4 /*yield*/, copy(fetchDependenciesScriptPath, path_1.join(destination, 'scripts', 'fetch-dependencies.sh'), {
+                                overwrite: true,
+                                expand: true,
+                                dot: true,
+                                junk: true
+                            })];
+                    case 4:
+                        _a.sent();
+                        _a.label = 5;
+                    case 5: return [2 /*return*/];
                 }
             });
         });
     };
-    SwiftGenPlugin.prototype.postExecute = function (configuration, destination) {
+    CarthagePlugin.prototype.postExecute = function (configuration, destination) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                if (configuration.swiftgen) {
-                    console.log('Generating SwiftGen content before creating the project...');
-                    shelljs_1.exec('cd ' + destination + ' && swiftgen');
+                // TODO: consider a --skipInstall parameter and fetch or install based on that
+                if (configuration.dependencyManager === 'Carthage') {
+                    this.fetchDependencies(destination);
                 }
                 return [2 /*return*/];
             });
         });
     };
-    return SwiftGenPlugin;
+    return CarthagePlugin;
 }(plugin_1.default));
-exports.default = SwiftGenPlugin;
+exports.default = CarthagePlugin;
