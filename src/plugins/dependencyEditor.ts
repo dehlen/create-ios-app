@@ -21,7 +21,7 @@ export default class DependencyEditorPlugin extends Plugin {
   }
 
   async execute(configuration: any, destination: string) {
-    if (configuration.editor.length > 0) {
+    if (configuration.editDependencies) {
       console.log('The editor will open the files for you to edit.')
       console.log('Use :tabn (next), :tabp (previous) and :tabc (close) to control the tabs.')
       console.log('\n')
