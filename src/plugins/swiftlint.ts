@@ -26,7 +26,16 @@ export default class SwiftLintPlugin extends Plugin {
   async execute(configuration: any, destination: string) {
     if (configuration.swiftlint) {
       const swiftlintConfigurationPath = join(this.pluginDirectory, '.swiftlint.yml')
+      const swiftlintScriptPath = join(this.pluginDirectory, 'scripts', 'swiftlint.sh')
+
       await copy(swiftlintConfigurationPath, join(destination, '.swiftlint.yml'), {
+        overwrite: true,
+        expand: true,
+        dot: true,
+        junk: true
+      })
+
+      await copy(swiftlintScriptPath, join(destination, 'scripts', 'swiftlint.sh'), {
         overwrite: true,
         expand: true,
         dot: true,
