@@ -63,6 +63,7 @@ var today_1 = require("../plugins/today");
 var carthage_1 = require("../plugins/carthage");
 var cocoapods_1 = require("../plugins/cocoapods");
 var directoryHandler_1 = require("../directoryHandler");
+var openXcodeProject_1 = require("../plugins/openXcodeProject");
 exports.default = (function (name, destination, skipInstall) { return __awaiter(_this, void 0, void 0, function () {
     var projectPath, generator, templateHandler, directoryHandler, configuration;
     return __generator(this, function (_a) {
@@ -95,7 +96,8 @@ exports.default = (function (name, destination, skipInstall) { return __awaiter(
                     new curatedDependency_1.default(),
                     new dependencyEditor_1.default(),
                     new xcodegen_1.default(name),
-                    new github_1.default()
+                    new github_1.default(),
+                    new openXcodeProject_1.default()
                 ]);
                 return [4 /*yield*/, directoryHandler.handleProjectFolderGeneration(projectPath)];
             case 1:

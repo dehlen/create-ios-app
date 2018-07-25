@@ -27,6 +27,7 @@ import TodayPlugin from '../plugins/today'
 import CarthagePlugin from '../plugins/carthage'
 import CocoapodsPlugin from '../plugins/cocoapods'
 import DirectoryHandler from '../directoryHandler'
+import OpenXcodeProjectPlugin from '../plugins/openXcodeProject'
 
 export default async (name: string, destination: string, skipInstall: boolean) => {
   const projectPath = join(destination, name)
@@ -58,7 +59,8 @@ export default async (name: string, destination: string, skipInstall: boolean) =
     new CuratedDependencyPlugin(),
     new DependencyEditorPlugin(),
     new XcodeGenPlugin(name),
-    new GithubPlugin()
+    new GithubPlugin(),
+    new OpenXcodeProjectPlugin()
   ])
 
   await directoryHandler.handleProjectFolderGeneration(projectPath)
