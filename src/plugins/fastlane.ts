@@ -51,7 +51,7 @@ export default class FastlanePlugin extends Plugin {
   async postExecute(configuration: any, destination: string) {
     if (configuration.fastlane) {
       console.log('Installing ruby gems needed for fastlane configuration')
-      exec('cd ' + destination + ' && bundle install --path vendor/bundle')
+      exec('cd ' + destination + ' && bundle install --path vendor/bundle', { silent: true })
     }
   }
 }
