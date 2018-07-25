@@ -54,9 +54,11 @@ var main = function () { return __awaiter(_this, void 0, void 0, function () {
                     .command('init <name>')
                     .description('Scaffold a new project with the given name')
                     .option('-d, --destination <destination>', 'Set output destination of generated project')
+                    .option('-s, --skipInstall', 'Skip installation of dependencies and only fetch them')
                     .action(function (name, args) {
                     var destination = args.destination || os_1.homedir();
-                    initAction_1.default(name, destination);
+                    var skipInstall = args.skipInstall || false;
+                    initAction_1.default(name, destination, skipInstall);
                 });
                 program.parse(process.argv);
                 return [2 /*return*/];

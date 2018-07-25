@@ -63,13 +63,13 @@ var today_1 = require("../plugins/today");
 var carthage_1 = require("../plugins/carthage");
 var cocoapods_1 = require("../plugins/cocoapods");
 var directoryHandler_1 = require("../directoryHandler");
-exports.default = (function (name, destination) { return __awaiter(_this, void 0, void 0, function () {
-    var pathToProject, generator, templateHandler, directoryHandler, configuration;
+exports.default = (function (name, destination, skipInstall) { return __awaiter(_this, void 0, void 0, function () {
+    var projectPath, generator, templateHandler, directoryHandler, configuration;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
-                pathToProject = path_1.join(destination, name);
-                generator = new generator_1.default(name, pathToProject);
+                projectPath = path_1.join(destination, name);
+                generator = new generator_1.default(name, projectPath, skipInstall);
                 templateHandler = new templateHandler_1.default(path_1.join(__dirname, '../../Template'));
                 directoryHandler = new directoryHandler_1.default();
                 generator.register([
@@ -85,8 +85,8 @@ exports.default = (function (name, destination) { return __awaiter(_this, void 0
                     new fastlane_1.default(),
                     new swiftgen_1.default(),
                     new dependencyChooser_1.default(),
-                    new carthage_1.default(),
-                    new cocoapods_1.default(),
+                    new carthage_1.default(skipInstall),
+                    new cocoapods_1.default(skipInstall),
                     new settingsBundle_1.default(),
                     new networkStack_1.default(),
                     new loggingDependency_1.default(),
@@ -97,13 +97,13 @@ exports.default = (function (name, destination) { return __awaiter(_this, void 0
                     new xcodegen_1.default(name),
                     new github_1.default()
                 ]);
-                return [4 /*yield*/, directoryHandler.handleProjectFolderGeneration(pathToProject)];
+                return [4 /*yield*/, directoryHandler.handleProjectFolderGeneration(projectPath)];
             case 1:
                 _a.sent();
                 return [4 /*yield*/, generator.ask()];
             case 2:
                 configuration = _a.sent();
-                return [4 /*yield*/, templateHandler.copyTo(pathToProject, configuration)];
+                return [4 /*yield*/, templateHandler.copyTo(projectPath, configuration)];
             case 3:
                 _a.sent();
                 return [4 /*yield*/, generator.run(configuration)];

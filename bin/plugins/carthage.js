@@ -51,15 +51,21 @@ var path_1 = require("path");
 var copy = require("recursive-copy");
 var CarthagePlugin = /** @class */ (function (_super) {
     __extends(CarthagePlugin, _super);
-    function CarthagePlugin() {
-        return _super.call(this) || this;
+    function CarthagePlugin(skipInstall) {
+        var _this = _super.call(this) || this;
+        _this.skipInstall = skipInstall;
+        return _this;
     }
+    CarthagePlugin.prototype.fetchDependencies = function (destination) {
+        console.log('⚡️ Fetching carthage dependencies');
+        shelljs_1.exec('cd ' + destination + ' && ./scripts/fetch-dependencies.sh');
+    };
+    CarthagePlugin.prototype.buildDependencies = function (destination) {
+        console.log('⚡️ Installing carthage dependencies');
+        shelljs_1.exec('cd ' + destination + ' && ./scripts/build-dependencies.sh');
+    };
     CarthagePlugin.prototype.questions = function () {
         return [];
-    };
-    CarthagePlugin.prototype.fetchDependencies = function (destination) {
-        console.log('⚡️ Installing carthage dependencies');
-        shelljs_1.exec('cd ' + destination + ' && ./scripts/fetch-dependencies.sh');
     };
     CarthagePlugin.prototype.execute = function (configuration, destination) {
         return __awaiter(this, void 0, void 0, function () {
@@ -113,9 +119,13 @@ var CarthagePlugin = /** @class */ (function (_super) {
     CarthagePlugin.prototype.postExecute = function (configuration, destination) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                // TODO: consider a --skipInstall parameter and fetch or install based on that
                 if (configuration.dependencyManager === 'Carthage') {
-                    this.fetchDependencies(destination);
+                    if (this.skipInstall) {
+                        this.fetchDependencies(destination);
+                    }
+                    else {
+                        this.buildDependencies(destination);
+                    }
                 }
                 return [2 /*return*/];
             });

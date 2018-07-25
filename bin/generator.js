@@ -38,7 +38,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var prompts = require('prompts');
 var exit_1 = require("./exit");
 var Generator = /** @class */ (function () {
-    function Generator(name, destination) {
+    function Generator(name, destination, skipInstall) {
         this.name = name;
         this.destination = destination;
         this.plugins = [];

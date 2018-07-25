@@ -111,7 +111,7 @@ var FastlanePlugin = /** @class */ (function (_super) {
             return __generator(this, function (_a) {
                 if (configuration.fastlane) {
                     console.log('Installing ruby gems needed for fastlane configuration');
-                    shelljs_1.exec('cd ' + destination + ' && bundle install --path vendor/bundle');
+                    shelljs_1.exec('cd ' + destination + ' && bundle install --path vendor/bundle', { silent: true });
                 }
                 return [2 /*return*/];
             });

@@ -48,8 +48,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var plugin_1 = require("../plugin");
 var CocoapodsPlugin = /** @class */ (function (_super) {
     __extends(CocoapodsPlugin, _super);
-    function CocoapodsPlugin() {
-        return _super.call(this) || this;
+    function CocoapodsPlugin(skipInstall) {
+        var _this = _super.call(this) || this;
+        _this.skipInstall = skipInstall;
+        return _this;
     }
     CocoapodsPlugin.prototype.questions = function () {
         return [];
