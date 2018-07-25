@@ -7,7 +7,7 @@ export default class Generator {
   destination: string
   plugins: Array<Plugin>
 
-  constructor(name: string, destination: string) {
+  constructor(name: string, destination: string, skipInstall: boolean) {
     this.name = name
     this.destination = destination
     this.plugins = []

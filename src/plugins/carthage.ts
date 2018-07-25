@@ -4,17 +4,25 @@ import { join } from 'path'
 import * as copy from 'recursive-copy'
 
 export default class CarthagePlugin extends Plugin {
-  constructor() {
+  skipInstall: boolean
+
+  constructor(skipInstall: boolean) {
     super()
+    this.skipInstall = skipInstall
+  }
+
+  private fetchDependencies(destination: string) {
+    console.log('⚡️ Fetching carthage dependencies')
+    exec('cd ' + destination + ' && ./scripts/fetch-dependencies.sh')
+  }
+
+  private buildDependencies(destination: string) {
+    console.log('⚡️ Installing carthage dependencies')
+    exec('cd ' + destination + ' && ./scripts/build-dependencies.sh')
   }
 
   questions(): Array<Prompt.PromptParameter> {
     return []
-  }
-
-  private fetchDependencies(destination: string) {
-    console.log('⚡️ Installing carthage dependencies')
-    exec('cd ' + destination + ' && ./scripts/fetch-dependencies.sh')
   }
 
   async execute(configuration: any, destination: string) {
@@ -71,9 +79,12 @@ export default class CarthagePlugin extends Plugin {
   }
 
   async postExecute(configuration: any, destination: string) {
-    // TODO: consider a --skipInstall parameter and fetch or install based on that
     if (configuration.dependencyManager === 'Carthage') {
-      this.fetchDependencies(destination)
+      if (this.skipInstall) {
+        this.fetchDependencies(destination)
+      } else {
+        this.buildDependencies(destination)
+      }
     }
   }
 }

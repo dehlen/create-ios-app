@@ -28,10 +28,10 @@ import CarthagePlugin from '../plugins/carthage'
 import CocoapodsPlugin from '../plugins/cocoapods'
 import DirectoryHandler from '../directoryHandler'
 
-export default async (name: string, destination: string) => {
-  const pathToProject = join(destination, name)
+export default async (name: string, destination: string, skipInstall: boolean) => {
+  const projectPath = join(destination, name)
 
-  const generator = new Generator(name, pathToProject)
+  const generator = new Generator(name, projectPath, skipInstall)
   const templateHandler = new TemplateHandler(join(__dirname, '../../Template'))
   const directoryHandler = new DirectoryHandler()
 
@@ -48,8 +48,8 @@ export default async (name: string, destination: string) => {
     new FastlanePlugin(),
     new SwiftGenPlugin(),
     new DependencyChooserPlugin(),
-    new CarthagePlugin(),
-    new CocoapodsPlugin(),
+    new CarthagePlugin(skipInstall),
+    new CocoapodsPlugin(skipInstall),
     new SettingsBundlePlugin(),
     new NetworkStackPlugin(),
     new LoggingDependencyPlugin(),
@@ -61,8 +61,8 @@ export default async (name: string, destination: string) => {
     new GithubPlugin()
   ])
 
-  await directoryHandler.handleProjectFolderGeneration(pathToProject)
+  await directoryHandler.handleProjectFolderGeneration(projectPath)
   const configuration = await generator.ask()
-  await templateHandler.copyTo(pathToProject, configuration)
+  await templateHandler.copyTo(projectPath, configuration)
   await generator.run(configuration)
 }

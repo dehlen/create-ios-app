@@ -1,8 +1,11 @@
 import Plugin from '../plugin'
 
 export default class CocoapodsPlugin extends Plugin {
-  constructor() {
+  skipInstall: boolean
+
+  constructor(skipInstall: boolean) {
     super()
+    this.skipInstall = skipInstall
   }
 
   questions(): Array<Prompt.PromptParameter> {
