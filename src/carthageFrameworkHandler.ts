@@ -43,10 +43,6 @@ export default class CarthageFrameworkHandler {
       join(projectPath, 'Cartfile.private'),
       true
     )
-    console.log(resolvedAppDependencies.dependencies)
-    console.log(resolvedAppDependencies.unknownDependencies)
-    console.log(resolvedTestDependencies.dependencies)
-    console.log(resolvedTestDependencies.unknownDependencies)
 
     if (
       resolvedAppDependencies.unknownDependencies.length > 0 ||
