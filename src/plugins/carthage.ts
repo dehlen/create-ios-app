@@ -80,6 +80,9 @@ export default class CarthagePlugin extends Plugin {
 
   async postExecute(configuration: any, destination: string) {
     if (configuration.dependencyManager === 'Carthage') {
+      console.log(
+        'Please note, that whenever you enter custom carthage dependencies in the future you should update the dependencies in the xcodegen project.yml file.'
+      )
       if (this.skipInstall) {
         this.fetchDependencies(destination)
       } else {
