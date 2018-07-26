@@ -1,6 +1,7 @@
 import Plugin from '../plugin'
 import { appendFileSync } from 'fs'
 import { join } from 'path'
+import dependencies from '../dependencyMap'
 
 export default class CuratedDependencyPlugin extends Plugin {
   constructor() {
@@ -8,41 +9,38 @@ export default class CuratedDependencyPlugin extends Plugin {
   }
 
   questions(): Array<Prompt.PromptParameter> {
+    const testDependencies = dependencies
+      .filter(dependency => dependency.isTestDependency)
+      .map(function(dependency: FrameworkNameMap): Prompt.Choice {
+        return {
+          title: dependency.frameworkName,
+          value: dependency.value,
+          selected: dependency.initiallySelected
+        }
+      })
+
+    const appDependencies = dependencies
+      .filter(dependency => !dependency.isTestDependency)
+      .map(function(dependency: FrameworkNameMap): Prompt.Choice {
+        return {
+          title: dependency.frameworkName + ' (' + dependency.description + ')',
+          value: dependency.value,
+          selected: dependency.initiallySelected
+        }
+      })
     return [
       {
         type: 'multiselect',
         name: 'testDependencies',
         message: 'Do you want to add one or more of this curated testing dependencies?',
-        choices: [
-          { title: 'Quick', value: 'Quick/Quick', selected: true },
-          { title: 'Nimble', value: 'Quick/Nimble', selected: true }
-        ],
+        choices: testDependencies,
         hint: '- Space to select. Return to submit'
       },
       {
         type: 'multiselect',
         name: 'dependencies',
         message: 'Do you want to add one or more of this curated other dependencies?',
-        choices: [
-          { title: 'Nuke (Image Caching)', value: 'kean/Nuke', selected: true },
-          { title: 'Shallows (Persistence)', value: 'dreymonde/Shallows', selected: true },
-          {
-            title: 'SwiftEntryKit (Context menus)',
-            value: 'huri000/SwiftEntryKit',
-            selected: true
-          },
-          { title: 'PromiseKit (Promises)', value: 'mxcl/PromiseKit', selected: true },
-          {
-            title: 'ViewAnimator (Animations)',
-            value: 'marcosgriselli/ViewAnimator',
-            selected: true
-          },
-          { title: 'Layoutless (Layouting)', value: 'DeclarativeHub/Layoutless', selected: true },
-          { title: 'Texture (Async Rendering)', value: 'texturegroup/texture' },
-          { title: 'Spruce (Transitions)', value: 'willowtreeapps/spruce-ios' },
-          { title: 'Hero', value: 'HeroTransitions/Hero' },
-          { title: 'EasyTransitions (Transitions)', value: 'marcosgriselli/EasyTransitions' }
-        ],
+        choices: appDependencies,
         hint: '- Space to select. Return to submit'
       }
     ]
