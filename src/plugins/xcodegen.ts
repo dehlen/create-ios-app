@@ -3,6 +3,7 @@ import { join } from 'path'
 import * as yaml from 'write-yaml'
 import exit from '../exit'
 import { exec } from 'shelljs'
+import CarthageFrameworkHandler from '../carthageFrameworkHandler'
 
 export default class XcodeGenPlugin extends Plugin {
   name: string
@@ -16,8 +17,12 @@ export default class XcodeGenPlugin extends Plugin {
     return []
   }
 
-  private createUnitTestConfiguration(testTargetName: string) {
-    const testTargetConfiguration = {
+  private createUnitTestConfiguration(
+    configuration: any,
+    testTargetName: string,
+    carthageFrameworks: Array<CarthageDependency>
+  ) {
+    const testTargetConfiguration: any = {
       platform: 'iOS',
       type: 'bundle.unit-test',
       configFiles: {
@@ -34,6 +39,10 @@ export default class XcodeGenPlugin extends Plugin {
         testTargets: [testTargetName],
         gatherCoverageData: true
       }
+    }
+
+    if (configuration.dependencyManager === 'Carthage') {
+      testTargetConfiguration.dependencies = carthageFrameworks
     }
 
     return testTargetConfiguration
@@ -59,8 +68,11 @@ export default class XcodeGenPlugin extends Plugin {
     return runScriptPhases
   }
 
-  private createApplicationConfiguration(configuration: any, testTargetName: string) {
-    // TODO: generate carthage run script phase if needed in dependencies: [{carthage: Framework Name}]
+  private createApplicationConfiguration(
+    configuration: any,
+    testTargetName: string,
+    carthageFrameworks: Array<CarthageDependency>
+  ) {
     const targetConfiguration: any = {
       type: 'application',
       platform: 'iOS',
@@ -76,6 +88,10 @@ export default class XcodeGenPlugin extends Plugin {
       }
     }
 
+    if (configuration.dependencyManager === 'Carthage') {
+      targetConfiguration.dependencies = carthageFrameworks
+    }
+
     const runScriptPhases = this.createRunScriptPhases(configuration)
     if (runScriptPhases !== undefined && runScriptPhases.length > 0) {
       targetConfiguration['postbuildScripts'] = runScriptPhases
@@ -84,7 +100,10 @@ export default class XcodeGenPlugin extends Plugin {
     return targetConfiguration
   }
 
-  private generateProjectConfiguration(configuration: any) {
+  private generateProjectConfiguration(
+    configuration: any,
+    carthageFrameworks: CarthageDependencies
+  ) {
     const testTargetName = this.name + 'Tests'
 
     const yamlConfiguration: any = {
@@ -101,17 +120,26 @@ export default class XcodeGenPlugin extends Plugin {
 
     yamlConfiguration.targets[this.name] = this.createApplicationConfiguration(
       configuration,
-      testTargetName
+      testTargetName,
+      carthageFrameworks.applicationDependencies
     )
-    yamlConfiguration.targets[testTargetName] = this.createUnitTestConfiguration(testTargetName)
+    yamlConfiguration.targets[testTargetName] = this.createUnitTestConfiguration(
+      configuration,
+      testTargetName,
+      carthageFrameworks.testDependencies
+    )
 
     return yamlConfiguration
   }
 
-  private writeProjectConfiguration(configuration: any, destination: string) {
+  private writeProjectConfiguration(
+    configuration: any,
+    destination: string,
+    carthageFrameworks: CarthageDependencies
+  ) {
     const specLocation = join(destination, '/project.yml')
     try {
-      yaml.sync(specLocation, this.generateProjectConfiguration(configuration))
+      yaml.sync(specLocation, this.generateProjectConfiguration(configuration, carthageFrameworks))
       console.log('✅ Created project spec at ' + specLocation)
     } catch (err) {
       console.log('Could not create project spec.')
@@ -123,7 +151,16 @@ export default class XcodeGenPlugin extends Plugin {
   async execute(configuration: any, destination: string) {}
 
   async postExecute(configuration: any, destination: string) {
-    this.writeProjectConfiguration(configuration, destination)
+    if (configuration.dependencyManager === 'Carthage') {
+      const frameworkHandler = new CarthageFrameworkHandler()
+      const carthageFrameworks = await frameworkHandler.retrieveDependencies(destination)
+      this.writeProjectConfiguration(configuration, destination, carthageFrameworks)
+    } else {
+      this.writeProjectConfiguration(configuration, destination, {
+        applicationDependencies: [],
+        testDependencies: []
+      })
+    }
     console.log('🛠 Generating Xcode project...')
     exec('xcodegen --spec ' + join(destination, 'project.yml') + ' --project ' + destination)
     // TODO: generate cocoapods workspace if needed
