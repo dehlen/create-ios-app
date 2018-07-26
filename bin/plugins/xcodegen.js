@@ -50,6 +50,7 @@ var path_1 = require("path");
 var yaml = require("write-yaml");
 var exit_1 = require("../exit");
 var shelljs_1 = require("shelljs");
+var carthageFrameworkHandler_1 = require("../carthageFrameworkHandler");
 var XcodeGenPlugin = /** @class */ (function (_super) {
     __extends(XcodeGenPlugin, _super);
     function XcodeGenPlugin(name) {
@@ -60,7 +61,7 @@ var XcodeGenPlugin = /** @class */ (function (_super) {
     XcodeGenPlugin.prototype.questions = function () {
         return [];
     };
-    XcodeGenPlugin.prototype.createUnitTestConfiguration = function (testTargetName) {
+    XcodeGenPlugin.prototype.createUnitTestConfiguration = function (configuration, testTargetName, carthageFrameworks) {
         var testTargetConfiguration = {
             platform: 'iOS',
             type: 'bundle.unit-test',
@@ -79,6 +80,9 @@ var XcodeGenPlugin = /** @class */ (function (_super) {
                 gatherCoverageData: true
             }
         };
+        if (configuration.dependencyManager === 'Carthage') {
+            testTargetConfiguration.dependencies = carthageFrameworks;
+        }
         return testTargetConfiguration;
     };
     XcodeGenPlugin.prototype.createRunScriptPhases = function (configuration) {
@@ -97,8 +101,7 @@ var XcodeGenPlugin = /** @class */ (function (_super) {
         }
         return runScriptPhases;
     };
-    XcodeGenPlugin.prototype.createApplicationConfiguration = function (configuration, testTargetName) {
-        // TODO: generate carthage run script phase if needed in dependencies: [{carthage: Framework Name}]
+    XcodeGenPlugin.prototype.createApplicationConfiguration = function (configuration, testTargetName, carthageFrameworks) {
         var targetConfiguration = {
             type: 'application',
             platform: 'iOS',
@@ -113,13 +116,16 @@ var XcodeGenPlugin = /** @class */ (function (_super) {
                 gatherCoverageData: true
             }
         };
+        if (configuration.dependencyManager === 'Carthage') {
+            targetConfiguration.dependencies = carthageFrameworks;
+        }
         var runScriptPhases = this.createRunScriptPhases(configuration);
         if (runScriptPhases !== undefined && runScriptPhases.length > 0) {
             targetConfiguration['postbuildScripts'] = runScriptPhases;
         }
         return targetConfiguration;
     };
-    XcodeGenPlugin.prototype.generateProjectConfiguration = function (configuration) {
+    XcodeGenPlugin.prototype.generateProjectConfiguration = function (configuration, carthageFrameworks) {
         var testTargetName = this.name + 'Tests';
         var yamlConfiguration = {
             name: this.name,
@@ -132,14 +138,14 @@ var XcodeGenPlugin = /** @class */ (function (_super) {
                 Release: 'Configurations/Release.xcconfig'
             }
         };
-        yamlConfiguration.targets[this.name] = this.createApplicationConfiguration(configuration, testTargetName);
-        yamlConfiguration.targets[testTargetName] = this.createUnitTestConfiguration(testTargetName);
+        yamlConfiguration.targets[this.name] = this.createApplicationConfiguration(configuration, testTargetName, carthageFrameworks.applicationDependencies);
+        yamlConfiguration.targets[testTargetName] = this.createUnitTestConfiguration(configuration, testTargetName, carthageFrameworks.testDependencies);
         return yamlConfiguration;
     };
-    XcodeGenPlugin.prototype.writeProjectConfiguration = function (configuration, destination) {
+    XcodeGenPlugin.prototype.writeProjectConfiguration = function (configuration, destination, carthageFrameworks) {
         var specLocation = path_1.join(destination, '/project.yml');
         try {
-            yaml.sync(specLocation, this.generateProjectConfiguration(configuration));
+            yaml.sync(specLocation, this.generateProjectConfiguration(configuration, carthageFrameworks));
             console.log('✅ Created project spec at ' + specLocation);
         }
         catch (err) {
@@ -155,11 +161,28 @@ var XcodeGenPlugin = /** @class */ (function (_super) {
     };
     XcodeGenPlugin.prototype.postExecute = function (configuration, destination) {
         return __awaiter(this, void 0, void 0, function () {
+            var frameworkHandler, carthageFrameworks;
             return __generator(this, function (_a) {
-                this.writeProjectConfiguration(configuration, destination);
-                console.log('🛠 Generating Xcode project...');
-                shelljs_1.exec('xcodegen --spec ' + path_1.join(destination, 'project.yml') + ' --project ' + destination);
-                return [2 /*return*/];
+                switch (_a.label) {
+                    case 0:
+                        if (!(configuration.dependencyManager === 'Carthage')) return [3 /*break*/, 2];
+                        frameworkHandler = new carthageFrameworkHandler_1.default();
+                        return [4 /*yield*/, frameworkHandler.retrieveDependencies(destination)];
+                    case 1:
+                        carthageFrameworks = _a.sent();
+                        this.writeProjectConfiguration(configuration, destination, carthageFrameworks);
+                        return [3 /*break*/, 3];
+                    case 2:
+                        this.writeProjectConfiguration(configuration, destination, {
+                            applicationDependencies: [],
+                            testDependencies: []
+                        });
+                        _a.label = 3;
+                    case 3:
+                        console.log('🛠 Generating Xcode project...');
+                        shelljs_1.exec('xcodegen --spec ' + path_1.join(destination, 'project.yml') + ' --project ' + destination);
+                        return [2 /*return*/];
+                }
             });
         });
     };

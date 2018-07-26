@@ -120,6 +120,7 @@ var CarthagePlugin = /** @class */ (function (_super) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 if (configuration.dependencyManager === 'Carthage') {
+                    console.log('Please note, that whenever you enter custom carthage dependencies in the future you should update the dependencies in the xcodegen project.yml file.');
                     if (this.skipInstall) {
                         this.fetchDependencies(destination);
                     }
