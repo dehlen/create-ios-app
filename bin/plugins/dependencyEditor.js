@@ -73,17 +73,10 @@ var DependencyEditorPlugin = /** @class */ (function (_super) {
                     console.log('The editor will open the files for you to edit.');
                     console.log('Use :tabn (next), :tabp (previous) and :tabc (close) to control the tabs.');
                     console.log('\n');
-                    files = [];
-                    if (configuration.dependencyManager === 'Carthage') {
-                        files.push(path_1.join(destination, 'Cartfile'));
-                        files.push(path_1.join(destination, 'Cartfile.private'));
-                    }
-                    else if (configuration.dependencyManager === 'Cocoapods') {
-                        // TODO: open Podfile for further editing
-                    }
-                    else {
-                        return [2 /*return*/];
-                    }
+                    files = [
+                        path_1.join(destination, 'Cartfile'),
+                        path_1.join(destination, 'Cartfile.private')
+                    ];
                     editor = 'vim';
                     child = child_process_1.spawnSync(editor, ['-p'].concat(files), {
                         stdio: 'inherit'

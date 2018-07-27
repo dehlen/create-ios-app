@@ -56,11 +56,7 @@ export default class CuratedDependencyPlugin extends Plugin {
   }
 
   async execute(configuration: any, destination: string) {
-    if (configuration.dependencyManager === 'Carthage') {
-      this.writeCarthageDependencies(configuration, destination)
-    } else if (configuration.dependencyManager === 'Cocoapods') {
-      // TODO: add dependencies to podfile
-    }
+    this.writeCarthageDependencies(configuration, destination)
   }
 
   async postExecute(configuration: any, destination: string) {}

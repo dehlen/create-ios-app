@@ -26,68 +26,56 @@ export default class CarthagePlugin extends Plugin {
   }
 
   async execute(configuration: any, destination: string) {
-    if (configuration.dependencyManager === 'Carthage') {
-      const cartfilePath = join(this.pluginDirectory, 'Cartfile')
-      const cartfilePrivatePath = join(this.pluginDirectory, 'Cartfile.private')
-      const buildDependenciesScriptPath = join(
-        this.pluginDirectory,
-        'scripts',
-        'build-dependencies.sh'
-      )
-      const fetchDependenciesScriptPath = join(
-        this.pluginDirectory,
-        'scripts',
-        'fetch-dependencies.sh'
-      )
+    const cartfilePath = join(this.pluginDirectory, 'Cartfile')
+    const cartfilePrivatePath = join(this.pluginDirectory, 'Cartfile.private')
+    const buildDependenciesScriptPath = join(
+      this.pluginDirectory,
+      'scripts',
+      'build-dependencies.sh'
+    )
+    const fetchDependenciesScriptPath = join(
+      this.pluginDirectory,
+      'scripts',
+      'fetch-dependencies.sh'
+    )
 
-      await copy(cartfilePath, join(destination, 'Cartfile'), {
-        overwrite: true,
-        expand: true,
-        dot: true,
-        junk: true
-      })
+    await copy(cartfilePath, join(destination, 'Cartfile'), {
+      overwrite: true,
+      expand: true,
+      dot: true,
+      junk: true
+    })
 
-      await copy(cartfilePrivatePath, join(destination, 'Cartfile.private'), {
-        overwrite: true,
-        expand: true,
-        dot: true,
-        junk: true
-      })
+    await copy(cartfilePrivatePath, join(destination, 'Cartfile.private'), {
+      overwrite: true,
+      expand: true,
+      dot: true,
+      junk: true
+    })
 
-      await copy(
-        buildDependenciesScriptPath,
-        join(destination, 'scripts', 'build-dependencies.sh'),
-        {
-          overwrite: true,
-          expand: true,
-          dot: true,
-          junk: true
-        }
-      )
+    await copy(buildDependenciesScriptPath, join(destination, 'scripts', 'build-dependencies.sh'), {
+      overwrite: true,
+      expand: true,
+      dot: true,
+      junk: true
+    })
 
-      await copy(
-        fetchDependenciesScriptPath,
-        join(destination, 'scripts', 'fetch-dependencies.sh'),
-        {
-          overwrite: true,
-          expand: true,
-          dot: true,
-          junk: true
-        }
-      )
-    }
+    await copy(fetchDependenciesScriptPath, join(destination, 'scripts', 'fetch-dependencies.sh'), {
+      overwrite: true,
+      expand: true,
+      dot: true,
+      junk: true
+    })
   }
 
   async postExecute(configuration: any, destination: string) {
-    if (configuration.dependencyManager === 'Carthage') {
-      console.log(
-        'Please note, that whenever you enter custom carthage dependencies in the future you should update the dependencies in the xcodegen project.yml file.'
-      )
-      if (this.skipInstall) {
-        this.fetchDependencies(destination)
-      } else {
-        this.buildDependencies(destination)
-      }
+    console.log(
+      'Please note, that whenever you enter custom carthage dependencies in the future you should update the dependencies in the xcodegen project.yml file.'
+    )
+    if (this.skipInstall) {
+      this.fetchDependencies(destination)
+    } else {
+      this.buildDependencies(destination)
     }
   }
 }

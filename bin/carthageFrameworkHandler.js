@@ -78,10 +78,6 @@ var CarthageFrameworkHandler = /** @class */ (function () {
                     case 0:
                         resolvedAppDependencies = this.getDependencies(path_1.join(projectPath, 'Cartfile'), false);
                         resolvedTestDependencies = this.getDependencies(path_1.join(projectPath, 'Cartfile.private'), true);
-                        console.log(resolvedAppDependencies.dependencies);
-                        console.log(resolvedAppDependencies.unknownDependencies);
-                        console.log(resolvedTestDependencies.dependencies);
-                        console.log(resolvedTestDependencies.unknownDependencies);
                         if (!(resolvedAppDependencies.unknownDependencies.length > 0 ||
                             resolvedTestDependencies.unknownDependencies.length > 0)) return [3 /*break*/, 3];
                         console.log('The resulting framework name of one or more of the entered Carthage dependencies could not be retrieved.');

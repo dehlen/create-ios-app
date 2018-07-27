@@ -18,7 +18,7 @@ export default class AnalyticsDependencyPlugin extends Plugin {
     ]
   }
   async execute(configuration: any, destination: string) {
-    // TODO: add dependency to cartfile or podfile based on configuration.dependencyManager
+    // TODO: add dependency to cartfile
   }
   async postExecute(configuration: any, destination: string) {}
 }

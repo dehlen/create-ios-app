@@ -80,9 +80,7 @@ var XcodeGenPlugin = /** @class */ (function (_super) {
                 gatherCoverageData: true
             }
         };
-        if (configuration.dependencyManager === 'Carthage') {
-            testTargetConfiguration.dependencies = carthageFrameworks;
-        }
+        testTargetConfiguration.dependencies = carthageFrameworks;
         return testTargetConfiguration;
     };
     XcodeGenPlugin.prototype.createRunScriptPhases = function (configuration) {
@@ -116,9 +114,7 @@ var XcodeGenPlugin = /** @class */ (function (_super) {
                 gatherCoverageData: true
             }
         };
-        if (configuration.dependencyManager === 'Carthage') {
-            targetConfiguration.dependencies = carthageFrameworks;
-        }
+        targetConfiguration.dependencies = carthageFrameworks;
         var runScriptPhases = this.createRunScriptPhases(configuration);
         if (runScriptPhases !== undefined && runScriptPhases.length > 0) {
             targetConfiguration['postbuildScripts'] = runScriptPhases;
@@ -165,20 +161,11 @@ var XcodeGenPlugin = /** @class */ (function (_super) {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        if (!(configuration.dependencyManager === 'Carthage')) return [3 /*break*/, 2];
                         frameworkHandler = new carthageFrameworkHandler_1.default();
                         return [4 /*yield*/, frameworkHandler.retrieveDependencies(destination)];
                     case 1:
                         carthageFrameworks = _a.sent();
                         this.writeProjectConfiguration(configuration, destination, carthageFrameworks);
-                        return [3 /*break*/, 3];
-                    case 2:
-                        this.writeProjectConfiguration(configuration, destination, {
-                            applicationDependencies: [],
-                            testDependencies: []
-                        });
-                        _a.label = 3;
-                    case 3:
                         console.log('🛠 Generating Xcode project...');
                         shelljs_1.exec('xcodegen --spec ' + path_1.join(destination, 'project.yml') + ' --project ' + destination);
                         return [2 /*return*/];

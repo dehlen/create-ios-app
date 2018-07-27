@@ -26,15 +26,10 @@ export default class DependencyEditorPlugin extends Plugin {
       console.log('Use :tabn (next), :tabp (previous) and :tabc (close) to control the tabs.')
       console.log('\n')
 
-      const files: Array<string> = []
-      if (configuration.dependencyManager === 'Carthage') {
-        files.push(join(destination, 'Cartfile'))
-        files.push(join(destination, 'Cartfile.private'))
-      } else if (configuration.dependencyManager === 'Cocoapods') {
-        // TODO: open Podfile for further editing
-      } else {
-        return
-      }
+      const files: Array<string> = [
+        join(destination, 'Cartfile'),
+        join(destination, 'Cartfile.private')
+      ]
       const editor = 'vim'
       const child = spawnSync(editor, ['-p', ...files], {
         stdio: 'inherit'

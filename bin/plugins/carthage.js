@@ -73,7 +73,6 @@ var CarthagePlugin = /** @class */ (function (_super) {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        if (!(configuration.dependencyManager === 'Carthage')) return [3 /*break*/, 5];
                         cartfilePath = path_1.join(this.pluginDirectory, 'Cartfile');
                         cartfilePrivatePath = path_1.join(this.pluginDirectory, 'Cartfile.private');
                         buildDependenciesScriptPath = path_1.join(this.pluginDirectory, 'scripts', 'build-dependencies.sh');
@@ -110,8 +109,7 @@ var CarthagePlugin = /** @class */ (function (_super) {
                             })];
                     case 4:
                         _a.sent();
-                        _a.label = 5;
-                    case 5: return [2 /*return*/];
+                        return [2 /*return*/];
                 }
             });
         });
@@ -119,14 +117,12 @@ var CarthagePlugin = /** @class */ (function (_super) {
     CarthagePlugin.prototype.postExecute = function (configuration, destination) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                if (configuration.dependencyManager === 'Carthage') {
-                    console.log('Please note, that whenever you enter custom carthage dependencies in the future you should update the dependencies in the xcodegen project.yml file.');
-                    if (this.skipInstall) {
-                        this.fetchDependencies(destination);
-                    }
-                    else {
-                        this.buildDependencies(destination);
-                    }
+                console.log('Please note, that whenever you enter custom carthage dependencies in the future you should update the dependencies in the xcodegen project.yml file.');
+                if (this.skipInstall) {
+                    this.fetchDependencies(destination);
+                }
+                else {
+                    this.buildDependencies(destination);
                 }
                 return [2 /*return*/];
             });

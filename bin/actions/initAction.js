@@ -52,7 +52,6 @@ var networkStack_1 = require("../plugins/networkStack");
 var loggingDependency_1 = require("../plugins/loggingDependency");
 var analyticsDependency_1 = require("../plugins/analyticsDependency");
 var themingDependency_1 = require("../plugins/themingDependency");
-var dependencyChooser_1 = require("../plugins/dependencyChooser");
 var curatedDependency_1 = require("../plugins/curatedDependency");
 var dependencyEditor_1 = require("../plugins/dependencyEditor");
 var templateHandler_1 = require("../templateHandler");
@@ -61,7 +60,6 @@ var author_1 = require("../plugins/author");
 var year_1 = require("../plugins/year");
 var today_1 = require("../plugins/today");
 var carthage_1 = require("../plugins/carthage");
-var cocoapods_1 = require("../plugins/cocoapods");
 var directoryHandler_1 = require("../directoryHandler");
 var openXcodeProject_1 = require("../plugins/openXcodeProject");
 exports.default = (function (name, destination, skipInstall) { return __awaiter(_this, void 0, void 0, function () {
@@ -85,9 +83,7 @@ exports.default = (function (name, destination, skipInstall) { return __awaiter(
                     new swiftlint_1.default(),
                     new fastlane_1.default(),
                     new swiftgen_1.default(),
-                    new dependencyChooser_1.default(),
                     new carthage_1.default(skipInstall),
-                    new cocoapods_1.default(skipInstall),
                     new settingsBundle_1.default(),
                     new networkStack_1.default(),
                     new loggingDependency_1.default(),

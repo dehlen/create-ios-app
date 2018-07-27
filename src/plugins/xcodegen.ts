@@ -41,9 +41,7 @@ export default class XcodeGenPlugin extends Plugin {
       }
     }
 
-    if (configuration.dependencyManager === 'Carthage') {
-      testTargetConfiguration.dependencies = carthageFrameworks
-    }
+    testTargetConfiguration.dependencies = carthageFrameworks
 
     return testTargetConfiguration
   }
@@ -88,9 +86,7 @@ export default class XcodeGenPlugin extends Plugin {
       }
     }
 
-    if (configuration.dependencyManager === 'Carthage') {
-      targetConfiguration.dependencies = carthageFrameworks
-    }
+    targetConfiguration.dependencies = carthageFrameworks
 
     const runScriptPhases = this.createRunScriptPhases(configuration)
     if (runScriptPhases !== undefined && runScriptPhases.length > 0) {
@@ -151,18 +147,11 @@ export default class XcodeGenPlugin extends Plugin {
   async execute(configuration: any, destination: string) {}
 
   async postExecute(configuration: any, destination: string) {
-    if (configuration.dependencyManager === 'Carthage') {
-      const frameworkHandler = new CarthageFrameworkHandler()
-      const carthageFrameworks = await frameworkHandler.retrieveDependencies(destination)
-      this.writeProjectConfiguration(configuration, destination, carthageFrameworks)
-    } else {
-      this.writeProjectConfiguration(configuration, destination, {
-        applicationDependencies: [],
-        testDependencies: []
-      })
-    }
+    const frameworkHandler = new CarthageFrameworkHandler()
+    const carthageFrameworks = await frameworkHandler.retrieveDependencies(destination)
+    this.writeProjectConfiguration(configuration, destination, carthageFrameworks)
+
     console.log('🛠 Generating Xcode project...')
     exec('xcodegen --spec ' + join(destination, 'project.yml') + ' --project ' + destination)
-    // TODO: generate cocoapods workspace if needed
   }
 }

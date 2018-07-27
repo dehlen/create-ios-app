@@ -16,7 +16,6 @@ import NetworkStackPlugin from '../plugins/networkStack'
 import LoggingDependencyPlugin from '../plugins/loggingDependency'
 import AnalyticsDependencyPlugin from '../plugins/analyticsDependency'
 import ThemingDependencyPlugin from '../plugins/themingDependency'
-import DependencyChooserPlugin from '../plugins/dependencyChooser'
 import CuratedDependencyPlugin from '../plugins/curatedDependency'
 import DependencyEditorPlugin from '../plugins/dependencyEditor'
 import TemplateHandler from '../templateHandler'
@@ -25,7 +24,6 @@ import AuthorPlugin from '../plugins/author'
 import YearPlugin from '../plugins/year'
 import TodayPlugin from '../plugins/today'
 import CarthagePlugin from '../plugins/carthage'
-import CocoapodsPlugin from '../plugins/cocoapods'
 import DirectoryHandler from '../directoryHandler'
 import OpenXcodeProjectPlugin from '../plugins/openXcodeProject'
 
@@ -48,9 +46,7 @@ export default async (name: string, destination: string, skipInstall: boolean) =
     new SwiftLintPlugin(),
     new FastlanePlugin(),
     new SwiftGenPlugin(),
-    new DependencyChooserPlugin(),
     new CarthagePlugin(skipInstall),
-    new CocoapodsPlugin(skipInstall),
     new SettingsBundlePlugin(),
     new NetworkStackPlugin(),
     new LoggingDependencyPlugin(),

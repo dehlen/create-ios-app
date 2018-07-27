@@ -103,12 +103,7 @@ var CuratedDependencyPlugin = /** @class */ (function (_super) {
     CuratedDependencyPlugin.prototype.execute = function (configuration, destination) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                if (configuration.dependencyManager === 'Carthage') {
-                    this.writeCarthageDependencies(configuration, destination);
-                }
-                else if (configuration.dependencyManager === 'Cocoapods') {
-                    // TODO: add dependencies to podfile
-                }
+                this.writeCarthageDependencies(configuration, destination);
                 return [2 /*return*/];
             });
         });
