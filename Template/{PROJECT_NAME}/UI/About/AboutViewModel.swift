@@ -1,7 +1,8 @@
-import Foundation
+import UIKit
 
 enum AboutViewRoute: Int {
     case libraries
+    case settings
 }
 
 protocol AboutViewRouting: class {
@@ -10,10 +11,10 @@ protocol AboutViewRouting: class {
 
 protocol AboutViewModeling {
     func userDidRequestLibraries()
+    func userDidRequestSettings()
 }
 
 final class AboutViewModel: AboutViewRouting {
-
     let appName: String
     let appVersion: String
     var routeSelected: ((AboutViewRoute) -> Void)?
@@ -27,5 +28,9 @@ final class AboutViewModel: AboutViewRouting {
 extension AboutViewModel: AboutViewModeling {
     func userDidRequestLibraries() {
         routeSelected?(.libraries)
+    }
+
+    func userDidRequestSettings() {
+        routeSelected?(.settings)
     }
 }

@@ -1,9 +1,10 @@
 import UIKit
 
 final class AboutViewController: UITableViewController {
-    @IBOutlet private weak var titleLabel: UILabel!
-    @IBOutlet private weak var librariesLabel: UILabel!
-    @IBOutlet private weak var versionLabel: UILabel!
+    @IBOutlet private var titleLabel: UILabel!
+    @IBOutlet private var versionLabel: UILabel!
+    @IBOutlet private var librariesLabel: UILabel!
+    @IBOutlet private var settingsLabel: UILabel!
 
     var viewModel: AboutViewModel!
 
@@ -20,6 +21,7 @@ final class AboutViewController: UITableViewController {
         tableView.estimatedRowHeight = 44
 
         librariesLabel.text = L10n.libraries
+        settingsLabel.text = L10n.settings
         titleLabel.text = viewModel.appName
         versionLabel.text = viewModel.appVersion
     }
@@ -34,6 +36,8 @@ extension AboutViewController {
         switch routeItem {
         case .libraries:
             viewModel.userDidRequestLibraries()
+        case .settings:
+            viewModel.userDidRequestSettings()
         }
     }
 

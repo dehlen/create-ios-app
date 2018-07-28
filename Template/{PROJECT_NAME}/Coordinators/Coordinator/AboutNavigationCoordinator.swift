@@ -12,10 +12,12 @@ final class AboutNavigationCoordinator: NavigationCoordinator {
 
     func start() {
         let (aboutViewController, routing) = viewFactory.about()
-        routing.routeSelected = {[weak self] route in
+        routing.routeSelected = { [weak self] route in
             switch route {
             case .libraries:
                 self?.showLibraries()
+            case .settings:
+                self?.showSettings()
             }
         }
 
@@ -25,5 +27,11 @@ final class AboutNavigationCoordinator: NavigationCoordinator {
     func showLibraries() {
         let viewController = viewFactory.libraries()
         navigationController.pushViewController(viewController, animated: true)
+    }
+
+    func showSettings() {
+        if let url = URL(string: UIApplicationOpenSettingsURLString) {
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        }
     }
 }
