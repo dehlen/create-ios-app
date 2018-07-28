@@ -95,6 +95,9 @@ var CuratedDependencyPlugin = /** @class */ (function (_super) {
             var testDependency = _a[_i];
             fs_1.appendFileSync(path_1.join(destination, 'Cartfile.private'), 'github "' + testDependency + '"\n');
         }
+        if (configuration.logging || configuration.analytics || configuration.network) {
+            configuration.dependencies.push('Mindera/Alicerce');
+        }
         for (var _b = 0, _c = configuration.dependencies; _b < _c.length; _b++) {
             var dependency = _c[_b];
             fs_1.appendFileSync(path_1.join(destination, 'Cartfile'), 'github "' + dependency + '"\n');

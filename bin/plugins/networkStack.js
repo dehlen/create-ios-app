@@ -64,11 +64,9 @@ var NetworkStackPlugin = /** @class */ (function (_super) {
         ];
     };
     NetworkStackPlugin.prototype.execute = function (configuration, destination) {
-        return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                return [2 /*return*/];
-            });
-        });
+        return __awaiter(this, void 0, void 0, function () { return __generator(this, function (_a) {
+            return [2 /*return*/];
+        }); });
     };
     NetworkStackPlugin.prototype.postExecute = function (configuration, destination) {
         return __awaiter(this, void 0, void 0, function () { return __generator(this, function (_a) {

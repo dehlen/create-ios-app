@@ -18,9 +18,7 @@ export default class LoggingDependencyPlugin extends Plugin {
     ]
   }
 
-  async execute(configuration: any, destination: string) {
-    // TODO: add dependency to cartfile
-  }
+  async execute(configuration: any, destination: string) {}
 
   async postExecute(configuration: any, destination: string) {}
 }

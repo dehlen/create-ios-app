@@ -50,6 +50,10 @@ export default class CuratedDependencyPlugin extends Plugin {
     for (const testDependency of configuration.testDependencies) {
       appendFileSync(join(destination, 'Cartfile.private'), 'github "' + testDependency + '"\n')
     }
+
+    if (configuration.logging || configuration.analytics || configuration.network) {
+      configuration.dependencies.push('Mindera/Alicerce')
+    }
     for (const dependency of configuration.dependencies) {
       appendFileSync(join(destination, 'Cartfile'), 'github "' + dependency + '"\n')
     }
