@@ -10,10 +10,10 @@ import UIKit
 
 @UIApplicationMain
 class AppDelegate: PluggableApplicationDelegate {
-
     override var services: [ApplicationService] {
         return [
-            WindowCoordinatorService()
+            WindowCoordinatorService(),
+            SettingsService(),
         ]
     }
 }
