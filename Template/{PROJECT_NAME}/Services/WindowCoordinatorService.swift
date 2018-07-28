@@ -4,8 +4,9 @@ final class WindowCoordinatorService: NSObject, ApplicationService {
     private var windowCoordinator: WindowCoordinator!
 
     // MARK: - Lifecycle
+
     // swiftlint:disable
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    func application(_: UIApplication, didFinishLaunchingWithOptions _: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         let coordinatorFactory = ConcreteCoordinatorFactory(viewFactory: ConcreteViewFactory())
         windowCoordinator = coordinatorFactory.window()
 
@@ -17,5 +18,6 @@ final class WindowCoordinatorService: NSObject, ApplicationService {
 
         return true
     }
+
     // swiftlint:enable
 }

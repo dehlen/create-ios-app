@@ -1,6 +1,7 @@
 import UIKit
 
 // MARK: - ViewControllerCoordinator
+
 protocol ViewControllerCoordinator {
     var viewFactory: ViewFactory { get }
     var presenter: UIViewController { get }
@@ -8,6 +9,7 @@ protocol ViewControllerCoordinator {
 }
 
 // MARK: - NavigationCoordinator
+
 protocol NavigationCoordinator: ViewControllerCoordinator {
     var navigationController: UINavigationController { get }
 }
@@ -19,6 +21,7 @@ extension NavigationCoordinator {
 }
 
 // MARK: - TabCoordinator
+
 protocol TabCoordinator: ViewControllerCoordinator {
     var tabBarController: UITabBarController { get }
 }

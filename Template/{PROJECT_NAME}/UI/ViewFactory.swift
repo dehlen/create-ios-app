@@ -34,5 +34,4 @@ extension ConcreteViewFactory: ViewFactory {
 
         return viewController
     }
-
 }

@@ -13,6 +13,7 @@ extension Bundle {
     var appBuild: String {
         return infoDictionary?["CFBundleVersion"] as! String
     }
+
     // swiftlint:enable force_cast
     func loadFile(filename fileName: String) -> Data? {
         let parts = fileName.components(separatedBy: ".")

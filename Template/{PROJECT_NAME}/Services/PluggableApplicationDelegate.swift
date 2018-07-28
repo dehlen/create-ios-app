@@ -14,14 +14,12 @@ public protocol ApplicationService: UIApplicationDelegate {}
 
 // swiftlint:disable all
 open class PluggableApplicationDelegate: UIResponder, UIApplicationDelegate {
-
     public var window: UIWindow?
 
     open var services: [ApplicationService] { return [] }
     private lazy var __services: [ApplicationService] = {
-        return self.services
+        self.services
     }()
-
 
     @discardableResult
     private func apply<T, S>(_ work: (ApplicationService, @escaping (T) -> Void) -> S?, completionHandler: @escaping ([T]) -> Swift.Void) -> [S] {
@@ -51,12 +49,10 @@ open class PluggableApplicationDelegate: UIResponder, UIApplicationDelegate {
         return returns
     }
 
-
     @available(iOS 2.0, *)
     open func applicationDidFinishLaunching(_ application: UIApplication) {
         __services.forEach { $0.applicationDidFinishLaunching?(application) }
     }
-
 
     @available(iOS 6.0, *)
     open func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]? = nil) -> Bool {
@@ -79,7 +75,6 @@ open class PluggableApplicationDelegate: UIResponder, UIApplicationDelegate {
         }
         return result
     }
-
 
     @available(iOS 2.0, *)
     open func applicationDidBecomeActive(_ application: UIApplication) {
@@ -149,7 +144,6 @@ open class PluggableApplicationDelegate: UIResponder, UIApplicationDelegate {
         }
     }
 
-
     @available(iOS 2.0, *)
     open func application(_ application: UIApplication, willChangeStatusBarOrientation newStatusBarOrientation: UIInterfaceOrientation, duration: TimeInterval) {
         for service in __services {
@@ -193,7 +187,6 @@ open class PluggableApplicationDelegate: UIResponder, UIApplicationDelegate {
         return result
     }
 
-
     // Called on the main thread after the NSUserActivity object is available. Use the data you stored in the NSUserActivity object to re-create what the user was doing.
     // You can create/fetch any restorable objects associated with the user activity, and pass them to the restorationHandler. They will then have the UIResponder restoreUserActivityState: method
     // invoked with the user activity. Invoking the restorationHandler is optional. It may be copied and invoked later, and it will bounce to the main thread to complete its work and call
@@ -210,7 +203,6 @@ open class PluggableApplicationDelegate: UIResponder, UIApplicationDelegate {
         return returns.reduce(false, { $0 || $1 })
     }
 
-
     // If the user activity cannot be fetched after willContinueUserActivityWithType is called, this will be called on the main thread when implemented.
     @available(iOS 8.0, *)
     open func application(_ application: UIApplication, didFailToContinueUserActivityWithType userActivityType: String, error: Error) {
@@ -218,7 +210,6 @@ open class PluggableApplicationDelegate: UIResponder, UIApplicationDelegate {
             service.application?(application, didFailToContinueUserActivityWithType: userActivityType, error: error)
         }
     }
-
 
     // This is called on the main thread when a user activity managed by UIKit has been updated. You can use this as a last chance to add additional data to the userActivity.
     @available(iOS 8.0, *)
@@ -228,4 +219,5 @@ open class PluggableApplicationDelegate: UIResponder, UIApplicationDelegate {
         }
     }
 }
+
 // swiftlint:enable all

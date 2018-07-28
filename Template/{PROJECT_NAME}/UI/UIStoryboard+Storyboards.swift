@@ -1,7 +1,6 @@
 import UIKit
 
 extension UIStoryboard {
-
     /// The uniform place where we state all the storyboard we have in our application
 
     enum Storyboard: String {
@@ -14,20 +13,17 @@ extension UIStoryboard {
         }
     }
 
-
     // MARK: - Convenience Initializers
 
     convenience init(storyboard: Storyboard, bundle: Bundle? = nil) {
         self.init(name: storyboard.filename, bundle: bundle)
     }
 
-
     // MARK: - Class Functions
 
     class func storyboard(_ storyboard: Storyboard, bundle: Bundle? = nil) -> UIStoryboard {
         return UIStoryboard(name: storyboard.filename, bundle: bundle)
     }
-
 
     // MARK: - View Controller Instantiation from Generics
 

@@ -98,4 +98,5 @@ if CommandLine.arguments.count >= 3 {
 } else {
     print("USAGE: ./fetch_licenses Cartfile.resolved output_directory/")
 }
+
 // swiftlint:enable all

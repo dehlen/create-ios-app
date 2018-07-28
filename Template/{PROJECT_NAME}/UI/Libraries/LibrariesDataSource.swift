@@ -14,11 +14,11 @@ class LibrariesDataSource: NSObject, UITableViewDataSource {
         self.viewModel = viewModel
     }
 
-    func numberOfSections(in tableView: UITableView) -> Int {
+    func numberOfSections(in _: UITableView) -> Int {
         return 1
     }
 
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_: UITableView, numberOfRowsInSection _: Int) -> Int {
         return viewModel.libraries.count
     }
 

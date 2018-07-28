@@ -1,3 +1,3 @@
 import UIKit
 
-extension UIViewController: StoryboardIdentifiable { }
+extension UIViewController: StoryboardIdentifiable {}

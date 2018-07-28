@@ -15,5 +15,4 @@ final class ConcreteTabCoordinator: TabCoordinator {
         tabBarController.setViewControllers(childCoordinators.map { $0.presenter }, animated: false)
         childCoordinators.forEach { $0.start() }
     }
-
 }

@@ -12,7 +12,7 @@
         <!--Libraries View Controller-->
         <scene sceneID="0eZ-7y-30M">
             <objects>
-                <tableViewController storyboardIdentifier="LibrariesViewController" id="uoB-Ch-4Uv" customClass="LibrariesViewController" customModule="{PROJECT_NAME}" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="LibrariesViewController" id="uoB-Ch-4Uv" customClass="LibrariesViewController" customModule="Sample" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="lxl-jS-bQ9">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

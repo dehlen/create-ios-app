@@ -5,7 +5,7 @@ final class WindowCoordinator {
     private let rootCoordinator: ViewControllerCoordinator
 
     init(rootCoordinator: ViewControllerCoordinator) {
-        self.window = UIWindow(frame: UIScreen.main.bounds)
+        window = UIWindow(frame: UIScreen.main.bounds)
         self.rootCoordinator = rootCoordinator
     }
 
@@ -14,5 +14,4 @@ final class WindowCoordinator {
         window.makeKeyAndVisible()
         rootCoordinator.start()
     }
-
 }

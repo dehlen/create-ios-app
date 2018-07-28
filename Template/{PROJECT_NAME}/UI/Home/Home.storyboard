@@ -12,7 +12,7 @@
         <!--HomeViewController-->
         <scene sceneID="aHn-cc-eue">
             <objects>
-                <viewController storyboardIdentifier="HomeViewController" id="Qt6-dZ-yic" userLabel="HomeViewController" customClass="HomeViewController" customModule="{PROJECT_NAME}" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="HomeViewController" id="Qt6-dZ-yic" userLabel="HomeViewController" customClass="HomeViewController" customModule="Sample" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="MtV-tu-J7f"/>
                         <viewControllerLayoutGuide type="bottom" id="Lpo-yK-2ry"/>

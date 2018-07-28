@@ -3,7 +3,6 @@ import Foundation
 typealias Library = (String, String)
 
 class LibrariesViewModel {
-
     // MARK: - Properties
 
     let libraries: [Library]
