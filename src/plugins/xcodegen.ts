@@ -46,24 +46,30 @@ export default class XcodeGenPlugin extends Plugin {
     return testTargetConfiguration
   }
 
-  private createRunScriptPhases(configuration: any): Array<RunScriptPhase> {
-    const runScriptPhases = []
+  private createPostBuildScripts(configuration: any): Array<RunScriptPhase> {
+    const scripts = []
 
     if (configuration.swiftlint) {
-      runScriptPhases.push({
+      scripts.push({
         script: 'sh "$PROJECT_DIR/scripts/swiftlint.sh"',
         name: 'Lint with Swiftlint'
       })
     }
 
+    return scripts
+  }
+
+  private createPreBuildScripts(configuration: any): Array<RunScriptPhase> {
+    const scripts = []
+
     if (configuration.swiftgen) {
-      runScriptPhases.push({
+      scripts.push({
         script: 'sh "$PROJECT_DIR/scripts/swiftgen.sh"',
         name: 'Generate with SwiftGen'
       })
     }
 
-    return runScriptPhases
+    return scripts
   }
 
   private createApplicationConfiguration(
@@ -88,9 +94,14 @@ export default class XcodeGenPlugin extends Plugin {
 
     targetConfiguration.dependencies = carthageFrameworks
 
-    const runScriptPhases = this.createRunScriptPhases(configuration)
-    if (runScriptPhases !== undefined && runScriptPhases.length > 0) {
-      targetConfiguration['postbuildScripts'] = runScriptPhases
+    const preBuildScripts = this.createPreBuildScripts(configuration)
+    const postBuildScripts = this.createPostBuildScripts(configuration)
+    if (preBuildScripts !== undefined && preBuildScripts.length > 0) {
+      targetConfiguration['prebuildScripts'] = preBuildScripts
+    }
+
+    if (postBuildScripts !== undefined && postBuildScripts.length > 0) {
+      targetConfiguration['postbuildScripts'] = postBuildScripts
     }
 
     return targetConfiguration

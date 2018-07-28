@@ -83,21 +83,25 @@ var XcodeGenPlugin = /** @class */ (function (_super) {
         testTargetConfiguration.dependencies = carthageFrameworks;
         return testTargetConfiguration;
     };
-    XcodeGenPlugin.prototype.createRunScriptPhases = function (configuration) {
-        var runScriptPhases = [];
+    XcodeGenPlugin.prototype.createPostBuildScripts = function (configuration) {
+        var scripts = [];
         if (configuration.swiftlint) {
-            runScriptPhases.push({
+            scripts.push({
                 script: 'sh "$PROJECT_DIR/scripts/swiftlint.sh"',
                 name: 'Lint with Swiftlint'
             });
         }
+        return scripts;
+    };
+    XcodeGenPlugin.prototype.createPreBuildScripts = function (configuration) {
+        var scripts = [];
         if (configuration.swiftgen) {
-            runScriptPhases.push({
+            scripts.push({
                 script: 'sh "$PROJECT_DIR/scripts/swiftgen.sh"',
                 name: 'Generate with SwiftGen'
             });
         }
-        return runScriptPhases;
+        return scripts;
     };
     XcodeGenPlugin.prototype.createApplicationConfiguration = function (configuration, testTargetName, carthageFrameworks) {
         var targetConfiguration = {
@@ -115,9 +119,13 @@ var XcodeGenPlugin = /** @class */ (function (_super) {
             }
         };
         targetConfiguration.dependencies = carthageFrameworks;
-        var runScriptPhases = this.createRunScriptPhases(configuration);
-        if (runScriptPhases !== undefined && runScriptPhases.length > 0) {
-            targetConfiguration['postbuildScripts'] = runScriptPhases;
+        var preBuildScripts = this.createPreBuildScripts(configuration);
+        var postBuildScripts = this.createPostBuildScripts(configuration);
+        if (preBuildScripts !== undefined && preBuildScripts.length > 0) {
+            targetConfiguration['prebuildScripts'] = preBuildScripts;
+        }
+        if (postBuildScripts !== undefined && postBuildScripts.length > 0) {
+            targetConfiguration['postbuildScripts'] = postBuildScripts;
         }
         return targetConfiguration;
     };
