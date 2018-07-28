@@ -1,12 +1,15 @@
 strings:
-  paths: {PROJECT_NAME}/en.lproj/Localizable.strings
-  templateName: structured-swift4
-  output: {PROJECT_NAME}/Resources/Strings.swift
-  params:
-    publicAccess: true
+  inputs: {PROJECT_NAME}/en.lproj/Localizable.strings
+  outputs:
+    - templateName: structured-swift4
+      output: {PROJECT_NAME}/Resources/Strings.swift
+      params:
+        publicAccess: true
 xcassets:
-  paths: {PROJECT_NAME}/Assets.xcassets
-  templateName: swift4
-  output: {PROJECT_NAME}/Resources/Assets.swift
-  params:  
-    publicAccess: true
+  inputs:
+    - {PROJECT_NAME}/Assets.xcassets
+  outputs:
+    - templateName: swift4
+      output: {PROJECT_NAME}/Resources/Assets.swift
+      params:  
+        publicAccess: true
