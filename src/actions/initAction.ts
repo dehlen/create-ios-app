@@ -1,5 +1,4 @@
 import { join } from 'path'
-import { ensureDir, pathExists } from 'fs-extra'
 
 import Generator from '../generator'
 import NamePlugin from '../plugins/name'
@@ -26,6 +25,7 @@ import TodayPlugin from '../plugins/today'
 import CarthagePlugin from '../plugins/carthage'
 import DirectoryHandler from '../directoryHandler'
 import OpenXcodeProjectPlugin from '../plugins/openXcodeProject'
+import FetchLicensesPlugin from '../plugins/fetchLicenses'
 
 export default async (name: string, destination: string, skipInstall: boolean) => {
   const projectPath = join(destination, name)
@@ -54,6 +54,7 @@ export default async (name: string, destination: string, skipInstall: boolean) =
     new ThemingDependencyPlugin(),
     new CuratedDependencyPlugin(),
     new DependencyEditorPlugin(),
+    new FetchLicensesPlugin(),
     new XcodeGenPlugin(name),
     new GithubPlugin(),
     new OpenXcodeProjectPlugin()

@@ -62,6 +62,7 @@ var today_1 = require("../plugins/today");
 var carthage_1 = require("../plugins/carthage");
 var directoryHandler_1 = require("../directoryHandler");
 var openXcodeProject_1 = require("../plugins/openXcodeProject");
+var fetchLicenses_1 = require("../plugins/fetchLicenses");
 exports.default = (function (name, destination, skipInstall) { return __awaiter(_this, void 0, void 0, function () {
     var projectPath, generator, templateHandler, directoryHandler, configuration;
     return __generator(this, function (_a) {
@@ -91,6 +92,7 @@ exports.default = (function (name, destination, skipInstall) { return __awaiter(
                     new themingDependency_1.default(),
                     new curatedDependency_1.default(),
                     new dependencyEditor_1.default(),
+                    new fetchLicenses_1.default(),
                     new xcodegen_1.default(name),
                     new github_1.default(),
                     new openXcodeProject_1.default()
