@@ -3,6 +3,7 @@ disabled_rules:
   - line_length
   - statement_position
   - switch_case_alignment
+  - trailing_comma
 identifier_name:
   max_length:
     warning: 60
