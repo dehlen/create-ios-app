@@ -49,6 +49,8 @@ var plugin_1 = require("../plugin");
 var shelljs_1 = require("shelljs");
 var copy = require("recursive-copy");
 var path_1 = require("path");
+var stringUtil_1 = require("../stringUtil");
+var replace = require("regex-replace");
 var SwiftGenPlugin = /** @class */ (function (_super) {
     __extends(SwiftGenPlugin, _super);
     function SwiftGenPlugin() {
@@ -68,13 +70,13 @@ var SwiftGenPlugin = /** @class */ (function (_super) {
     };
     SwiftGenPlugin.prototype.execute = function (configuration, destination) {
         return __awaiter(this, void 0, void 0, function () {
-            var swiftgenConfigurationPath, swiftgenScriptPath;
+            var swiftgenConfigurationPath, swiftgenScriptPath, stringsSwiftFilePath;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
+                        if (!configuration.swiftgen) return [3 /*break*/, 3];
                         swiftgenConfigurationPath = path_1.join(this.pluginDirectory, 'swiftgen.yml');
                         swiftgenScriptPath = path_1.join(this.pluginDirectory, 'scripts', 'swiftgen.sh');
-                        if (!configuration.swiftgen) return [3 /*break*/, 3];
                         return [4 /*yield*/, copy(swiftgenConfigurationPath, path_1.join(destination, 'swiftgen.yml'), {
                                 overwrite: true,
                                 expand: true,
@@ -91,20 +93,39 @@ var SwiftGenPlugin = /** @class */ (function (_super) {
                             })];
                     case 2:
                         _a.sent();
-                        _a.label = 3;
-                    case 3: return [2 /*return*/];
+                        return [3 /*break*/, 5];
+                    case 3:
+                        stringsSwiftFilePath = path_1.join(this.pluginDirectory, 'Strings.swift');
+                        return [4 /*yield*/, copy(stringsSwiftFilePath, path_1.join(destination, '{PROJECT_NAME}', 'Resources', 'Strings.swift'), {
+                                overwrite: true,
+                                expand: true,
+                                dot: true,
+                                junk: true
+                            })];
+                    case 4:
+                        _a.sent();
+                        _a.label = 5;
+                    case 5: return [2 /*return*/];
                 }
             });
         });
     };
     SwiftGenPlugin.prototype.postExecute = function (configuration, destination) {
         return __awaiter(this, void 0, void 0, function () {
+            var stringUtil;
             return __generator(this, function (_a) {
-                if (configuration.swiftgen) {
-                    console.log('Generating SwiftGen content before creating the project...');
-                    shelljs_1.exec('cd ' + destination + ' && swiftgen');
+                switch (_a.label) {
+                    case 0:
+                        stringUtil = new stringUtil_1.default();
+                        return [4 /*yield*/, replace('{SWIFTGEN_MINT}', configuration.swiftgen ? 'swiftgen/swiftgen@master' : '', stringUtil.removeTrailingSlash(destination))];
+                    case 1:
+                        _a.sent();
+                        if (configuration.swiftgen) {
+                            console.log('Generating SwiftGen content before creating the project...');
+                            shelljs_1.exec('cd ' + destination + ' && swiftgen');
+                        }
+                        return [2 /*return*/];
                 }
-                return [2 /*return*/];
             });
         });
     };
