@@ -111,7 +111,7 @@ var SwiftGenPlugin = /** @class */ (function (_super) {
                         _a.sent();
                         if (configuration.swiftgen) {
                             console.log('Generating SwiftGen content before creating the project...');
-                            shelljs_1.exec('cd ' + destination + ' && swiftgen');
+                            shelljs_1.exec('cd ' + destination + ' && mint run swiftgen swiftgen');
                         }
                         return [2 /*return*/];
                 }

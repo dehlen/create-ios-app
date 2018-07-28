@@ -10,7 +10,6 @@ import TabBasedAppPlugin from '../plugins/tabBasedApp'
 import SwiftLintPlugin from '../plugins/swiftlint'
 import FastlanePlugin from '../plugins/fastlane'
 import SwiftGenPlugin from '../plugins/swiftgen'
-import SettingsBundlePlugin from '../plugins/settingsBundle'
 import NetworkStackPlugin from '../plugins/networkStack'
 import LoggingDependencyPlugin from '../plugins/loggingDependency'
 import AnalyticsDependencyPlugin from '../plugins/analyticsDependency'
@@ -51,7 +50,6 @@ export default async (name: string, destination: string, skipInstall: boolean) =
     new FastlanePlugin(),
     new SwiftGenPlugin(),
     new CarthagePlugin(skipInstall),
-    new SettingsBundlePlugin(),
     new NetworkStackPlugin(),
     new LoggingDependencyPlugin(),
     new AnalyticsDependencyPlugin(),

@@ -47,7 +47,6 @@ var tabBasedApp_1 = require("../plugins/tabBasedApp");
 var swiftlint_1 = require("../plugins/swiftlint");
 var fastlane_1 = require("../plugins/fastlane");
 var swiftgen_1 = require("../plugins/swiftgen");
-var settingsBundle_1 = require("../plugins/settingsBundle");
 var networkStack_1 = require("../plugins/networkStack");
 var loggingDependency_1 = require("../plugins/loggingDependency");
 var analyticsDependency_1 = require("../plugins/analyticsDependency");
@@ -89,7 +88,6 @@ exports.default = (function (name, destination, skipInstall) { return __awaiter(
                     new fastlane_1.default(),
                     new swiftgen_1.default(),
                     new carthage_1.default(skipInstall),
-                    new settingsBundle_1.default(),
                     new networkStack_1.default(),
                     new loggingDependency_1.default(),
                     new analyticsDependency_1.default(),
