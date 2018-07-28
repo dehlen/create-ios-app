@@ -60,7 +60,7 @@ var CarthageFrameworkHandler = /** @class */ (function () {
                     dependencies.push({ carthage: 'Alicerce' });
                 }
                 else if (value === 'jspahrsummers/xcconfigs') {
-                    //do nothing since this is not build as a framework
+                    // do nothing since this is not build as a framework
                 }
                 else if (value !== undefined) {
                     unknownDependencies.push(value);
