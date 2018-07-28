@@ -56,7 +56,13 @@ var CarthageFrameworkHandler = /** @class */ (function () {
                 return element.value === value && element.isTestDependency == filterForTestDependencies;
             });
             if (isEmpty(frameworkItem)) {
-                if (value !== undefined) {
+                if (value === 'Mindera/Alicerce') {
+                    dependencies.push({ carthage: 'Alicerce' });
+                }
+                else if (value === 'jspahrsummers/xcconfigs') {
+                    //do nothing since this is not build as a framework
+                }
+                else if (value !== undefined) {
                     unknownDependencies.push(value);
                 }
             }
