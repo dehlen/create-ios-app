@@ -54,7 +54,7 @@ export default class SwiftGenPlugin extends Plugin {
 
     if (configuration.swiftgen) {
       console.log('Generating SwiftGen content before creating the project...')
-      exec('cd ' + destination + ' && swiftgen')
+      exec('cd ' + destination + ' && mint run swiftgen swiftgen')
     }
   }
 }
