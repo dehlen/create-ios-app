@@ -63,6 +63,7 @@ var carthage_1 = require("../plugins/carthage");
 var directoryHandler_1 = require("../directoryHandler");
 var openXcodeProject_1 = require("../plugins/openXcodeProject");
 var fetchLicenses_1 = require("../plugins/fetchLicenses");
+var bootstrapPlugin_1 = require("../plugins/bootstrapPlugin");
 exports.default = (function (name, destination, skipInstall) { return __awaiter(_this, void 0, void 0, function () {
     var projectPath, generator, templateHandler, directoryHandler, configuration;
     return __generator(this, function (_a) {
@@ -81,6 +82,7 @@ exports.default = (function (name, destination, skipInstall) { return __awaiter(
                     new bundleIdPrefix_1.default(),
                     new deploymentTarget_1.default(),
                     new tabBasedApp_1.default(),
+                    new bootstrapPlugin_1.default(),
                     new swiftlint_1.default(),
                     new fastlane_1.default(),
                     new swiftgen_1.default(),

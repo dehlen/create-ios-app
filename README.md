@@ -9,7 +9,8 @@ A command line interface to create an iOS Boilerplate Xcode project
 3. Link binary: ```yarn link create-ios-app```
 
 ## Run
-```create-ios-app init <projectName> --destination <projectDestination>```
+1. Generate project: ```create-ios-app init <projectName> --destination <projectDestination>```
+2. No step two
 
 For further help call: ```create-ios-app --help```
 

@@ -17,14 +17,7 @@ fi
 # Install dependencies via brew
 #
 echo "🚀 Installing dependencies"
-brew install \
-swiftlint \
-swiftgen \
-carthage \
-blender/homebrew-tap/rome
-
-brew tap yonaskolb/XcodeGen https://github.com/yonaskolb/XcodeGen.git
-brew install XcodeGen
-
 gem install bundler
+brew install libxml2 && brew link --force libxml2
+brew install mint
 echo "✅ Installation completed"

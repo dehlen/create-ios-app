@@ -26,6 +26,7 @@ import CarthagePlugin from '../plugins/carthage'
 import DirectoryHandler from '../directoryHandler'
 import OpenXcodeProjectPlugin from '../plugins/openXcodeProject'
 import FetchLicensesPlugin from '../plugins/fetchLicenses'
+import BootstrapPlugin from '../plugins/bootstrapPlugin'
 
 export default async (name: string, destination: string, skipInstall: boolean) => {
   const projectPath = join(destination, name)
@@ -43,6 +44,7 @@ export default async (name: string, destination: string, skipInstall: boolean) =
     new BundleIdPrefixPlugin(),
     new DeploymentTargetPlugin(),
     new TabBasedAppPlugin(),
+    new BootstrapPlugin(),
     new SwiftLintPlugin(),
     new FastlanePlugin(),
     new SwiftGenPlugin(),
