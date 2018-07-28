@@ -15,7 +15,7 @@ export default class SwiftGenPlugin extends Plugin {
       {
         type: 'toggle',
         name: 'swiftgen',
-        message: 'Should we add swiftgen to generate localizable strings, images, etc?',
+        message: 'Should we add SwiftGen to generate localizable strings, images, etc?',
         active: 'yes',
         inactive: 'no',
         initial: 'yes'
@@ -41,19 +41,6 @@ export default class SwiftGenPlugin extends Plugin {
         dot: true,
         junk: true
       })
-    } else {
-      const stringsSwiftFilePath = join(this.pluginDirectory, 'Strings.swift')
-
-      await copy(
-        stringsSwiftFilePath,
-        join(destination, '{PROJECT_NAME}', 'Resources', 'Strings.swift'),
-        {
-          overwrite: true,
-          expand: true,
-          dot: true,
-          junk: true
-        }
-      )
     }
   }
 

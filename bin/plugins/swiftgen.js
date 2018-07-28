@@ -61,7 +61,7 @@ var SwiftGenPlugin = /** @class */ (function (_super) {
             {
                 type: 'toggle',
                 name: 'swiftgen',
-                message: 'Should we add swiftgen to generate localizable strings, images, etc?',
+                message: 'Should we add SwiftGen to generate localizable strings, images, etc?',
                 active: 'yes',
                 inactive: 'no',
                 initial: 'yes'
@@ -70,7 +70,7 @@ var SwiftGenPlugin = /** @class */ (function (_super) {
     };
     SwiftGenPlugin.prototype.execute = function (configuration, destination) {
         return __awaiter(this, void 0, void 0, function () {
-            var swiftgenConfigurationPath, swiftgenScriptPath, stringsSwiftFilePath;
+            var swiftgenConfigurationPath, swiftgenScriptPath;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -93,19 +93,8 @@ var SwiftGenPlugin = /** @class */ (function (_super) {
                             })];
                     case 2:
                         _a.sent();
-                        return [3 /*break*/, 5];
-                    case 3:
-                        stringsSwiftFilePath = path_1.join(this.pluginDirectory, 'Strings.swift');
-                        return [4 /*yield*/, copy(stringsSwiftFilePath, path_1.join(destination, '{PROJECT_NAME}', 'Resources', 'Strings.swift'), {
-                                overwrite: true,
-                                expand: true,
-                                dot: true,
-                                junk: true
-                            })];
-                    case 4:
-                        _a.sent();
-                        _a.label = 5;
-                    case 5: return [2 /*return*/];
+                        _a.label = 3;
+                    case 3: return [2 /*return*/];
                 }
             });
         });
