@@ -46,10 +46,10 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var plugin_1 = require("../plugin");
-var replace = require("regex-replace");
 var path_1 = require("path");
 var copy = require("recursive-copy");
 var stringUtil_1 = require("../stringUtil");
+var replace = require("regex-replace");
 var SwiftLintPlugin = /** @class */ (function (_super) {
     __extends(SwiftLintPlugin, _super);
     function SwiftLintPlugin() {
@@ -110,6 +110,9 @@ var SwiftLintPlugin = /** @class */ (function (_super) {
                         stringUtil = new stringUtil_1.default();
                         return [4 /*yield*/, replace('{SWIFTLINT_LANE}', configuration.swiftlintLane, stringUtil.removeTrailingSlash(destination))];
                     case 1:
+                        _a.sent();
+                        return [4 /*yield*/, replace('{SWIFTLINT_MINT}', configuration.swiftlint ? 'realm/SwiftLint@0.26.0' : '', stringUtil.removeTrailingSlash(destination))];
+                    case 2:
                         _a.sent();
                         return [2 /*return*/];
                 }

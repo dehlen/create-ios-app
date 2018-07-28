@@ -1,9 +1,9 @@
 import Plugin from '../plugin'
 
-import * as replace from 'regex-replace'
 import { join } from 'path'
 import * as copy from 'recursive-copy'
 import StringUtility from '../stringUtil'
+import * as replace from 'regex-replace'
 
 export default class SwiftLintPlugin extends Plugin {
   constructor() {
@@ -56,6 +56,12 @@ export default class SwiftLintPlugin extends Plugin {
     await replace(
       '{SWIFTLINT_LANE}',
       configuration.swiftlintLane,
+      stringUtil.removeTrailingSlash(destination)
+    )
+
+    await replace(
+      '{SWIFTLINT_MINT}',
+      configuration.swiftlint ? 'realm/SwiftLint@0.26.0' : '',
       stringUtil.removeTrailingSlash(destination)
     )
   }
