@@ -1,11 +1,11 @@
 /* 
   Localizable.strings
-  {PROJECT_NAME}
+  Sample
 
-	Created by {AUTHOR} on {TODAY}.
-	Copyright © {YEAR} {ORGANIZATION}. All rights reserved.
+	Created by John Doe on July 28, 2018.
+	Copyright © 2018 . All rights reserved.
 */
 
 "home" = "Home";
 "about" = "About";
-
+"libraries" = "Used libraries";

@@ -12,13 +12,18 @@ final class AboutNavigationCoordinator: NavigationCoordinator {
 
     func start() {
         let (aboutViewController, routing) = viewFactory.about()
-        routing.routeSelected = { route in
+        routing.routeSelected = {[weak self] route in
             switch route {
-            default:
-                print("no handling for route \(route)")
+            case .libraries:
+                self?.showLibraries()
             }
         }
 
         navigationController.pushViewController(aboutViewController, animated: false)
+    }
+
+    func showLibraries() {
+        let viewController = viewFactory.libraries()
+        navigationController.pushViewController(viewController, animated: true)
     }
 }
