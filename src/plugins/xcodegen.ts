@@ -69,6 +69,13 @@ export default class XcodeGenPlugin extends Plugin {
       })
     }
 
+    if (configuration.swiftformat) {
+      scripts.push({
+        script: 'sh "$PROJECT_DIR/scripts/swiftformat.sh"',
+        name: 'Format with SwiftFormat'
+      })
+    }
+
     return scripts
   }
 

@@ -101,6 +101,12 @@ var XcodeGenPlugin = /** @class */ (function (_super) {
                 name: 'Generate with SwiftGen'
             });
         }
+        if (configuration.swiftformat) {
+            scripts.push({
+                script: 'sh "$PROJECT_DIR/scripts/swiftformat.sh"',
+                name: 'Format with SwiftFormat'
+            });
+        }
         return scripts;
     };
     XcodeGenPlugin.prototype.createApplicationConfiguration = function (configuration, testTargetName, carthageFrameworks) {
