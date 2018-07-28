@@ -15,7 +15,7 @@ export default class SwiftLintPlugin extends Plugin {
       {
         type: 'toggle',
         name: 'swiftlint',
-        message: 'Add Swiftlint as linting mechanism?',
+        message: 'Add SwiftLint as linting mechanism?',
         active: 'yes',
         inactive: 'no',
         initial: 'yes'
