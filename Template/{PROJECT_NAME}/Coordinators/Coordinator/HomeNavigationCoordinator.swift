@@ -6,7 +6,7 @@ final class HomeNavigationCoordinator: NavigationCoordinator {
 
     init(viewFactory: ViewFactory) {
         self.viewFactory = viewFactory
-        navigationController = UINavigationController()
+        navigationController = .largeTitleNavigationController
         navigationController.title = L10n.home
     }
 
