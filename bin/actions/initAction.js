@@ -42,7 +42,7 @@ var name_1 = require("../plugins/name");
 var organization_1 = require("../plugins/organization");
 var bundleIdPrefix_1 = require("../plugins/bundleIdPrefix");
 var deploymentTarget_1 = require("../plugins/deploymentTarget");
-var github_1 = require("../plugins/github");
+var gitHandler_1 = require("../plugins/gitHandler");
 var tabBasedApp_1 = require("../plugins/tabBasedApp");
 var swiftlint_1 = require("../plugins/swiftlint");
 var fastlane_1 = require("../plugins/fastlane");
@@ -97,7 +97,7 @@ exports.default = (function (name, destination, skipInstall) { return __awaiter(
                     new dependencyEditor_1.default(),
                     new fetchLicenses_1.default(pluginDirectory),
                     new xcodegen_1.default(name, true),
-                    new github_1.default(),
+                    new gitHandler_1.default(),
                     new openXcodeProject_1.default()
                 ]);
                 return [4 /*yield*/, directoryHandler.handleProjectFolderGeneration(projectPath)];

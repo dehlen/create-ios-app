@@ -5,8 +5,6 @@ import NamePlugin from '../plugins/name'
 import OrganizationPlugin from '../plugins/organization'
 import BundleIdPrefixPlugin from '../plugins/bundleIdPrefix'
 import DeploymentTargetPlugin from '../plugins/deploymentTarget'
-import GithubPlugin from '../plugins/github'
-import TabBasedAppPlugin from '../plugins/tabBasedApp'
 import SwiftLintPlugin from '../plugins/swiftlint'
 import FastlanePlugin from '../plugins/fastlane'
 import SwiftGenPlugin from '../plugins/swiftgen'
@@ -24,7 +22,6 @@ import TodayPlugin from '../plugins/today'
 import CarthagePlugin from '../plugins/carthage'
 import DirectoryHandler from '../directoryHandler'
 import OpenXcodeProjectPlugin from '../plugins/openXcodeProject'
-import FetchLicensesPlugin from '../plugins/fetchLicenses'
 import BootstrapPlugin from '../plugins/bootstrap'
 import SwiftFormatPlugin from '../plugins/swiftformat'
 
@@ -79,7 +76,7 @@ export default async (name: string, destination: string, carthageFramework: stri
     testDependencies: [] as Array<string>,
     dependencies: [carthageFramework],
     editDependencies: false,
-    githubURL: ''
+    repositoryURL: ''
   }
   await templateHandler.copyTo(projectPath, configuration)
   await generator.run(configuration)

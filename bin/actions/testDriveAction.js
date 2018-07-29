@@ -115,7 +115,7 @@ exports.default = (function (name, destination, carthageFramework) { return __aw
                     testDependencies: [],
                     dependencies: [carthageFramework],
                     editDependencies: false,
-                    githubURL: ''
+                    repositoryURL: ''
                 };
                 return [4 /*yield*/, templateHandler.copyTo(projectPath, configuration)];
             case 2:

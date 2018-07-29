@@ -5,7 +5,7 @@ import NamePlugin from '../plugins/name'
 import OrganizationPlugin from '../plugins/organization'
 import BundleIdPrefixPlugin from '../plugins/bundleIdPrefix'
 import DeploymentTargetPlugin from '../plugins/deploymentTarget'
-import GithubPlugin from '../plugins/github'
+import GitHandlerPlugin from '../plugins/gitHandler'
 import TabBasedAppPlugin from '../plugins/tabBasedApp'
 import SwiftLintPlugin from '../plugins/swiftlint'
 import FastlanePlugin from '../plugins/fastlane'
@@ -59,7 +59,7 @@ export default async (name: string, destination: string, skipInstall: boolean) =
     new DependencyEditorPlugin(),
     new FetchLicensesPlugin(pluginDirectory),
     new XcodeGenPlugin(name, true),
-    new GithubPlugin(),
+    new GitHandlerPlugin(),
     new OpenXcodeProjectPlugin()
   ])
 

@@ -4,13 +4,13 @@ import isEmpty = require('is-empty')
 import * as replace from 'regex-replace'
 import StringUtility from '../stringUtil'
 
-export default class GithubPlugin extends Plugin {
+export default class GitHandlerPlugin extends Plugin {
   constructor() {
     super()
   }
 
   private initRepository(workingDir: string, remoteUrl: string) {
-    console.log('Initializing GitHub repository')
+    console.log('Initializing git repository')
     if (isEmpty(remoteUrl)) {
       git(workingDir)
         .init()
@@ -32,9 +32,8 @@ export default class GithubPlugin extends Plugin {
     return [
       {
         type: 'text',
-        name: 'githubURL',
-        message:
-          "🌎 Any Github URL that you'll be hosting this project at? You may leave this empty.",
+        name: 'repositoryURL',
+        message: "🌎 Any git URL that you'll be hosting this project at? You may leave this empty.",
         initial: ''
       }
     ]
@@ -43,9 +42,9 @@ export default class GithubPlugin extends Plugin {
   async execute(configuration: any, destination: string) {}
 
   async postExecute(configuration: any, destination: string) {
-    this.initRepository(destination, configuration.githubURL)
+    this.initRepository(destination, configuration.repositoryURL)
 
-    const gitPushCommand = isEmpty(configuration.githubURL) ? '' : 'push_to_git_remote'
+    const gitPushCommand = isEmpty(configuration.repositoryURL) ? '' : 'push_to_git_remote'
     const stringUtil = new StringUtility()
     await replace(
       '{GIT_PUSH_CONFIGURATION}',
