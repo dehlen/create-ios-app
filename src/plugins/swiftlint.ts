@@ -55,11 +55,7 @@ export default class SwiftLintPlugin extends Plugin {
       : ''
 
     const stringUtil = new StringUtility()
-    await replace(
-      '{SWIFTLINT_LANE}',
-      configuration.swiftlintLane,
-      stringUtil.removeTrailingSlash(destination)
-    )
+    await replace('{SWIFTLINT_LANE}', swiftlintLane, stringUtil.removeTrailingSlash(destination))
 
     await replace(
       '{SWIFTLINT_MINT}',
