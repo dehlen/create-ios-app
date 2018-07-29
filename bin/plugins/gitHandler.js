@@ -61,7 +61,8 @@ var GitHandlerPlugin = /** @class */ (function (_super) {
             git(workingDir)
                 .init()
                 .add('./*')
-                .commit('initial commit', function () { return console.log('✅ Initialized successfully'); });
+                .commit('initial commit', function () { return console.log('✅ Initialized successfully'); })
+                .checkoutBranch('develop', 'master');
         }
         else {
             git(workingDir)
@@ -69,7 +70,8 @@ var GitHandlerPlugin = /** @class */ (function (_super) {
                 .add('./*')
                 .commit('initial commit')
                 .addRemote('origin', remoteUrl)
-                .push(['-u', 'origin', 'master'], function () {
+                .checkoutBranch('develop', 'master')
+                .push(['-u', 'origin', 'develop'], function () {
                 return console.log('✅ Initialized successfully and pushed to: ' + remoteUrl);
             });
         }

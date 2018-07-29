@@ -16,13 +16,15 @@ export default class GitHandlerPlugin extends Plugin {
         .init()
         .add('./*')
         .commit('initial commit', () => console.log('✅ Initialized successfully'))
+        .checkoutBranch('develop', 'master')
     } else {
       git(workingDir)
         .init()
         .add('./*')
         .commit('initial commit')
         .addRemote('origin', remoteUrl)
-        .push(['-u', 'origin', 'master'], () =>
+        .checkoutBranch('develop', 'master')
+        .push(['-u', 'origin', 'develop'], () =>
           console.log('✅ Initialized successfully and pushed to: ' + remoteUrl)
         )
     }
