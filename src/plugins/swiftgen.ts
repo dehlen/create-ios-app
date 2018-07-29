@@ -6,8 +6,10 @@ import StringUtility from '../stringUtil'
 import * as replace from 'regex-replace'
 
 export default class SwiftGenPlugin extends Plugin {
-  constructor() {
+  pluginDirectory: string
+  constructor(pluginDirectory: string) {
     super()
+    this.pluginDirectory = pluginDirectory
   }
 
   questions(): Array<Prompt.PromptParameter> {

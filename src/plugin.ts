@@ -7,10 +7,7 @@ interface PluginInterface {
 }
 
 export default class Plugin implements PluginInterface {
-  pluginDirectory: string
-  constructor() {
-    this.pluginDirectory = join(__dirname, '../Template', 'plugins')
-  }
+  constructor() {}
 
   questions(): Array<Prompt.PromptParameter> {
     return []

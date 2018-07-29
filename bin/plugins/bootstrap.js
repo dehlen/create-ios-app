@@ -50,8 +50,10 @@ var path_1 = require("path");
 var copy = require("recursive-copy");
 var BootstrapPlugin = /** @class */ (function (_super) {
     __extends(BootstrapPlugin, _super);
-    function BootstrapPlugin() {
-        return _super.call(this) || this;
+    function BootstrapPlugin(pluginDirectory) {
+        var _this = _super.call(this) || this;
+        _this.pluginDirectory = pluginDirectory;
+        return _this;
     }
     BootstrapPlugin.prototype.questions = function () {
         return [];

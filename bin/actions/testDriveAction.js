@@ -42,8 +42,6 @@ var name_1 = require("../plugins/name");
 var organization_1 = require("../plugins/organization");
 var bundleIdPrefix_1 = require("../plugins/bundleIdPrefix");
 var deploymentTarget_1 = require("../plugins/deploymentTarget");
-var github_1 = require("../plugins/github");
-var tabBasedApp_1 = require("../plugins/tabBasedApp");
 var swiftlint_1 = require("../plugins/swiftlint");
 var fastlane_1 = require("../plugins/fastlane");
 var swiftgen_1 = require("../plugins/swiftgen");
@@ -61,19 +59,18 @@ var today_1 = require("../plugins/today");
 var carthage_1 = require("../plugins/carthage");
 var directoryHandler_1 = require("../directoryHandler");
 var openXcodeProject_1 = require("../plugins/openXcodeProject");
-var fetchLicenses_1 = require("../plugins/fetchLicenses");
 var bootstrap_1 = require("../plugins/bootstrap");
 var swiftformat_1 = require("../plugins/swiftformat");
-exports.default = (function (name, destination, skipInstall) { return __awaiter(_this, void 0, void 0, function () {
+exports.default = (function (name, destination, carthageFramework) { return __awaiter(_this, void 0, void 0, function () {
     var projectPath, generator, templateHandler, directoryHandler, pluginDirectory, configuration;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
                 projectPath = path_1.join(destination, name);
-                generator = new generator_1.default(name, projectPath, skipInstall);
-                templateHandler = new templateHandler_1.default(path_1.join(__dirname, '../../Template'));
+                generator = new generator_1.default(name, projectPath, false);
+                templateHandler = new templateHandler_1.default(path_1.join(__dirname, '../../TestDriveTemplate'));
                 directoryHandler = new directoryHandler_1.default();
-                pluginDirectory = path_1.join(__dirname, '../../Template', 'plugins');
+                pluginDirectory = path_1.join(__dirname, '../../TestDriveTemplate', 'plugins');
                 generator.register([
                     new name_1.default(name),
                     new year_1.default(),
@@ -82,35 +79,49 @@ exports.default = (function (name, destination, skipInstall) { return __awaiter(
                     new organization_1.default(),
                     new bundleIdPrefix_1.default(),
                     new deploymentTarget_1.default(),
-                    new tabBasedApp_1.default(),
                     new bootstrap_1.default(pluginDirectory),
                     new swiftformat_1.default(pluginDirectory),
                     new swiftlint_1.default(pluginDirectory),
                     new fastlane_1.default(pluginDirectory),
                     new swiftgen_1.default(pluginDirectory),
-                    new carthage_1.default(skipInstall, pluginDirectory),
+                    new carthage_1.default(false, pluginDirectory),
                     new networkStack_1.default(),
                     new loggingDependency_1.default(),
                     new analyticsDependency_1.default(),
                     new themingDependency_1.default(),
                     new curatedDependency_1.default(),
                     new dependencyEditor_1.default(),
-                    new fetchLicenses_1.default(pluginDirectory),
-                    new xcodegen_1.default(name, true),
-                    new github_1.default(),
+                    new xcodegen_1.default(name, false),
                     new openXcodeProject_1.default()
                 ]);
                 return [4 /*yield*/, directoryHandler.handleProjectFolderGeneration(projectPath)];
             case 1:
                 _a.sent();
-                return [4 /*yield*/, generator.ask()];
-            case 2:
-                configuration = _a.sent();
+                configuration = {
+                    name: 'TestDrive',
+                    organization: '',
+                    bundleIdPrefix: 'com.domain',
+                    deploymentTarget: '11.4',
+                    tabBased: false,
+                    tabs: [''],
+                    swiftformat: false,
+                    swiftlint: false,
+                    fastlane: false,
+                    swiftgen: false,
+                    network: false,
+                    logging: false,
+                    analytics: false,
+                    theming: false,
+                    testDependencies: [],
+                    dependencies: [carthageFramework],
+                    editDependencies: false,
+                    githubURL: ''
+                };
                 return [4 /*yield*/, templateHandler.copyTo(projectPath, configuration)];
-            case 3:
+            case 2:
                 _a.sent();
                 return [4 /*yield*/, generator.run(configuration)];
-            case 4:
+            case 3:
                 _a.sent();
                 return [2 /*return*/];
         }

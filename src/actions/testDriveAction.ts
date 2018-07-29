@@ -28,13 +28,13 @@ import FetchLicensesPlugin from '../plugins/fetchLicenses'
 import BootstrapPlugin from '../plugins/bootstrap'
 import SwiftFormatPlugin from '../plugins/swiftformat'
 
-export default async (name: string, destination: string, skipInstall: boolean) => {
+export default async (name: string, destination: string, carthageFramework: string) => {
   const projectPath = join(destination, name)
 
-  const generator = new Generator(name, projectPath, skipInstall)
-  const templateHandler = new TemplateHandler(join(__dirname, '../../Template'))
+  const generator = new Generator(name, projectPath, false)
+  const templateHandler = new TemplateHandler(join(__dirname, '../../TestDriveTemplate'))
   const directoryHandler = new DirectoryHandler()
-  const pluginDirectory = join(__dirname, '../../Template', 'plugins')
+  const pluginDirectory = join(__dirname, '../../TestDriveTemplate', 'plugins')
 
   generator.register([
     new NamePlugin(name),
@@ -44,27 +44,43 @@ export default async (name: string, destination: string, skipInstall: boolean) =
     new OrganizationPlugin(),
     new BundleIdPrefixPlugin(),
     new DeploymentTargetPlugin(),
-    new TabBasedAppPlugin(),
     new BootstrapPlugin(pluginDirectory),
     new SwiftFormatPlugin(pluginDirectory),
     new SwiftLintPlugin(pluginDirectory),
     new FastlanePlugin(pluginDirectory),
     new SwiftGenPlugin(pluginDirectory),
-    new CarthagePlugin(skipInstall, pluginDirectory),
+    new CarthagePlugin(false, pluginDirectory),
     new NetworkStackPlugin(),
     new LoggingDependencyPlugin(),
     new AnalyticsDependencyPlugin(),
     new ThemingDependencyPlugin(),
     new CuratedDependencyPlugin(),
     new DependencyEditorPlugin(),
-    new FetchLicensesPlugin(pluginDirectory),
-    new XcodeGenPlugin(name, true),
-    new GithubPlugin(),
+    new XcodeGenPlugin(name, false),
     new OpenXcodeProjectPlugin()
   ])
 
   await directoryHandler.handleProjectFolderGeneration(projectPath)
-  const configuration = await generator.ask()
+  const configuration = {
+    name: 'TestDrive',
+    organization: '',
+    bundleIdPrefix: 'com.domain',
+    deploymentTarget: '11.4',
+    tabBased: false,
+    tabs: [''],
+    swiftformat: false,
+    swiftlint: false,
+    fastlane: false,
+    swiftgen: false,
+    network: false,
+    logging: false,
+    analytics: false,
+    theming: false,
+    testDependencies: [] as Array<string>,
+    dependencies: [carthageFramework],
+    editDependencies: false,
+    githubURL: ''
+  }
   await templateHandler.copyTo(projectPath, configuration)
   await generator.run(configuration)
 }

@@ -22,7 +22,7 @@ export default class DirectoryHandler {
     }
   }
 
-  private async directoryExists(path: string): Promise<boolean> {
+  async directoryExists(path: string): Promise<boolean> {
     const exists = await pathExists(path)
     return exists
   }

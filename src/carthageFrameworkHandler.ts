@@ -3,7 +3,8 @@ import { join } from 'path'
 import isEmpty = require('is-empty')
 import exit from './exit'
 import frameworkNameMap from './dependencyMap'
-
+import StringUtility from './stringUtil'
+import * as replace from 'regex-replace'
 const prompts = require('prompts')
 
 export default class CarthageFrameworkHandler {
@@ -27,7 +28,7 @@ export default class CarthageFrameworkHandler {
       })
       if (isEmpty(frameworkItem)) {
         if (value === 'Mindera/Alicerce') {
-          dependencies.push({carthage: 'Alicerce'})
+          dependencies.push({ carthage: 'Alicerce' })
         } else if (value === 'jspahrsummers/xcconfigs') {
           // do nothing since this is not build as a framework
         } else if (value !== undefined) {
@@ -39,6 +40,15 @@ export default class CarthageFrameworkHandler {
     }
 
     return { dependencies, unknownDependencies }
+  }
+
+  async replaceTestDriveImport(frameworkName: string, destination: string) {
+    const stringUtil = new StringUtility()
+    await replace(
+      '{TESTDRIVE_FRAMEWORK_NAME}',
+      frameworkName,
+      stringUtil.removeTrailingSlash(destination)
+    )
   }
 
   async retrieveDependencies(projectPath: string): Promise<CarthageDependencies> {

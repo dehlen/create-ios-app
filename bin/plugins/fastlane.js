@@ -51,8 +51,10 @@ var path_1 = require("path");
 var shelljs_1 = require("shelljs");
 var FastlanePlugin = /** @class */ (function (_super) {
     __extends(FastlanePlugin, _super);
-    function FastlanePlugin() {
-        return _super.call(this) || this;
+    function FastlanePlugin(pluginDirectory) {
+        var _this = _super.call(this) || this;
+        _this.pluginDirectory = pluginDirectory;
+        return _this;
     }
     FastlanePlugin.prototype.questions = function () {
         return [

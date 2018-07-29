@@ -40,6 +40,8 @@ var path_1 = require("path");
 var isEmpty = require("is-empty");
 var exit_1 = require("./exit");
 var dependencyMap_1 = require("./dependencyMap");
+var stringUtil_1 = require("./stringUtil");
+var replace = require("regex-replace");
 var prompts = require('prompts');
 var CarthageFrameworkHandler = /** @class */ (function () {
     function CarthageFrameworkHandler() {
@@ -75,6 +77,21 @@ var CarthageFrameworkHandler = /** @class */ (function () {
             _loop_1(line);
         }
         return { dependencies: dependencies, unknownDependencies: unknownDependencies };
+    };
+    CarthageFrameworkHandler.prototype.replaceTestDriveImport = function (frameworkName, destination) {
+        return __awaiter(this, void 0, void 0, function () {
+            var stringUtil;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        stringUtil = new stringUtil_1.default();
+                        return [4 /*yield*/, replace('{TESTDRIVE_FRAMEWORK_NAME}', frameworkName, stringUtil.removeTrailingSlash(destination))];
+                    case 1:
+                        _a.sent();
+                        return [2 /*return*/];
+                }
+            });
+        });
     };
     CarthageFrameworkHandler.prototype.retrieveDependencies = function (projectPath) {
         return __awaiter(this, void 0, void 0, function () {

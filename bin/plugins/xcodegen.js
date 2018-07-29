@@ -51,11 +51,13 @@ var yaml = require("write-yaml");
 var exit_1 = require("../exit");
 var shelljs_1 = require("shelljs");
 var carthageFrameworkHandler_1 = require("../carthageFrameworkHandler");
+var isEmpty = require("is-empty");
 var XcodeGenPlugin = /** @class */ (function (_super) {
     __extends(XcodeGenPlugin, _super);
-    function XcodeGenPlugin(name) {
+    function XcodeGenPlugin(name, includeUnitTestTarget) {
         var _this = _super.call(this) || this;
         _this.name = name;
+        _this.includeUnitTestTarget = includeUnitTestTarget;
         return _this;
     }
     XcodeGenPlugin.prototype.questions = function () {
@@ -120,7 +122,7 @@ var XcodeGenPlugin = /** @class */ (function (_super) {
             },
             sources: [this.name],
             scheme: {
-                testTargets: [testTargetName],
+                testTargets: isEmpty(testTargetName) ? [] : [testTargetName],
                 gatherCoverageData: true
             }
         };
@@ -136,7 +138,7 @@ var XcodeGenPlugin = /** @class */ (function (_super) {
         return targetConfiguration;
     };
     XcodeGenPlugin.prototype.generateProjectConfiguration = function (configuration, carthageFrameworks) {
-        var testTargetName = this.name + 'Tests';
+        var testTargetName = this.includeUnitTestTarget ? this.name + 'Tests' : undefined;
         var yamlConfiguration = {
             name: this.name,
             options: {
@@ -149,7 +151,9 @@ var XcodeGenPlugin = /** @class */ (function (_super) {
             }
         };
         yamlConfiguration.targets[this.name] = this.createApplicationConfiguration(configuration, testTargetName, carthageFrameworks.applicationDependencies);
-        yamlConfiguration.targets[testTargetName] = this.createUnitTestConfiguration(configuration, testTargetName, carthageFrameworks.testDependencies);
+        if (this.includeUnitTestTarget) {
+            yamlConfiguration.targets[testTargetName] = this.createUnitTestConfiguration(configuration, testTargetName, carthageFrameworks.testDependencies);
+        }
         return yamlConfiguration;
     };
     XcodeGenPlugin.prototype.writeProjectConfiguration = function (configuration, destination, carthageFrameworks) {
@@ -179,6 +183,12 @@ var XcodeGenPlugin = /** @class */ (function (_super) {
                         return [4 /*yield*/, frameworkHandler.retrieveDependencies(destination)];
                     case 1:
                         carthageFrameworks = _a.sent();
+                        if (!(carthageFrameworks.applicationDependencies.length == 1)) return [3 /*break*/, 3];
+                        return [4 /*yield*/, frameworkHandler.replaceTestDriveImport(carthageFrameworks.applicationDependencies[0].carthage, destination)];
+                    case 2:
+                        _a.sent();
+                        _a.label = 3;
+                    case 3:
                         this.writeProjectConfiguration(configuration, destination, carthageFrameworks);
                         console.log('🛠 Generating Xcode project...');
                         shelljs_1.exec('xcodegen --spec ' + path_1.join(destination, 'project.yml') + ' --project ' + destination);

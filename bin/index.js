@@ -41,6 +41,7 @@ var program = require("commander");
 var os_1 = require("os");
 var packageVersion_1 = require("./actions/packageVersion");
 var initAction_1 = require("./actions/initAction");
+var testDriveAction_1 = require("./actions/testDriveAction");
 var main = function () { return __awaiter(_this, void 0, void 0, function () {
     var _a, _b;
     return __generator(this, function (_c) {
@@ -59,6 +60,14 @@ var main = function () { return __awaiter(_this, void 0, void 0, function () {
                     var destination = args.destination || os_1.homedir();
                     var skipInstall = args.skipInstall || false;
                     initAction_1.default(name, destination, skipInstall);
+                });
+                program
+                    .command('testdrive <name> <carthageFramework>')
+                    .description('Scaffold a new project with the given carthage framework')
+                    .option('-d, --destination <destination>', 'Set output destination of generated project')
+                    .action(function (name, carthageFramework, args) {
+                    var destination = args.destination || os_1.homedir();
+                    testDriveAction_1.default(name, destination, carthageFramework);
                 });
                 program.parse(process.argv);
                 return [2 /*return*/];

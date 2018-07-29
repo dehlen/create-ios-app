@@ -3,6 +3,7 @@ import * as replace from 'regex-replace'
 import StringUtility from '../stringUtil'
 import { join } from 'path'
 import { move } from 'fs-extra'
+import DirectoryHandler from '../directoryHandler'
 
 export default class NamePlugin extends Plugin {
   projectName: string
@@ -33,8 +34,11 @@ export default class NamePlugin extends Plugin {
       join(destination, this.projectName + 'Tests', '{PROJECT_NAME}Tests.swift')
     ]
 
+    const directoryHandler = new DirectoryHandler()
     for (const file of filesToMove) {
-      await move(file, file.replace(/\{PROJECT_NAME\}/g, this.projectName), { overwrite: false })
+      if (await directoryHandler.directoryExists(file)) {
+        await move(file, file.replace(/\{PROJECT_NAME\}/g, this.projectName), { overwrite: false })
+      }
     }
   }
 }

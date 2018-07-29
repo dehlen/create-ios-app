@@ -4,8 +4,10 @@ import * as copy from 'recursive-copy'
 import { exec } from 'shelljs'
 
 export default class BootstrapPlugin extends Plugin {
-  constructor() {
+  pluginDirectory: string
+  constructor(pluginDirectory: string) {
     super()
+    this.pluginDirectory = pluginDirectory
   }
 
   questions(): Array<Prompt.PromptParameter> {

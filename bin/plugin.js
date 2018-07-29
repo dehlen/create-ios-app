@@ -35,10 +35,8 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var path_1 = require("path");
 var Plugin = /** @class */ (function () {
     function Plugin() {
-        this.pluginDirectory = path_1.join(__dirname, '../Template', 'plugins');
     }
     Plugin.prototype.questions = function () {
         return [];

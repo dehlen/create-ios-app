@@ -4,8 +4,10 @@ import { join } from 'path'
 import { exec } from 'shelljs'
 
 export default class FastlanePlugin extends Plugin {
-  constructor() {
+  pluginDirectory: string
+  constructor(pluginDirectory: string) {
     super()
+    this.pluginDirectory = pluginDirectory
   }
 
   questions(): Array<Prompt.PromptParameter> {

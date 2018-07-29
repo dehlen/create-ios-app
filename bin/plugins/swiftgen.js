@@ -53,8 +53,10 @@ var stringUtil_1 = require("../stringUtil");
 var replace = require("regex-replace");
 var SwiftGenPlugin = /** @class */ (function (_super) {
     __extends(SwiftGenPlugin, _super);
-    function SwiftGenPlugin() {
-        return _super.call(this) || this;
+    function SwiftGenPlugin(pluginDirectory) {
+        var _this = _super.call(this) || this;
+        _this.pluginDirectory = pluginDirectory;
+        return _this;
     }
     SwiftGenPlugin.prototype.questions = function () {
         return [

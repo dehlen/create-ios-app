@@ -50,6 +50,7 @@ var replace = require("regex-replace");
 var stringUtil_1 = require("../stringUtil");
 var path_1 = require("path");
 var fs_extra_1 = require("fs-extra");
+var directoryHandler_1 = require("../directoryHandler");
 var NamePlugin = /** @class */ (function (_super) {
     __extends(NamePlugin, _super);
     function NamePlugin(projectName) {
@@ -67,7 +68,7 @@ var NamePlugin = /** @class */ (function (_super) {
     };
     NamePlugin.prototype.postExecute = function (configuration, destination) {
         return __awaiter(this, void 0, void 0, function () {
-            var stringUtil, filesToMove, _i, filesToMove_1, file;
+            var stringUtil, filesToMove, directoryHandler, _i, filesToMove_1, file;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -84,19 +85,23 @@ var NamePlugin = /** @class */ (function (_super) {
                             path_1.join(destination, '{PROJECT_NAME}Tests'),
                             path_1.join(destination, this.projectName + 'Tests', '{PROJECT_NAME}Tests.swift')
                         ];
+                        directoryHandler = new directoryHandler_1.default();
                         _i = 0, filesToMove_1 = filesToMove;
                         _a.label = 2;
                     case 2:
-                        if (!(_i < filesToMove_1.length)) return [3 /*break*/, 5];
+                        if (!(_i < filesToMove_1.length)) return [3 /*break*/, 6];
                         file = filesToMove_1[_i];
-                        return [4 /*yield*/, fs_extra_1.move(file, file.replace(/\{PROJECT_NAME\}/g, this.projectName), { overwrite: false })];
+                        return [4 /*yield*/, directoryHandler.directoryExists(file)];
                     case 3:
-                        _a.sent();
-                        _a.label = 4;
+                        if (!_a.sent()) return [3 /*break*/, 5];
+                        return [4 /*yield*/, fs_extra_1.move(file, file.replace(/\{PROJECT_NAME\}/g, this.projectName), { overwrite: false })];
                     case 4:
+                        _a.sent();
+                        _a.label = 5;
+                    case 5:
                         _i++;
                         return [3 /*break*/, 2];
-                    case 5: return [2 /*return*/];
+                    case 6: return [2 /*return*/];
                 }
             });
         });

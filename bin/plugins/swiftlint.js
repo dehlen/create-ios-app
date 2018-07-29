@@ -52,8 +52,10 @@ var stringUtil_1 = require("../stringUtil");
 var replace = require("regex-replace");
 var SwiftLintPlugin = /** @class */ (function (_super) {
     __extends(SwiftLintPlugin, _super);
-    function SwiftLintPlugin() {
-        return _super.call(this) || this;
+    function SwiftLintPlugin(pluginDirectory) {
+        var _this = _super.call(this) || this;
+        _this.pluginDirectory = pluginDirectory;
+        return _this;
     }
     SwiftLintPlugin.prototype.questions = function () {
         return [

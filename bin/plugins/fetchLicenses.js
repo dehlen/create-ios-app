@@ -51,8 +51,10 @@ var path_1 = require("path");
 var shelljs_1 = require("shelljs");
 var FetchLicensesPlugin = /** @class */ (function (_super) {
     __extends(FetchLicensesPlugin, _super);
-    function FetchLicensesPlugin() {
-        return _super.call(this) || this;
+    function FetchLicensesPlugin(pluginDirectory) {
+        var _this = _super.call(this) || this;
+        _this.pluginDirectory = pluginDirectory;
+        return _this;
     }
     FetchLicensesPlugin.prototype.questions = function () {
         return [];

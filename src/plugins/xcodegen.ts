@@ -4,13 +4,15 @@ import * as yaml from 'write-yaml'
 import exit from '../exit'
 import { exec } from 'shelljs'
 import CarthageFrameworkHandler from '../carthageFrameworkHandler'
+import isEmpty = require('is-empty')
 
 export default class XcodeGenPlugin extends Plugin {
   name: string
-
-  constructor(name: string) {
+  includeUnitTestTarget: boolean
+  constructor(name: string, includeUnitTestTarget: boolean) {
     super()
     this.name = name
+    this.includeUnitTestTarget = includeUnitTestTarget
   }
 
   questions(): Array<Prompt.PromptParameter> {
@@ -94,7 +96,7 @@ export default class XcodeGenPlugin extends Plugin {
       },
       sources: [this.name],
       scheme: {
-        testTargets: [testTargetName],
+        testTargets: isEmpty(testTargetName) ? [] : [testTargetName],
         gatherCoverageData: true
       }
     }
@@ -118,7 +120,7 @@ export default class XcodeGenPlugin extends Plugin {
     configuration: any,
     carthageFrameworks: CarthageDependencies
   ) {
-    const testTargetName = this.name + 'Tests'
+    const testTargetName = this.includeUnitTestTarget ? this.name + 'Tests' : undefined
 
     const yamlConfiguration: any = {
       name: this.name,
@@ -137,12 +139,13 @@ export default class XcodeGenPlugin extends Plugin {
       testTargetName,
       carthageFrameworks.applicationDependencies
     )
-    yamlConfiguration.targets[testTargetName] = this.createUnitTestConfiguration(
-      configuration,
-      testTargetName,
-      carthageFrameworks.testDependencies
-    )
-
+    if (this.includeUnitTestTarget) {
+      yamlConfiguration.targets[testTargetName] = this.createUnitTestConfiguration(
+        configuration,
+        testTargetName,
+        carthageFrameworks.testDependencies
+      )
+    }
     return yamlConfiguration
   }
 
@@ -167,6 +170,12 @@ export default class XcodeGenPlugin extends Plugin {
   async postExecute(configuration: any, destination: string) {
     const frameworkHandler = new CarthageFrameworkHandler()
     const carthageFrameworks = await frameworkHandler.retrieveDependencies(destination)
+    if (carthageFrameworks.applicationDependencies.length == 1) {
+      await frameworkHandler.replaceTestDriveImport(
+        carthageFrameworks.applicationDependencies[0].carthage,
+        destination
+      )
+    }
     this.writeProjectConfiguration(configuration, destination, carthageFrameworks)
 
     console.log('🛠 Generating Xcode project...')

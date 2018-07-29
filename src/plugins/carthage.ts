@@ -5,10 +5,12 @@ import * as copy from 'recursive-copy'
 
 export default class CarthagePlugin extends Plugin {
   skipInstall: boolean
+  pluginDirectory: string
 
-  constructor(skipInstall: boolean) {
+  constructor(skipInstall: boolean, pluginDirectory: string) {
     super()
     this.skipInstall = skipInstall
+    this.pluginDirectory = pluginDirectory
   }
 
   private fetchDependencies(destination: string) {

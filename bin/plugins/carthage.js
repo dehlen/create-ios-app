@@ -51,9 +51,10 @@ var path_1 = require("path");
 var copy = require("recursive-copy");
 var CarthagePlugin = /** @class */ (function (_super) {
     __extends(CarthagePlugin, _super);
-    function CarthagePlugin(skipInstall) {
+    function CarthagePlugin(skipInstall, pluginDirectory) {
         var _this = _super.call(this) || this;
         _this.skipInstall = skipInstall;
+        _this.pluginDirectory = pluginDirectory;
         return _this;
     }
     CarthagePlugin.prototype.fetchDependencies = function (destination) {

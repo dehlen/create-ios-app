@@ -52,8 +52,10 @@ var stringUtil_1 = require("../stringUtil");
 var replace = require("regex-replace");
 var SwiftFormatPlugin = /** @class */ (function (_super) {
     __extends(SwiftFormatPlugin, _super);
-    function SwiftFormatPlugin() {
-        return _super.call(this) || this;
+    function SwiftFormatPlugin(pluginDirectory) {
+        var _this = _super.call(this) || this;
+        _this.pluginDirectory = pluginDirectory;
+        return _this;
     }
     SwiftFormatPlugin.prototype.questions = function () {
         return [

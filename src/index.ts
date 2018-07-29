@@ -4,7 +4,7 @@ import * as program from 'commander'
 import { homedir } from 'os'
 import packageVersion from './actions/packageVersion'
 import handleInit from './actions/initAction'
-
+import handleTestDrive from './actions/testDriveAction'
 const main = async () => {
   program.version(await packageVersion())
   program
@@ -16,6 +16,15 @@ const main = async () => {
       const destination = args.destination || homedir()
       const skipInstall = args.skipInstall || false
       handleInit(name, destination, skipInstall)
+    })
+
+  program
+    .command('testdrive <name> <carthageFramework>')
+    .description('Scaffold a new project with the given carthage framework')
+    .option('-d, --destination <destination>', 'Set output destination of generated project')
+    .action((name: string, carthageFramework: string, args: any) => {
+      const destination = args.destination || homedir()
+      handleTestDrive(name, destination, carthageFramework)
     })
 
   program.parse(process.argv)
