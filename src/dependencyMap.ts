@@ -82,6 +82,27 @@ const dependencies: Array<FrameworkNameMap> = [
     isTestDependency: false,
     description: 'Transitions',
     initiallySelected: false
+  },
+  {
+    value: 'IBAnimatable/IBAnimatable',
+    frameworkName: 'IBAnimatable',
+    isTestDependency: false,
+    description: 'Animations',
+    initiallySelected: false
+  },
+  {
+    value: 'pmusolino/Wormholy',
+    frameworkName: 'Wormholy',
+    isTestDependency: false,
+    description: 'Network Debugging Tool',
+    initiallySelected: false
+  },
+  {
+    value: 'remirobert/Dotzu',
+    frameworkName: 'Dozu',
+    isTestDependency: false,
+    description: 'Debug Menu & Crash Reporting',
+    initiallySelected: false
   }
 ]
 
