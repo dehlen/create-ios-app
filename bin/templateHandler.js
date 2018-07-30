@@ -36,6 +36,8 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var copy = require("recursive-copy");
+var fs_extra_1 = require("fs-extra");
+var path_1 = require("path");
 var TemplateHandler = /** @class */ (function () {
     function TemplateHandler(templateDirectory) {
         this.templateDirectory = templateDirectory;
@@ -57,6 +59,58 @@ var TemplateHandler = /** @class */ (function () {
                 }
             });
         });
+    };
+    TemplateHandler.prototype.readConfiguration = function (templateFileDirectory) {
+        return __awaiter(this, void 0, void 0, function () {
+            var file, configuration, err_1;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        file = path_1.join(path_1.resolve(__dirname, '..', templateFileDirectory), 'template.json');
+                        return [4 /*yield*/, fs_extra_1.readJson(file)];
+                    case 1:
+                        configuration = _a.sent();
+                        if (this.validateConfiguration(configuration)) {
+                            return [2 /*return*/, configuration];
+                        }
+                        else {
+                            console.log('The template file is invalid because keys are missing.');
+                            console.log('Therefore the normal setup will be presented to you.');
+                        }
+                        return [3 /*break*/, 3];
+                    case 2:
+                        err_1 = _a.sent();
+                        console.log('Could not read template file');
+                        console.log('Therefore the normal setup will be presented to you.');
+                        return [3 /*break*/, 3];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    TemplateHandler.prototype.validateConfiguration = function (configuration) {
+        if (configuration.hasOwnProperty('name') &&
+            configuration.hasOwnProperty('organization') &&
+            configuration.hasOwnProperty('bundleIdPrefix') &&
+            configuration.hasOwnProperty('deploymentTarget') &&
+            configuration.hasOwnProperty('tabBased') &&
+            configuration.hasOwnProperty('tabs') &&
+            configuration.hasOwnProperty('swiftformat') &&
+            configuration.hasOwnProperty('swiftlint') &&
+            configuration.hasOwnProperty('fastlane') &&
+            configuration.hasOwnProperty('swiftgen') &&
+            configuration.hasOwnProperty('network') &&
+            configuration.hasOwnProperty('logging') &&
+            configuration.hasOwnProperty('analytics') &&
+            configuration.hasOwnProperty('theming') &&
+            configuration.hasOwnProperty('testDependencies') &&
+            configuration.hasOwnProperty('dependencies') &&
+            configuration.hasOwnProperty('editDependencies') &&
+            configuration.hasOwnProperty('repositoryURL')) {
+            return true;
+        }
+        return false;
     };
     return TemplateHandler;
 }());

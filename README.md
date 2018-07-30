@@ -14,6 +14,10 @@ A command line interface to create an iOS Boilerplate Xcode project
 
 For further help call: ```create-ios-app --help```
 
+There is also the possibility to shorten the project generation by providing a template.json file. A sample can be found in this repository `sample_template.json`. It is necessary that this file is called `template.json` since the project will look for a file by that convention in the given template path. Also all keys of this file are mandatory. You can then use
+``` create-ios-app init <projectName> --destination <projectDestination> --template <templateDirector>``` to skip the setup question.
+
+Both commands can also be prependend with the ```--skipInstall``` option in order to skip the build of the chosen Carthage dependencies.
 ## Created Xcode project
 If you enabled fastlane support in the setup a sample configuration is copied to your generated Xcode project.
 You can run all available options via ```bundle exec fastlane ios <action>```.

@@ -12,10 +12,15 @@ const main = async () => {
     .description('Scaffold a new project with the given name')
     .option('-d, --destination <destination>', 'Set output destination of generated project')
     .option('-s, --skipInstall', 'Skip installation of dependencies and only fetch them')
+    .option(
+      '-t, --template <templateFileDirectory>',
+      'Directory to an optional template.json file to skip setup question with a prebuild configuration'
+    )
     .action((name: string, args: any) => {
       const destination = args.destination || homedir()
       const skipInstall = args.skipInstall || false
-      handleInit(name, destination, skipInstall)
+      const templateFileDirectory = args.template || undefined
+      handleInit(name, destination, skipInstall, templateFileDirectory)
     })
 
   program

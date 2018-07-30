@@ -37,6 +37,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 var _this = this;
 Object.defineProperty(exports, "__esModule", { value: true });
 var path_1 = require("path");
+var isEmpty = require("is-empty");
 var generator_1 = require("../generator");
 var name_1 = require("../plugins/name");
 var organization_1 = require("../plugins/organization");
@@ -64,7 +65,7 @@ var openXcodeProject_1 = require("../plugins/openXcodeProject");
 var fetchLicenses_1 = require("../plugins/fetchLicenses");
 var bootstrap_1 = require("../plugins/bootstrap");
 var swiftformat_1 = require("../plugins/swiftformat");
-exports.default = (function (name, destination, skipInstall) { return __awaiter(_this, void 0, void 0, function () {
+exports.default = (function (name, destination, skipInstall, templateFileDirectory) { return __awaiter(_this, void 0, void 0, function () {
     var projectPath, generator, templateHandler, directoryHandler, pluginDirectory, configuration;
     return __generator(this, function (_a) {
         switch (_a.label) {
@@ -103,14 +104,22 @@ exports.default = (function (name, destination, skipInstall) { return __awaiter(
                 return [4 /*yield*/, directoryHandler.handleProjectFolderGeneration(projectPath)];
             case 1:
                 _a.sent();
-                return [4 /*yield*/, generator.ask()];
+                if (!!isEmpty(templateFileDirectory)) return [3 /*break*/, 3];
+                return [4 /*yield*/, templateHandler.readConfiguration(templateFileDirectory)];
             case 2:
                 configuration = _a.sent();
-                return [4 /*yield*/, templateHandler.copyTo(projectPath, configuration)];
+                _a.label = 3;
             case 3:
+                if (!isEmpty(configuration)) return [3 /*break*/, 5];
+                return [4 /*yield*/, generator.ask()];
+            case 4:
+                configuration = _a.sent();
+                _a.label = 5;
+            case 5: return [4 /*yield*/, templateHandler.copyTo(projectPath, configuration)];
+            case 6:
                 _a.sent();
                 return [4 /*yield*/, generator.run(configuration)];
-            case 4:
+            case 7:
                 _a.sent();
                 return [2 /*return*/];
         }

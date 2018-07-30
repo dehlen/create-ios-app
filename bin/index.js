@@ -56,10 +56,16 @@ var main = function () { return __awaiter(_this, void 0, void 0, function () {
                     .description('Scaffold a new project with the given name')
                     .option('-d, --destination <destination>', 'Set output destination of generated project')
                     .option('-s, --skipInstall', 'Skip installation of dependencies and only fetch them')
+                    .option('-t, --template <templateFileDirectory>', 'Directory to an optional template.json file to skip setup question with a prebuild configuration')
                     .action(function (name, args) {
                     var destination = args.destination || os_1.homedir();
                     var skipInstall = args.skipInstall || false;
-                    initAction_1.default(name, destination, skipInstall);
+                    var templateFileDirectory = args.template || undefined;
+                    console.log(destination);
+                    console.log(skipInstall);
+                    console.log(templateFileDirectory);
+                    console.log(name);
+                    initAction_1.default(name, destination, skipInstall, templateFileDirectory);
                 });
                 program
                     .command('testdrive <name> <carthageFramework>')

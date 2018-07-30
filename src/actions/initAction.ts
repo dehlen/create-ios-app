@@ -1,4 +1,5 @@
 import { join } from 'path'
+import isEmpty = require('is-empty')
 
 import Generator from '../generator'
 import NamePlugin from '../plugins/name'
@@ -28,7 +29,12 @@ import FetchLicensesPlugin from '../plugins/fetchLicenses'
 import BootstrapPlugin from '../plugins/bootstrap'
 import SwiftFormatPlugin from '../plugins/swiftformat'
 
-export default async (name: string, destination: string, skipInstall: boolean) => {
+export default async (
+  name: string,
+  destination: string,
+  skipInstall: boolean,
+  templateFileDirectory: string
+) => {
   const projectPath = join(destination, name)
 
   const generator = new Generator(name, projectPath, skipInstall)
@@ -64,7 +70,16 @@ export default async (name: string, destination: string, skipInstall: boolean) =
   ])
 
   await directoryHandler.handleProjectFolderGeneration(projectPath)
-  const configuration = await generator.ask()
+
+  let configuration: any
+  if (!isEmpty(templateFileDirectory)) {
+    configuration = await templateHandler.readConfiguration(templateFileDirectory)
+  }
+
+  if (isEmpty(configuration)) {
+    configuration = await generator.ask()
+  }
+
   await templateHandler.copyTo(projectPath, configuration)
   await generator.run(configuration)
 }

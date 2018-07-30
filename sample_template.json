@@ -1,0 +1,20 @@
+{
+    "name": "TestDrive",
+    "organization": "",
+    "bundleIdPrefix": "com.domain",
+    "deploymentTarget": "11.4",
+    "tabBased": false,
+    "tabs": [""],
+    "swiftformat": false,
+    "swiftlint": false,
+    "fastlane": false,
+    "swiftgen": false,
+    "network": false,
+    "logging": false,
+    "analytics": false,
+    "theming": false,
+    "testDependencies": [],
+    "dependencies": [],
+    "editDependencies": false,
+    "repositoryURL": ""
+  }
