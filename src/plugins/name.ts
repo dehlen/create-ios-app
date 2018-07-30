@@ -31,7 +31,9 @@ export default class NamePlugin extends Plugin {
     const filesToMove: Array<string> = [
       join(destination, '{PROJECT_NAME}'),
       join(destination, '{PROJECT_NAME}Tests'),
-      join(destination, this.projectName + 'Tests', '{PROJECT_NAME}Tests.swift')
+      join(destination, this.projectName + 'Tests', '{PROJECT_NAME}Tests.swift'),
+      join(destination, '{PROJECT_NAME}UITests'),
+      join(destination, this.projectName + 'UITests', '{PROJECT_NAME}UITests.swift')
     ]
 
     const directoryHandler = new DirectoryHandler()

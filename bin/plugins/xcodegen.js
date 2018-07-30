@@ -54,10 +54,11 @@ var carthageFrameworkHandler_1 = require("../carthageFrameworkHandler");
 var isEmpty = require("is-empty");
 var XcodeGenPlugin = /** @class */ (function (_super) {
     __extends(XcodeGenPlugin, _super);
-    function XcodeGenPlugin(name, includeUnitTestTarget) {
+    function XcodeGenPlugin(name, includeUnitTestTarget, includeUITestTarget) {
         var _this = _super.call(this) || this;
         _this.name = name;
         _this.includeUnitTestTarget = includeUnitTestTarget;
+        _this.includeUITestTarget = includeUITestTarget;
         return _this;
     }
     XcodeGenPlugin.prototype.questions = function () {
@@ -84,6 +85,27 @@ var XcodeGenPlugin = /** @class */ (function (_super) {
         };
         testTargetConfiguration.dependencies = carthageFrameworks;
         return testTargetConfiguration;
+    };
+    XcodeGenPlugin.prototype.createUITestConfiguration = function (configuration, uiTestTargetName) {
+        var uiTestTargetConfiguration = {
+            platform: 'iOS',
+            type: 'bundle.ui-testing',
+            configFiles: {
+                Debug: 'Configurations/Tests.xcconfig',
+                Release: 'Configurations/Tests.xcconfig'
+            },
+            sources: uiTestTargetName,
+            dependencies: [
+                {
+                    target: this.name
+                }
+            ],
+            scheme: {
+                testTargets: [uiTestTargetName],
+                gatherCoverageData: true
+            }
+        };
+        return uiTestTargetConfiguration;
     };
     XcodeGenPlugin.prototype.createPostBuildScripts = function (configuration) {
         var scripts = [];
@@ -153,6 +175,10 @@ var XcodeGenPlugin = /** @class */ (function (_super) {
         yamlConfiguration.targets[this.name] = this.createApplicationConfiguration(configuration, testTargetName, carthageFrameworks.applicationDependencies);
         if (this.includeUnitTestTarget) {
             yamlConfiguration.targets[testTargetName] = this.createUnitTestConfiguration(configuration, testTargetName, carthageFrameworks.testDependencies);
+        }
+        if (this.includeUITestTarget) {
+            var uiTestTargetName = this.name + 'UITests';
+            yamlConfiguration.targets[uiTestTargetName] = this.createUITestConfiguration(configuration, uiTestTargetName);
         }
         return yamlConfiguration;
     };

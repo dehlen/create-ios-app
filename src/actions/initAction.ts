@@ -58,7 +58,7 @@ export default async (name: string, destination: string, skipInstall: boolean) =
     new CuratedDependencyPlugin(),
     new DependencyEditorPlugin(),
     new FetchLicensesPlugin(pluginDirectory, true),
-    new XcodeGenPlugin(name, true),
+    new XcodeGenPlugin(name, true, true),
     new GitHandlerPlugin(),
     new OpenXcodeProjectPlugin()
   ])

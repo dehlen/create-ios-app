@@ -96,7 +96,7 @@ exports.default = (function (name, destination, skipInstall) { return __awaiter(
                     new curatedDependency_1.default(),
                     new dependencyEditor_1.default(),
                     new fetchLicenses_1.default(pluginDirectory, true),
-                    new xcodegen_1.default(name, true),
+                    new xcodegen_1.default(name, true, true),
                     new gitHandler_1.default(),
                     new openXcodeProject_1.default()
                 ]);

@@ -83,7 +83,9 @@ var NamePlugin = /** @class */ (function (_super) {
                         filesToMove = [
                             path_1.join(destination, '{PROJECT_NAME}'),
                             path_1.join(destination, '{PROJECT_NAME}Tests'),
-                            path_1.join(destination, this.projectName + 'Tests', '{PROJECT_NAME}Tests.swift')
+                            path_1.join(destination, this.projectName + 'Tests', '{PROJECT_NAME}Tests.swift'),
+                            path_1.join(destination, '{PROJECT_NAME}UITests'),
+                            path_1.join(destination, this.projectName + 'UITests', '{PROJECT_NAME}UITests.swift')
                         ];
                         directoryHandler = new directoryHandler_1.default();
                         _i = 0, filesToMove_1 = filesToMove;

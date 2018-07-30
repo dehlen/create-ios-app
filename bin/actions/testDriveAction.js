@@ -93,7 +93,7 @@ exports.default = (function (name, destination, carthageFramework) { return __aw
                     new curatedDependency_1.default(),
                     new dependencyEditor_1.default(),
                     new fetchLicenses_1.default(pluginDirectory, false),
-                    new xcodegen_1.default(name, false),
+                    new xcodegen_1.default(name, false, false),
                     new openXcodeProject_1.default()
                 ]);
                 return [4 /*yield*/, directoryHandler.handleProjectFolderGeneration(projectPath)];

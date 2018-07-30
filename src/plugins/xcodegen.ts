@@ -9,10 +9,13 @@ import isEmpty = require('is-empty')
 export default class XcodeGenPlugin extends Plugin {
   name: string
   includeUnitTestTarget: boolean
-  constructor(name: string, includeUnitTestTarget: boolean) {
+  includeUITestTarget: boolean
+
+  constructor(name: string, includeUnitTestTarget: boolean, includeUITestTarget: boolean) {
     super()
     this.name = name
     this.includeUnitTestTarget = includeUnitTestTarget
+    this.includeUITestTarget = includeUITestTarget
   }
 
   questions(): Array<Prompt.PromptParameter> {
@@ -46,6 +49,29 @@ export default class XcodeGenPlugin extends Plugin {
     testTargetConfiguration.dependencies = carthageFrameworks
 
     return testTargetConfiguration
+  }
+
+  private createUITestConfiguration(configuration: any, uiTestTargetName: string) {
+    const uiTestTargetConfiguration: any = {
+      platform: 'iOS',
+      type: 'bundle.ui-testing',
+      configFiles: {
+        Debug: 'Configurations/Tests.xcconfig',
+        Release: 'Configurations/Tests.xcconfig'
+      },
+      sources: uiTestTargetName,
+      dependencies: [
+        {
+          target: this.name
+        }
+      ],
+      scheme: {
+        testTargets: [uiTestTargetName],
+        gatherCoverageData: true
+      }
+    }
+
+    return uiTestTargetConfiguration
   }
 
   private createPostBuildScripts(configuration: any): Array<RunScriptPhase> {
@@ -139,6 +165,7 @@ export default class XcodeGenPlugin extends Plugin {
       testTargetName,
       carthageFrameworks.applicationDependencies
     )
+
     if (this.includeUnitTestTarget) {
       yamlConfiguration.targets[testTargetName] = this.createUnitTestConfiguration(
         configuration,
@@ -146,6 +173,16 @@ export default class XcodeGenPlugin extends Plugin {
         carthageFrameworks.testDependencies
       )
     }
+
+    if (this.includeUITestTarget) {
+      const uiTestTargetName = this.name + 'UITests'
+
+      yamlConfiguration.targets[uiTestTargetName] = this.createUITestConfiguration(
+        configuration,
+        uiTestTargetName
+      )
+    }
+
     return yamlConfiguration
   }
 

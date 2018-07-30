@@ -55,7 +55,7 @@ export default async (name: string, destination: string, carthageFramework: stri
     new CuratedDependencyPlugin(),
     new DependencyEditorPlugin(),
     new FetchLicensesPlugin(pluginDirectory, false),
-    new XcodeGenPlugin(name, false),
+    new XcodeGenPlugin(name, false, false),
     new OpenXcodeProjectPlugin()
   ])
 
