@@ -18,6 +18,14 @@ There is also the possibility to shorten the project generation by providing a t
 ``` create-ios-app init <projectName> --destination <projectDestination> --template <templateDirector>``` to skip the setup question.
 
 Both commands can also be prependend with the ```--skipInstall``` option in order to skip the build of the chosen Carthage dependencies.
+
+
+## Test Drive
+Sometimes you want to quickly try out a certain dependency. For this use case the command ```testdrive``` is available. This command expects you to provide a single Carthage compatible dependency. A project is generated with exactly that dependency so you can quickly try out your ideas before embedding a dependency in your main project.  To use this feature simply run
+```create-ios-app testdrive <projectName> <carthageFramework> --destination <projectDestination>```.
+The Carthage framework should be the exact github name of this dependency like: ```mxcl/PromiseKit```. 
+
+
 ## Created Xcode project
 If you enabled fastlane support in the setup a sample configuration is copied to your generated Xcode project.
 You can run all available options via ```bundle exec fastlane ios <action>```.
