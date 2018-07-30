@@ -61,6 +61,7 @@ var directoryHandler_1 = require("../directoryHandler");
 var openXcodeProject_1 = require("../plugins/openXcodeProject");
 var bootstrap_1 = require("../plugins/bootstrap");
 var swiftformat_1 = require("../plugins/swiftformat");
+var fetchLicenses_1 = require("../plugins/fetchLicenses");
 exports.default = (function (name, destination, carthageFramework) { return __awaiter(_this, void 0, void 0, function () {
     var projectPath, generator, templateHandler, directoryHandler, pluginDirectory, configuration;
     return __generator(this, function (_a) {
@@ -91,6 +92,7 @@ exports.default = (function (name, destination, carthageFramework) { return __aw
                     new themingDependency_1.default(),
                     new curatedDependency_1.default(),
                     new dependencyEditor_1.default(),
+                    new fetchLicenses_1.default(pluginDirectory, false),
                     new xcodegen_1.default(name, false),
                     new openXcodeProject_1.default()
                 ]);

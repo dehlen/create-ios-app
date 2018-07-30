@@ -49,8 +49,16 @@ export default class SwiftGenPlugin extends Plugin {
   async postExecute(configuration: any, destination: string) {
     const stringUtil = new StringUtility()
     await replace(
-      '{SWIFTGEN_MINT}',
+      '{SWIFTGEN_MINT}\n',
       configuration.swiftgen ? 'swiftgen/swiftgen@master' : '',
+      stringUtil.removeTrailingSlash(destination)
+    )
+
+    await replace(
+      '{SWIFTGEN_SCRIPT}\n',
+      configuration.swiftgen
+        ? '* swiftgen.sh: generates enum for type safe access of your localization and image assets\n'
+        : '',
       stringUtil.removeTrailingSlash(destination)
     )
 

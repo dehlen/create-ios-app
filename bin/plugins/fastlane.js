@@ -49,6 +49,8 @@ var plugin_1 = require("../plugin");
 var copy = require("recursive-copy");
 var path_1 = require("path");
 var shelljs_1 = require("shelljs");
+var stringUtil_1 = require("../stringUtil");
+var replace = require("regex-replace");
 var FastlanePlugin = /** @class */ (function (_super) {
     __extends(FastlanePlugin, _super);
     function FastlanePlugin(pluginDirectory) {
@@ -110,12 +112,22 @@ var FastlanePlugin = /** @class */ (function (_super) {
     };
     FastlanePlugin.prototype.postExecute = function (configuration, destination) {
         return __awaiter(this, void 0, void 0, function () {
+            var stringUtil;
             return __generator(this, function (_a) {
-                if (configuration.fastlane) {
-                    console.log('Installing ruby gems needed for fastlane configuration');
-                    shelljs_1.exec('cd ' + destination + ' && bundle install --path vendor/bundle', { silent: true });
+                switch (_a.label) {
+                    case 0:
+                        stringUtil = new stringUtil_1.default();
+                        return [4 /*yield*/, replace('{FASTLANE_README}\n', configuration.fastlane
+                                ? "## Fastlane\n      You can run all available options via `bundle exec fastlane ios <action>`.\n      Possible actions are:\n      * version_bump patch/minor/major: Increment the version of your app\n      * tests: Run test target\n      * lint : Lint via swiftlint if a configuration is specified. This is only added if you enabled swiftlint support.\n      * beta : Increment build number and build the app\n"
+                                : '', stringUtil.removeTrailingSlash(destination))];
+                    case 1:
+                        _a.sent();
+                        if (configuration.fastlane) {
+                            console.log('Installing ruby gems needed for fastlane configuration');
+                            shelljs_1.exec('cd ' + destination + ' && bundle install --path vendor/bundle', { silent: true });
+                        }
+                        return [2 /*return*/];
                 }
-                return [2 /*return*/];
             });
         });
     };

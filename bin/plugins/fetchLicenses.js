@@ -49,10 +49,13 @@ var plugin_1 = require("../plugin");
 var copy = require("recursive-copy");
 var path_1 = require("path");
 var shelljs_1 = require("shelljs");
+var stringUtil_1 = require("../stringUtil");
+var replace = require("regex-replace");
 var FetchLicensesPlugin = /** @class */ (function (_super) {
     __extends(FetchLicensesPlugin, _super);
-    function FetchLicensesPlugin(pluginDirectory) {
+    function FetchLicensesPlugin(pluginDirectory, shouldExecute) {
         var _this = _super.call(this) || this;
+        _this.shouldExecute = shouldExecute;
         _this.pluginDirectory = pluginDirectory;
         return _this;
     }
@@ -65,6 +68,7 @@ var FetchLicensesPlugin = /** @class */ (function (_super) {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
+                        if (!this.shouldExecute) return [3 /*break*/, 2];
                         fetchLicensesScriptPath = path_1.join(this.pluginDirectory, 'scripts', 'fetch-licenses.sh');
                         return [4 /*yield*/, copy(fetchLicensesScriptPath, path_1.join(destination, 'scripts', 'fetch-licenses.sh'), {
                                 overwrite: true,
@@ -74,16 +78,29 @@ var FetchLicensesPlugin = /** @class */ (function (_super) {
                             })];
                     case 1:
                         _a.sent();
-                        return [2 /*return*/];
+                        _a.label = 2;
+                    case 2: return [2 /*return*/];
                 }
             });
         });
     };
     FetchLicensesPlugin.prototype.postExecute = function (configuration, destination) {
         return __awaiter(this, void 0, void 0, function () {
+            var stringUtil;
             return __generator(this, function (_a) {
-                shelljs_1.exec('cd ' + destination + ' && ./scripts/fetch-licenses.sh');
-                return [2 /*return*/];
+                switch (_a.label) {
+                    case 0:
+                        stringUtil = new stringUtil_1.default();
+                        return [4 /*yield*/, replace('{FETCH_LICENSES_SCRIPT}\n', this.shouldExecute
+                                ? '* fetch-licenses.sh: Fetches license information for all Carthage dependencies and adds them to a library screen in the about page of the app\n'
+                                : '', stringUtil.removeTrailingSlash(destination))];
+                    case 1:
+                        _a.sent();
+                        if (this.shouldExecute) {
+                            shelljs_1.exec('cd ' + destination + ' && ./scripts/fetch-licenses.sh');
+                        }
+                        return [2 /*return*/];
+                }
             });
         });
     };

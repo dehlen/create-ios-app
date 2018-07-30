@@ -108,8 +108,13 @@ var SwiftGenPlugin = /** @class */ (function (_super) {
                 switch (_a.label) {
                     case 0:
                         stringUtil = new stringUtil_1.default();
-                        return [4 /*yield*/, replace('{SWIFTGEN_MINT}', configuration.swiftgen ? 'swiftgen/swiftgen@master' : '', stringUtil.removeTrailingSlash(destination))];
+                        return [4 /*yield*/, replace('{SWIFTGEN_MINT}\n', configuration.swiftgen ? 'swiftgen/swiftgen@master' : '', stringUtil.removeTrailingSlash(destination))];
                     case 1:
+                        _a.sent();
+                        return [4 /*yield*/, replace('{SWIFTGEN_SCRIPT}\n', configuration.swiftgen
+                                ? '* swiftgen.sh: generates enum for type safe access of your localization and image assets\n'
+                                : '', stringUtil.removeTrailingSlash(destination))];
+                    case 2:
                         _a.sent();
                         if (configuration.swiftgen) {
                             console.log('Generating SwiftGen content before creating the project...');

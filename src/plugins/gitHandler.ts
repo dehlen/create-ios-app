@@ -49,7 +49,7 @@ export default class GitHandlerPlugin extends Plugin {
     const gitPushCommand = isEmpty(configuration.repositoryURL) ? '' : 'push_to_git_remote'
     const stringUtil = new StringUtility()
     await replace(
-      '{GIT_PUSH_CONFIGURATION}',
+      '{GIT_PUSH_CONFIGURATION}\n',
       gitPushCommand,
       stringUtil.removeTrailingSlash(destination)
     )

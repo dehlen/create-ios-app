@@ -100,7 +100,7 @@ var GitHandlerPlugin = /** @class */ (function (_super) {
                         this.initRepository(destination, configuration.repositoryURL);
                         gitPushCommand = isEmpty(configuration.repositoryURL) ? '' : 'push_to_git_remote';
                         stringUtil = new stringUtil_1.default();
-                        return [4 /*yield*/, replace('{GIT_PUSH_CONFIGURATION}', gitPushCommand, stringUtil.removeTrailingSlash(destination))];
+                        return [4 /*yield*/, replace('{GIT_PUSH_CONFIGURATION}\n', gitPushCommand, stringUtil.removeTrailingSlash(destination))];
                     case 1:
                         _a.sent();
                         return [2 /*return*/];

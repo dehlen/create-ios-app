@@ -41,8 +41,14 @@ export default class SwiftFormatPlugin extends Plugin {
   async postExecute(configuration: any, destination: string) {
     const stringUtil = new StringUtility()
     await replace(
-      '{SWIFTFORMAT_MINT}',
+      '{SWIFTFORMAT_MINT}\n',
       configuration.swiftformat ? 'nicklockwood/SwiftFormat@0.33.13' : '',
+      stringUtil.removeTrailingSlash(destination)
+    )
+
+    await replace(
+      '{SWIFTFORMAT_SCRIPT}\n',
+      configuration.swiftgen ? '* swiftformat.sh: Formats your Swift code\n' : '',
       stringUtil.removeTrailingSlash(destination)
     )
   }

@@ -98,8 +98,11 @@ var SwiftFormatPlugin = /** @class */ (function (_super) {
                 switch (_a.label) {
                     case 0:
                         stringUtil = new stringUtil_1.default();
-                        return [4 /*yield*/, replace('{SWIFTFORMAT_MINT}', configuration.swiftformat ? 'nicklockwood/SwiftFormat@0.33.13' : '', stringUtil.removeTrailingSlash(destination))];
+                        return [4 /*yield*/, replace('{SWIFTFORMAT_MINT}\n', configuration.swiftformat ? 'nicklockwood/SwiftFormat@0.33.13' : '', stringUtil.removeTrailingSlash(destination))];
                     case 1:
+                        _a.sent();
+                        return [4 /*yield*/, replace('{SWIFTFORMAT_SCRIPT}\n', configuration.swiftgen ? '* swiftformat.sh: Formats your Swift code\n' : '', stringUtil.removeTrailingSlash(destination))];
+                    case 2:
                         _a.sent();
                         return [2 /*return*/];
                 }

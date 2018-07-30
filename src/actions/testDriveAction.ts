@@ -24,6 +24,7 @@ import DirectoryHandler from '../directoryHandler'
 import OpenXcodeProjectPlugin from '../plugins/openXcodeProject'
 import BootstrapPlugin from '../plugins/bootstrap'
 import SwiftFormatPlugin from '../plugins/swiftformat'
+import FetchLicensesPlugin from '../plugins/fetchLicenses'
 
 export default async (name: string, destination: string, carthageFramework: string) => {
   const projectPath = join(destination, name)
@@ -53,6 +54,7 @@ export default async (name: string, destination: string, carthageFramework: stri
     new ThemingDependencyPlugin(),
     new CuratedDependencyPlugin(),
     new DependencyEditorPlugin(),
+    new FetchLicensesPlugin(pluginDirectory, false),
     new XcodeGenPlugin(name, false),
     new OpenXcodeProjectPlugin()
   ])

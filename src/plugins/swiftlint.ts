@@ -55,11 +55,17 @@ export default class SwiftLintPlugin extends Plugin {
       : ''
 
     const stringUtil = new StringUtility()
-    await replace('{SWIFTLINT_LANE}', swiftlintLane, stringUtil.removeTrailingSlash(destination))
+    await replace('{SWIFTLINT_LANE}\n', swiftlintLane, stringUtil.removeTrailingSlash(destination))
 
     await replace(
-      '{SWIFTLINT_MINT}',
+      '{SWIFTLINT_MINT}\n',
       configuration.swiftlint ? 'realm/SwiftLint@0.26.0' : '',
+      stringUtil.removeTrailingSlash(destination)
+    )
+
+    await replace(
+      '{SWIFTLINT_SCRIPT}\n',
+      configuration.swiftgen ? '* swiftlint.sh: lints all your .swift files\n' : '',
       stringUtil.removeTrailingSlash(destination)
     )
   }
