@@ -112,7 +112,7 @@ export default class FastlanePlugin extends Plugin {
       const bundleIdentifier =
         stringUtil.removeTrailingDot(configuration.bundleIdPrefix) + '.' + this.name
       await replace(
-        '{}',
+        '{BETA_LANE}',
         `#### Build ####
   lane :beta do
     increment_build_number_in_plist(
