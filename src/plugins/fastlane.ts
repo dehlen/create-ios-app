@@ -52,14 +52,17 @@ export default class FastlanePlugin extends Plugin {
       const gemfilePath = join(this.pluginDirectory, 'Gemfile')
       const gemfileLockPath = join(this.pluginDirectory, 'Gemfile.lock')
 
+      const filter = ['**/*']
+      if (!configuration.match) {
+        filter.push('!**/*Matchfile')
+      }
       await copy(fastlanePath, join(destination, 'fastlane'), {
         overwrite: true,
         expand: true,
         dot: true,
         junk: true,
-        filter: ['**/*', '!**/fastlane/Matchfile']
+        filter: filter
       })
-
       await copy(gemfilePath, join(destination, 'Gemfile'), {
         overwrite: true,
         expand: true,
@@ -74,16 +77,6 @@ export default class FastlanePlugin extends Plugin {
         junk: true
       })
     }
-
-    if (configuration.match) {
-      const matchfilePath = join(this.pluginDirectory, 'fastlane', 'Matchfile')
-
-      await copy(matchfilePath, join(destination, 'fastlane', 'Matchfile'), {
-        overwrite: true,
-        expand: true,
-        dot: true,
-        junk: true
-      })
     }
   }
   async postExecute(configuration: any, destination: string) {
