@@ -98,13 +98,13 @@ export default class FastlanePlugin extends Plugin {
 
     if (configuration.match) {
       await replace(
-        '{MATCH_GIT_URL}\n',
+        '{MATCH_GIT_URL}',
         configuration.matchGitUrl,
         stringUtil.removeTrailingSlash(destination)
       )
 
       await replace(
-        '{MATCH_APPLE_DEVELOPER}\n',
+        '{MATCH_APPLE_DEVELOPER}',
         configuration.matchAppleDeveloper,
         stringUtil.removeTrailingSlash(destination)
       )
