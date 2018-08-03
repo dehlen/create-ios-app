@@ -77,12 +77,11 @@ export default class FastlanePlugin extends Plugin {
         junk: true
       })
     }
-    }
   }
   async postExecute(configuration: any, destination: string) {
     const stringUtil = new StringUtility()
     const betaString = configuration.match
-      ? '* beta : Increment build number and build the app'
+      ? '\n* beta : Increment build number and build the app'
       : ''
     await replace(
       '{FASTLANE_README}\n',
