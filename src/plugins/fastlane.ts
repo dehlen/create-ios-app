@@ -132,6 +132,7 @@ export default class FastlanePlugin extends Plugin {
             output_name: '${this.name}'
           )
       end`
+        stringUtil.removeTrailingSlash(destination)
       )
 
       console.log(`Since you configured match for your project you might need to update your Xcode project to Manual Code Signing
