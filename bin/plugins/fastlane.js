@@ -91,7 +91,7 @@ var FastlanePlugin = /** @class */ (function (_super) {
     };
     FastlanePlugin.prototype.execute = function (configuration, destination) {
         return __awaiter(this, void 0, void 0, function () {
-            var fastlanePath, gemfilePath, gemfileLockPath, matchfilePath;
+            var fastlanePath, gemfilePath, gemfileLockPath, filter;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -99,12 +99,16 @@ var FastlanePlugin = /** @class */ (function (_super) {
                         fastlanePath = path_1.join(this.pluginDirectory, 'fastlane');
                         gemfilePath = path_1.join(this.pluginDirectory, 'Gemfile');
                         gemfileLockPath = path_1.join(this.pluginDirectory, 'Gemfile.lock');
+                        filter = ['**/*'];
+                        if (!configuration.match) {
+                            filter.push('!**/*Matchfile');
+                        }
                         return [4 /*yield*/, copy(fastlanePath, path_1.join(destination, 'fastlane'), {
                                 overwrite: true,
                                 expand: true,
                                 dot: true,
                                 junk: true,
-                                filter: ['**/*', '!**/fastlane/Matchfile']
+                                filter: filter
                             })];
                     case 1:
                         _a.sent();
@@ -125,19 +129,7 @@ var FastlanePlugin = /** @class */ (function (_super) {
                     case 3:
                         _a.sent();
                         _a.label = 4;
-                    case 4:
-                        if (!configuration.match) return [3 /*break*/, 6];
-                        matchfilePath = path_1.join(this.pluginDirectory, 'fastlane', 'Matchfile');
-                        return [4 /*yield*/, copy(matchfilePath, path_1.join(destination, 'fastlane', 'Matchfile'), {
-                                overwrite: true,
-                                expand: true,
-                                dot: true,
-                                junk: true
-                            })];
-                    case 5:
-                        _a.sent();
-                        _a.label = 6;
-                    case 6: return [2 /*return*/];
+                    case 4: return [2 /*return*/];
                 }
             });
         });
@@ -150,7 +142,7 @@ var FastlanePlugin = /** @class */ (function (_super) {
                     case 0:
                         stringUtil = new stringUtil_1.default();
                         betaString = configuration.match
-                            ? '* beta : Increment build number and build the app'
+                            ? '\n* beta : Increment build number and build the app'
                             : '';
                         return [4 /*yield*/, replace('{FASTLANE_README}\n', configuration.fastlane
                                 ? "## Fastlane\n      You can run all available options via `bundle exec fastlane ios <action>`.\n      Possible actions are:\n      * version_bump patch/minor/major: Increment the version of your app\n      * tests: Run test target\n      * lint : Lint via swiftlint if a configuration is specified. This is only added if you enabled swiftlint support." + betaString + "\n"
@@ -158,14 +150,14 @@ var FastlanePlugin = /** @class */ (function (_super) {
                     case 1:
                         _a.sent();
                         if (!configuration.match) return [3 /*break*/, 5];
-                        return [4 /*yield*/, replace('{MATCH_GIT_URL}\n', configuration.matchGitUrl, stringUtil.removeTrailingSlash(destination))];
+                        return [4 /*yield*/, replace('{MATCH_GIT_URL}', configuration.matchGitUrl, stringUtil.removeTrailingSlash(destination))];
                     case 2:
                         _a.sent();
-                        return [4 /*yield*/, replace('{MATCH_APPLE_DEVELOPER}\n', configuration.matchAppleDeveloper, stringUtil.removeTrailingSlash(destination))];
+                        return [4 /*yield*/, replace('{MATCH_APPLE_DEVELOPER}', configuration.matchAppleDeveloper, stringUtil.removeTrailingSlash(destination))];
                     case 3:
                         _a.sent();
                         bundleIdentifier = stringUtil.removeTrailingDot(configuration.bundleIdPrefix) + '.' + this.name;
-                        return [4 /*yield*/, replace('{}', "#### Build ####\n        lane :beta do\n          increment_build_number_in_plist(\n            xcodeproj: './" + this.name + ".xcodeproj',\n            scheme: '" + this.name + "'\n          )\n          produce(\n            app_name: '" + this.name + "',\n            username: '" + configuration.matchAppleDeveloper + "',\n            app_identifier: '" + bundleIdentifier + "'\n          )\n          match(type: 'development')\n          gym(\n            clean: true,\n            scheme: '" + this.name + "',\n            configuration: 'Debug',\n            output_name: '" + this.name + "'\n          )\n      end")];
+                        return [4 /*yield*/, replace('{BETA_LANE}', "#### Build ####\n  lane :beta do\n    increment_build_number_in_plist(\n      xcodeproj: './" + this.name + ".xcodeproj',\n      scheme: '" + this.name + "'\n    )\n    produce(\n      app_name: '" + this.name + "',\n      username: '" + configuration.matchAppleDeveloper + "',\n      app_identifier: '" + bundleIdentifier + "'\n    )\n    match(type: 'appstore')\n    build_app(\n      scheme: '" + this.name + "',\n      configuration: 'Release'\n    )\n  end", stringUtil.removeTrailingSlash(destination))];
                     case 4:
                         _a.sent();
                         console.log("Since you configured match for your project you might need to update your Xcode project to Manual Code Signing\n      and update the targets provision profiles accordingly in order for the beta lane to work.");
