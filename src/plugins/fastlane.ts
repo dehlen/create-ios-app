@@ -114,24 +114,22 @@ export default class FastlanePlugin extends Plugin {
       await replace(
         '{}',
         `#### Build ####
-        lane :beta do
-          increment_build_number_in_plist(
-            xcodeproj: './${this.name}.xcodeproj',
-            scheme: '${this.name}'
-          )
-          produce(
-            app_name: '${this.name}',
-            username: '${configuration.matchAppleDeveloper}',
-            app_identifier: '${bundleIdentifier}'
-          )
-          match(type: 'development')
-          gym(
-            clean: true,
-            scheme: '${this.name}',
-            configuration: 'Debug',
-            output_name: '${this.name}'
-          )
-      end`
+  lane :beta do
+    increment_build_number_in_plist(
+      xcodeproj: './${this.name}.xcodeproj',
+      scheme: '${this.name}'
+    )
+    produce(
+      app_name: '${this.name}',
+      username: '${configuration.matchAppleDeveloper}',
+      app_identifier: '${bundleIdentifier}'
+    )
+    match(type: 'appstore')
+    build_app(
+      scheme: '${this.name}',
+      configuration: 'Release'
+    )
+  end`,
         stringUtil.removeTrailingSlash(destination)
       )
 
