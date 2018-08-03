@@ -50,7 +50,7 @@ export default class SwiftGenPlugin extends Plugin {
     const stringUtil = new StringUtility()
     await replace(
       '{SWIFTGEN_MINT}\n',
-      configuration.swiftgen ? 'swiftgen/swiftgen@master' : '',
+      configuration.swiftgen ? 'swiftgen/swiftgen@master\n' : '',
       stringUtil.removeTrailingSlash(destination)
     )
 

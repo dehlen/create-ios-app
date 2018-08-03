@@ -108,7 +108,7 @@ var SwiftGenPlugin = /** @class */ (function (_super) {
                 switch (_a.label) {
                     case 0:
                         stringUtil = new stringUtil_1.default();
-                        return [4 /*yield*/, replace('{SWIFTGEN_MINT}\n', configuration.swiftgen ? 'swiftgen/swiftgen@master' : '', stringUtil.removeTrailingSlash(destination))];
+                        return [4 /*yield*/, replace('{SWIFTGEN_MINT}\n', configuration.swiftgen ? 'swiftgen/swiftgen@master\n' : '', stringUtil.removeTrailingSlash(destination))];
                     case 1:
                         _a.sent();
                         return [4 /*yield*/, replace('{SWIFTGEN_SCRIPT}\n', configuration.swiftgen

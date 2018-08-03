@@ -107,13 +107,13 @@ var SwiftLintPlugin = /** @class */ (function (_super) {
                 switch (_a.label) {
                     case 0:
                         swiftlintLane = configuration.swiftlint
-                            ? "desc \"Check style and conventions\"\n    lane :lint do\n      swiftlint(strict: true)\n    end"
+                            ? "desc \"Check style and conventions\"\n    lane :lint do\n      swiftlint(strict: true)\n    end\n"
                             : '';
                         stringUtil = new stringUtil_1.default();
                         return [4 /*yield*/, replace('{SWIFTLINT_LANE}\n', swiftlintLane, stringUtil.removeTrailingSlash(destination))];
                     case 1:
                         _a.sent();
-                        return [4 /*yield*/, replace('{SWIFTLINT_MINT}\n', configuration.swiftlint ? 'realm/SwiftLint@0.26.0' : '', stringUtil.removeTrailingSlash(destination))];
+                        return [4 /*yield*/, replace('{SWIFTLINT_MINT}\n', configuration.swiftlint ? 'realm/SwiftLint@0.26.0\n' : '', stringUtil.removeTrailingSlash(destination))];
                     case 2:
                         _a.sent();
                         return [4 /*yield*/, replace('{SWIFTLINT_SCRIPT}\n', configuration.swiftgen ? '* swiftlint.sh: lints all your .swift files\n' : '', stringUtil.removeTrailingSlash(destination))];

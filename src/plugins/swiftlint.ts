@@ -51,7 +51,7 @@ export default class SwiftLintPlugin extends Plugin {
       ? `desc "Check style and conventions"
     lane :lint do
       swiftlint(strict: true)
-    end`
+    end\n`
       : ''
 
     const stringUtil = new StringUtility()
@@ -59,7 +59,7 @@ export default class SwiftLintPlugin extends Plugin {
 
     await replace(
       '{SWIFTLINT_MINT}\n',
-      configuration.swiftlint ? 'realm/SwiftLint@0.26.0' : '',
+      configuration.swiftlint ? 'realm/SwiftLint@0.26.0\n' : '',
       stringUtil.removeTrailingSlash(destination)
     )
 

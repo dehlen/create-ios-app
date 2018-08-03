@@ -42,7 +42,7 @@ export default class SwiftFormatPlugin extends Plugin {
     const stringUtil = new StringUtility()
     await replace(
       '{SWIFTFORMAT_MINT}\n',
-      configuration.swiftformat ? 'nicklockwood/SwiftFormat@0.33.13' : '',
+      configuration.swiftformat ? 'nicklockwood/SwiftFormat@0.33.13\n' : '',
       stringUtil.removeTrailingSlash(destination)
     )
 
