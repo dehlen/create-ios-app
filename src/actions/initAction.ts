@@ -54,7 +54,7 @@ export default async (
     new BootstrapPlugin(pluginDirectory),
     new SwiftFormatPlugin(pluginDirectory),
     new SwiftLintPlugin(pluginDirectory),
-    new FastlanePlugin(pluginDirectory),
+    new FastlanePlugin(pluginDirectory, name),
     new SwiftGenPlugin(pluginDirectory),
     new CarthagePlugin(skipInstall, pluginDirectory),
     new NetworkStackPlugin(),

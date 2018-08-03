@@ -83,7 +83,7 @@ exports.default = (function (name, destination, carthageFramework) { return __aw
                     new bootstrap_1.default(pluginDirectory),
                     new swiftformat_1.default(pluginDirectory),
                     new swiftlint_1.default(pluginDirectory),
-                    new fastlane_1.default(pluginDirectory),
+                    new fastlane_1.default(pluginDirectory, name),
                     new swiftgen_1.default(pluginDirectory),
                     new carthage_1.default(false, pluginDirectory),
                     new networkStack_1.default(),

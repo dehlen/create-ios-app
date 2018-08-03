@@ -61,10 +61,6 @@ var main = function () { return __awaiter(_this, void 0, void 0, function () {
                     var destination = args.destination || os_1.homedir();
                     var skipInstall = args.skipInstall || false;
                     var templateFileDirectory = args.template || undefined;
-                    console.log(destination);
-                    console.log(skipInstall);
-                    console.log(templateFileDirectory);
-                    console.log(name);
                     initAction_1.default(name, destination, skipInstall, templateFileDirectory);
                 });
                 program

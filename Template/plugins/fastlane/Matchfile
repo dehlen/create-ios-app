@@ -1,0 +1,9 @@
+git_url("{MATCH_GIT_URL}")
+
+type("development") # The default type, can be: appstore, adhoc, enterprise or development
+
+app_identifier(["{BUNDLE_IDENTIFIER_PREFIX}.{PROJECT_NAME}"])
+username("{MATCH_APPLE_DEVELOPER}") # Your Apple Developer Portal username
+
+# For all available options run `fastlane match --help`
+# Remove the # in the beginning of the line to enable the other options

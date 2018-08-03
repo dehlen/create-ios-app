@@ -22,7 +22,7 @@ platform :ios do
       bump_type: options[:type],
     )
 
-	git_commit(path: "./{PROJECT_NAME}/Info.plist", message: "Version bump to: #{version_number}")
+	  git_commit(path: "./{PROJECT_NAME}/Info.plist", message: "Version bump to: #{version_number}")
   	add_git_tag(tag: "#{version_number}")
   	{GIT_PUSH_CONFIGURATION}
 	end
@@ -35,13 +35,5 @@ platform :ios do
 
 	{SWIFTLINT_LANE}
 
-	#### Build ####
-	lane :beta do
-  	ensure_git_status_clean
-  	increment_build_number(xcodeproj: "{PROJECT_NAME}.xcodeproj")
-  	build_app(scheme: "{PROJECT_NAME}")
-  	commit_version_bump(xcodeproj: "{PROJECT_NAME}.xcodeproj")
-  	add_git_tag
-  	push_to_git_remote
-	end
+	{BETA_LANE} 
 end

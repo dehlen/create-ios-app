@@ -7,9 +7,12 @@ import * as replace from 'regex-replace'
 
 export default class FastlanePlugin extends Plugin {
   pluginDirectory: string
-  constructor(pluginDirectory: string) {
+  name: string
+
+  constructor(pluginDirectory: string, name: string) {
     super()
     this.pluginDirectory = pluginDirectory
+    this.name = name
   }
 
   questions(): Array<Prompt.PromptParameter> {
@@ -21,6 +24,25 @@ export default class FastlanePlugin extends Plugin {
         active: 'yes',
         inactive: 'no',
         initial: 'yes'
+      },
+      {
+        type: (prev: any) => prev && 'toggle',
+        name: 'match',
+        message: 'Should we add match for code signing support?',
+        active: 'yes',
+        inactive: 'no',
+        initial: 'yes'
+      },
+      {
+        type: (prev: any) => prev && 'text',
+        name: 'matchGitUrl',
+        message:
+          'Enter a git url to  a privat repository where your certificates and profile will be stored:'
+      },
+      {
+        type: (prev: any) => prev && 'text',
+        name: 'matchAppleDeveloper',
+        message: 'Enter the E-Mail address of your Apple Developer username:'
       }
     ]
   }
@@ -34,7 +56,8 @@ export default class FastlanePlugin extends Plugin {
         overwrite: true,
         expand: true,
         dot: true,
-        junk: true
+        junk: true,
+        filter: ['**/*', '!**/fastlane/Matchfile']
       })
 
       await copy(gemfilePath, join(destination, 'Gemfile'), {
@@ -51,9 +74,23 @@ export default class FastlanePlugin extends Plugin {
         junk: true
       })
     }
+
+    if (configuration.match) {
+      const matchfilePath = join(this.pluginDirectory, 'fastlane', 'Matchfile')
+
+      await copy(matchfilePath, join(destination, 'fastlane', 'Matchfile'), {
+        overwrite: true,
+        expand: true,
+        dot: true,
+        junk: true
+      })
+    }
   }
   async postExecute(configuration: any, destination: string) {
     const stringUtil = new StringUtility()
+    const betaString = configuration.match
+      ? '* beta : Increment build number and build the app'
+      : ''
     await replace(
       '{FASTLANE_README}\n',
       configuration.fastlane
@@ -62,11 +99,52 @@ export default class FastlanePlugin extends Plugin {
       Possible actions are:
       * version_bump patch/minor/major: Increment the version of your app
       * tests: Run test target
-      * lint : Lint via swiftlint if a configuration is specified. This is only added if you enabled swiftlint support.
-      * beta : Increment build number and build the app\n`
+      * lint : Lint via swiftlint if a configuration is specified. This is only added if you enabled swiftlint support.${betaString}\n`
         : '',
       stringUtil.removeTrailingSlash(destination)
     )
+
+    if (configuration.match) {
+      await replace(
+        '{MATCH_GIT_URL}\n',
+        configuration.matchGitUrl,
+        stringUtil.removeTrailingSlash(destination)
+      )
+
+      await replace(
+        '{MATCH_APPLE_DEVELOPER}\n',
+        configuration.matchAppleDeveloper,
+        stringUtil.removeTrailingSlash(destination)
+      )
+
+      const bundleIdentifier =
+        stringUtil.removeTrailingDot(configuration.bundleIdPrefix) + '.' + this.name
+      await replace(
+        '{}',
+        `#### Build ####
+        lane :beta do
+          increment_build_number_in_plist(
+            xcodeproj: './${this.name}.xcodeproj',
+            scheme: '${this.name}'
+          )
+          produce(
+            app_name: '${this.name}',
+            username: '${configuration.matchAppleDeveloper}',
+            app_identifier: '${bundleIdentifier}'
+          )
+          match(type: 'development')
+          gym(
+            clean: true,
+            scheme: '${this.name}',
+            configuration: 'Debug',
+            output_name: '${this.name}'
+          )
+      end`
+      )
+
+      console.log(`Since you configured match for your project you might need to update your Xcode project to Manual Code Signing
+      and update the targets provision profiles accordingly in order for the beta lane to work.`)
+    }
 
     if (configuration.fastlane) {
       console.log('Installing ruby gems needed for fastlane configuration')
