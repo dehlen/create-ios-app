@@ -125,6 +125,12 @@ export default class FastlanePlugin extends Plugin {
       app_identifier: '${bundleIdentifier}'
     )
     match(type: 'appstore')
+    automatic_code_signing(
+      use_automatic_signing: false,
+      profile_name: ENV['sigh_${bundleIdentifier}_appstore_profile-name'],
+      team_id: ENV['sigh_${bundleIdentifier}_appstore_team-id'],
+      code_sign_identity: 'iPhone Distribution'
+    )
     build_app(
       scheme: '${this.name}',
       configuration: 'Release'
