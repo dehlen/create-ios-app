@@ -50,7 +50,7 @@ export default async (
     new OrganizationPlugin(),
     new BundleIdPrefixPlugin(),
     new DeploymentTargetPlugin(),
-    new TabBasedAppPlugin(),
+    new TabBasedAppPlugin(pluginDirectory),
     new BootstrapPlugin(pluginDirectory),
     new SwiftFormatPlugin(pluginDirectory),
     new SwiftLintPlugin(pluginDirectory),

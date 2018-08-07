@@ -46,32 +46,125 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var plugin_1 = require("../plugin");
+var replace = require("regex-replace");
+var stringUtil_1 = require("../stringUtil");
+var copy = require("recursive-copy");
+var path_1 = require("path");
+var isEmpty = require("is-empty");
 var TabBasedAppPlugin = /** @class */ (function (_super) {
     __extends(TabBasedAppPlugin, _super);
-    function TabBasedAppPlugin() {
-        return _super.call(this) || this;
+    function TabBasedAppPlugin(pluginDirectory) {
+        var _this = _super.call(this) || this;
+        _this.pluginDirectory = pluginDirectory;
+        return _this;
     }
     TabBasedAppPlugin.prototype.questions = function () {
         return [
             {
-                type: 'toggle',
-                name: 'tabBased',
-                message: 'Is this a tab based app?',
-                active: 'yes',
-                inactive: 'no',
-                initial: 'yes'
-            },
-            {
-                type: function (prev) { return prev && 'list'; },
+                type: 'text',
                 name: 'tabs',
-                message: 'Enter names of tabs - Comma separated'
+                message: 'Enter names of tabs which should be added to the app other than the default home and about tab - Comma separated'
             }
         ];
     };
     TabBasedAppPlugin.prototype.execute = function (configuration, destination) {
         return __awaiter(this, void 0, void 0, function () {
+            var stringUtil, tabs, protocolFunctions, localizableStrings, storyboardCases, additionalTabFunctions, additionalTabStrings, _i, tabs_1, tab, tabClassesPath;
             return __generator(this, function (_a) {
-                return [2 /*return*/];
+                switch (_a.label) {
+                    case 0:
+                        stringUtil = new stringUtil_1.default();
+                        tabs = configuration.tabs
+                            .split(',')
+                            .map(function (tab) { return tab.trim(); })
+                            .filter(function (tab) { return !isEmpty(tab); });
+                        if (!(tabs.length > 0)) return [3 /*break*/, 15];
+                        console.log(tabs);
+                        console.log(tabs.length);
+                        protocolFunctions = tabs
+                            .map(function (tab) {
+                            return "func " + stringUtil.camelize(tab) + "() -> (UIViewController, " + stringUtil.capitalize(tab.toLowerCase()) + "ViewRouting)";
+                        })
+                            .join('\n');
+                        localizableStrings = tabs
+                            .map(function (tab) { return "\"" + stringUtil.camelize(tab) + "\" = \"" + stringUtil.capitalize(tab) + "\";"; })
+                            .join('\n');
+                        storyboardCases = tabs
+                            .map(function (tab) { return "case " + stringUtil.camelize(tab); })
+                            .join('\n');
+                        additionalTabFunctions = tabs
+                            .map(function (tab) { return stringUtil.camelize(tab) + "()"; })
+                            .join(', ');
+                        return [4 /*yield*/, replace('{ADDITIONAL_TAB_VIEWFACTORY_FUNCTIONS}\n', protocolFunctions, stringUtil.removeTrailingSlash(destination))];
+                    case 1:
+                        _a.sent();
+                        return [4 /*yield*/, replace('{ADDITIONAL_TAB_LOCALIZABLE_STRINGS}\n', localizableStrings, stringUtil.removeTrailingSlash(destination))];
+                    case 2:
+                        _a.sent();
+                        return [4 /*yield*/, replace('{ADDITIONAL_TAB_STORYBOARD_CASES}\n', storyboardCases, stringUtil.removeTrailingSlash(destination))];
+                    case 3:
+                        _a.sent();
+                        return [4 /*yield*/, replace('{ADDITIONAL_TAB_FUNCTIONS}', ", " + additionalTabFunctions, stringUtil.removeTrailingSlash(destination))];
+                    case 4:
+                        _a.sent();
+                        if (!!configuration.swiftgen) return [3 /*break*/, 6];
+                        additionalTabStrings = tabs
+                            .map(function (tab) {
+                            return "/// " + stringUtil.capitalize(stringUtil.camelize(tab)) + "\npublic static let " + stringUtil.camelize(tab) + " = L10n.tr(\"Localizable\", \"" + stringUtil.camelize(tab) + "\")";
+                        })
+                            .join('\n');
+                        return [4 /*yield*/, replace('{ADDITIONAL_TAB_STRINGS_WITHOUT_SWIFTGEN}\n', additionalTabStrings, stringUtil.removeTrailingSlash(destination))];
+                    case 5:
+                        _a.sent();
+                        return [3 /*break*/, 8];
+                    case 6: return [4 /*yield*/, replace('{ADDITIONAL_TAB_STRINGS_WITHOUT_SWIFTGEN}\n', '', stringUtil.removeTrailingSlash(destination))];
+                    case 7:
+                        _a.sent();
+                        _a.label = 8;
+                    case 8:
+                        _i = 0, tabs_1 = tabs;
+                        _a.label = 9;
+                    case 9:
+                        if (!(_i < tabs_1.length)) return [3 /*break*/, 14];
+                        tab = tabs_1[_i];
+                        tabClassesPath = path_1.join(this.pluginDirectory, '{TABNAME}');
+                        return [4 /*yield*/, copy(tabClassesPath, path_1.join(destination, '{PROJECT_NAME}', 'Features'), {
+                                overwrite: false,
+                                expand: true,
+                                dot: true,
+                                junk: true
+                            })];
+                    case 10:
+                        _a.sent();
+                        return [4 /*yield*/, replace('{TABNAME}', stringUtil.capitalize(stringUtil.camelize(tab)), stringUtil.removeTrailingSlash(destination))];
+                    case 11:
+                        _a.sent();
+                        return [4 /*yield*/, replace('{TABNAME_CAMEL_CASED}', stringUtil.camelize(tab), stringUtil.removeTrailingSlash(destination))];
+                    case 12:
+                        _a.sent();
+                        _a.label = 13;
+                    case 13:
+                        _i++;
+                        return [3 /*break*/, 9];
+                    case 14: return [3 /*break*/, 21];
+                    case 15: return [4 /*yield*/, replace('{ADDITIONAL_TAB_VIEWFACTORY_FUNCTIONS}\n', '', stringUtil.removeTrailingSlash(destination))];
+                    case 16:
+                        _a.sent();
+                        return [4 /*yield*/, replace('{ADDITIONAL_TAB_LOCALIZABLE_STRINGS}\n', '', stringUtil.removeTrailingSlash(destination))];
+                    case 17:
+                        _a.sent();
+                        return [4 /*yield*/, replace('{ADDITIONAL_TAB_STORYBOARD_CASES}\n', '', stringUtil.removeTrailingSlash(destination))];
+                    case 18:
+                        _a.sent();
+                        return [4 /*yield*/, replace('{ADDITIONAL_TAB_FUNCTIONS}', '', stringUtil.removeTrailingSlash(destination))];
+                    case 19:
+                        _a.sent();
+                        return [4 /*yield*/, replace('{ADDITIONAL_TAB_STRINGS_WITHOUT_SWIFTGEN}\n', '', stringUtil.removeTrailingSlash(destination))];
+                    case 20:
+                        _a.sent();
+                        _a.label = 21;
+                    case 21: return [2 /*return*/];
+                }
             });
         });
     };

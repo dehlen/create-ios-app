@@ -9,7 +9,7 @@ protocol CoordinatorFactory {
 
 final class ConcreteCoordinatorFactory {
 
-    fileprivate let viewFactory: ViewFactory
+    let viewFactory: ViewFactory
 
     init(viewFactory: ViewFactory) {
         self.viewFactory = viewFactory
@@ -24,7 +24,7 @@ extension ConcreteCoordinatorFactory: CoordinatorFactory {
     func tab() -> TabCoordinator {
         return ConcreteTabCoordinator(
             viewFactory: viewFactory,
-            childCoordinators: [home(), about()])
+            childCoordinators: [home(), about(){ADDITIONAL_TAB_FUNCTIONS}])
     }
 
     func home() -> HomeNavigationCoordinator {

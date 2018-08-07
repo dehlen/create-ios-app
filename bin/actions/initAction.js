@@ -83,7 +83,7 @@ exports.default = (function (name, destination, skipInstall, templateFileDirecto
                     new organization_1.default(),
                     new bundleIdPrefix_1.default(),
                     new deploymentTarget_1.default(),
-                    new tabBasedApp_1.default(),
+                    new tabBasedApp_1.default(pluginDirectory),
                     new bootstrap_1.default(pluginDirectory),
                     new swiftformat_1.default(pluginDirectory),
                     new swiftlint_1.default(pluginDirectory),

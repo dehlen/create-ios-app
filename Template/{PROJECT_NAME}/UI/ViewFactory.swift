@@ -4,6 +4,7 @@ protocol ViewFactory {
     func home() -> (UIViewController, HomeViewRouting)
     func about() -> (UIViewController, AboutViewRouting)
     func libraries() -> UIViewController
+    {ADDITIONAL_TAB_VIEWFACTORY_FUNCTIONS}
 }
 
 final class ConcreteViewFactory {

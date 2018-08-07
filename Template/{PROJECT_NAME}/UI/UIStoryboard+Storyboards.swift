@@ -7,6 +7,7 @@ extension UIStoryboard {
         case home
         case about
         case libraries
+        {ADDITIONAL_TAB_STORYBOARD_CASES}
 
         var filename: String {
             return rawValue.capitalized

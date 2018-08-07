@@ -16,6 +16,7 @@ public enum L10n {
     public static let libraries = L10n.tr("Localizable", "libraries")
     /// Settings
     public static let settings = L10n.tr("Localizable", "settings")
+    {ADDITIONAL_TAB_STRINGS_WITHOUT_SWIFTGEN}
 }
 
 // swiftlint:enable explicit_type_interface function_parameter_count identifier_name line_length
