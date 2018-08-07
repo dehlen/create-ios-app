@@ -30,9 +30,9 @@ export default class TabBasedAppPlugin extends Plugin {
       .split(',')
       .map((tab: string) => tab.trim())
       .filter((tab: string) => !isEmpty(tab))
+
     if (tabs.length > 0) {
-      console.log(tabs)
-      console.log(tabs.length)
+      console.log('Generating tabs...')
       const protocolFunctions: string = tabs
         .map(
           (tab: string) =>
@@ -123,6 +123,7 @@ export default class TabBasedAppPlugin extends Plugin {
           stringUtil.removeTrailingSlash(destination)
         )
       }
+      console.log(`Automagically added tabs: ${tabs.join(', ')} for you.`)
     } else {
       await replace(
         '{ADDITIONAL_TAB_VIEWFACTORY_FUNCTIONS}\n',
