@@ -79,8 +79,7 @@ var TabBasedAppPlugin = /** @class */ (function (_super) {
                             .map(function (tab) { return tab.trim(); })
                             .filter(function (tab) { return !isEmpty(tab); });
                         if (!(tabs.length > 0)) return [3 /*break*/, 15];
-                        console.log(tabs);
-                        console.log(tabs.length);
+                        console.log('Generating tabs...');
                         protocolFunctions = tabs
                             .map(function (tab) {
                             return "func " + stringUtil.camelize(tab) + "() -> (UIViewController, " + stringUtil.capitalize(tab.toLowerCase()) + "ViewRouting)";
@@ -146,7 +145,9 @@ var TabBasedAppPlugin = /** @class */ (function (_super) {
                     case 13:
                         _i++;
                         return [3 /*break*/, 9];
-                    case 14: return [3 /*break*/, 21];
+                    case 14:
+                        console.log("Automagically added tabs: " + tabs.join(', ') + " for you.");
+                        return [3 /*break*/, 21];
                     case 15: return [4 /*yield*/, replace('{ADDITIONAL_TAB_VIEWFACTORY_FUNCTIONS}\n', '', stringUtil.removeTrailingSlash(destination))];
                     case 16:
                         _a.sent();
