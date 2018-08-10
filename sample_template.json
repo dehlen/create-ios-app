@@ -3,7 +3,6 @@
     "organization": "",
     "bundleIdPrefix": "com.domain",
     "deploymentTarget": "11.4",
-    "tabBased": false,
     "tabs": [""],
     "swiftformat": false,
     "swiftlint": false,

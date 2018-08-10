@@ -65,7 +65,6 @@ export default async (name: string, destination: string, carthageFramework: stri
     organization: '',
     bundleIdPrefix: 'com.domain',
     deploymentTarget: '11.4',
-    tabBased: false,
     tabs: [''],
     swiftformat: false,
     swiftlint: false,
