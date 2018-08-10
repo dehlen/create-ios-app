@@ -45,28 +45,28 @@ export default class CarthagePlugin extends Plugin {
       overwrite: true,
       expand: true,
       dot: true,
-      junk: true
+      junk: false
     })
 
     await copy(cartfilePrivatePath, join(destination, 'Cartfile.private'), {
       overwrite: true,
       expand: true,
       dot: true,
-      junk: true
+      junk: false
     })
 
     await copy(buildDependenciesScriptPath, join(destination, 'scripts', 'build-dependencies.sh'), {
       overwrite: true,
       expand: true,
       dot: true,
-      junk: true
+      junk: false
     })
 
     await copy(fetchDependenciesScriptPath, join(destination, 'scripts', 'fetch-dependencies.sh'), {
       overwrite: true,
       expand: true,
       dot: true,
-      junk: true
+      junk: false
     })
   }
 

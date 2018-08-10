@@ -34,14 +34,14 @@ export default class SwiftLintPlugin extends Plugin {
         overwrite: true,
         expand: true,
         dot: true,
-        junk: true
+        junk: false
       })
 
       await copy(swiftlintScriptPath, join(destination, 'scripts', 'swiftlint.sh'), {
         overwrite: true,
         expand: true,
         dot: true,
-        junk: true
+        junk: false
       })
     }
   }

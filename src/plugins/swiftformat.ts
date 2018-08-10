@@ -33,7 +33,7 @@ export default class SwiftFormatPlugin extends Plugin {
         overwrite: true,
         expand: true,
         dot: true,
-        junk: true
+        junk: false
       })
     }
   }

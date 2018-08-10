@@ -21,7 +21,7 @@ export default class BootstrapPlugin extends Plugin {
       overwrite: true,
       expand: true,
       dot: true,
-      junk: true
+      junk: false
     })
   }
 

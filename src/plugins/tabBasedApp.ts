@@ -108,7 +108,7 @@ export default class TabBasedAppPlugin extends Plugin {
           overwrite: false,
           expand: true,
           dot: true,
-          junk: true
+          junk: false
         })
 
         await replace(

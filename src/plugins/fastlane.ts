@@ -60,21 +60,21 @@ export default class FastlanePlugin extends Plugin {
         overwrite: true,
         expand: true,
         dot: true,
-        junk: true,
+        junk: false,
         filter: filter
       })
       await copy(gemfilePath, join(destination, 'Gemfile'), {
         overwrite: true,
         expand: true,
         dot: true,
-        junk: true
+        junk: false
       })
 
       await copy(gemfileLockPath, join(destination, 'Gemfile.lock'), {
         overwrite: true,
         expand: true,
         dot: true,
-        junk: true
+        junk: false
       })
     }
   }

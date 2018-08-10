@@ -34,14 +34,14 @@ export default class SwiftGenPlugin extends Plugin {
         overwrite: true,
         expand: true,
         dot: true,
-        junk: true
+        junk: false
       })
 
       await copy(swiftgenScriptPath, join(destination, 'scripts', 'swiftgen.sh'), {
         overwrite: true,
         expand: true,
         dot: true,
-        junk: true
+        junk: false
       })
     }
   }
